@@ -12,4 +12,9 @@ st.header("Two", divider=True)
 st.header("Three", divider=True)
 st.header("Four", divider=True)
 
-st.audio("cat-purr.mp3", format="audio/mpeg", loop=True)
+st.badge("New")
+st.badge("Success", icon=":material/check:", color="green")
+
+st.markdown(
+    ":violet-badge[:material/star: Favorite] :orange-badge[⚠️ Needs review] :gray-badge[Deprecated]"
+)
