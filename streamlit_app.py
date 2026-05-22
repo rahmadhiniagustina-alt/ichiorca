@@ -11,3 +11,5 @@ st.header("One", divider=True)
 st.header("Two", divider=True)
 st.header("Three", divider=True)
 st.header("Four", divider=True)
+
+st.balloons()
