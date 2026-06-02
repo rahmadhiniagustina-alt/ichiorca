@@ -1,7 +1,7 @@
 import streamlit as st
 
 # ==========================================
-# 1. MANAGEMENT HALAMAN & THEME CYBERPUNK
+# 1. MANAGEMENT HALAMAN & THEME LIGHT MODE (TERANG)
 # ==========================================
 st.set_page_config(
     page_title="EnvironForensic Pro v5.0",
@@ -9,56 +9,78 @@ st.set_page_config(
     layout="wide"
 )
 
-# CSS Kustom - Estetika visual lab forensik secara utuh
+# CSS Kustom - Mengubah total tampilan menjadi LIGHT MODE yang bersih dan cerah
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700;800&family=JetBrains+Mono:wght=400;700&display=swap');
+    
+    /* Latar belakang utama aplikasi menjadi putih terang */
     [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
-        background-color: #0A0E17 !important;
-        color: #E2E8F0 !important;
+        background-color: #F8FAFC !important;
+        color: #1E293B !important;
         font-family: 'Plus Jakarta Sans', sans-serif;
     }
+    
+    /* Latar belakang sidebar menjadi abu-abu sangat terang */
     [data-testid="stSidebar"] {
-        background-color: #111827 !important;
-        border-right: 2px solid #1F2937;
+        background-color: #F1F5F9 !important;
+        border-right: 2px solid #E2E8F0;
     }
+    
+    /* Judul Aplikasi dengan Gradasi Cerah */
     .app-brand {
         font-size: 32px;
         font-weight: 800;
-        background: linear-gradient(135deg, #10B981 0%, #06B6D4 100%);
+        background: linear-gradient(135deg, #059669 0%, #0891B2 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
     }
+    
+    /* Kartu Laboratorium di dalam Tab */
     .lab-card {
-        background-color: #161E2E;
-        border: 1px solid #1F2937;
+        background-color: #FFFFFF;
+        border: 1px solid #E2E8F0;
         border-radius: 16px;
         padding: 22px;
         margin-bottom: 15px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        color: #334155;
     }
+    
+    /* Kartu Pemilihan Kasus di Beranda */
     .case-selection-card {
-        background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
-        border: 2px solid #334155;
+        background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
+        border: 2px solid #CBD5E1;
         border-radius: 16px;
         padding: 20px;
         text-align: center;
         margin-bottom: 20px;
         min-height: 180px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        color: #1E293B;
     }
+    
+    /* Input teks dan angka disesuaikan ke tema terang */
     .stTextInput input, .stNumberInput input {
-        background-color: #1F2937 !important;
-        color: #38BDF8 !important;
-        border: 1px solid #374151 !important;
+        background-color: #FFFFFF !important;
+        color: #0F172A !important;
+        border: 1px solid #CBD5E1 !important;
         font-family: 'JetBrains Mono', monospace !important;
     }
+    
+    /* Tombol utama dengan warna hijau/biru segar */
     .stButton>button {
         width: 100%;
-        background: linear-gradient(135deg, #06B6D4 0%, #0891B2 100%);
+        background: linear-gradient(135deg, #059669 0%, #0D9488 100%);
         color: white !important;
         font-weight: 600;
         border-radius: 12px;
         padding: 12px;
         border: none;
+        box-shadow: 0 4px 6px rgba(5, 150, 105, 0.2);
+    }
+    .stButton>button:hover {
+        background: linear-gradient(135deg, #047857 0%, #0F766E 100%);
     }
     </style>
 """, unsafe_allow_html=True)
@@ -101,7 +123,7 @@ def back_to_menu():
     st.session_state.show_edu_material = False
 
 # ==========================================
-# 3. SIDEBAR UTAMA & MUSIK BACKGROUND
+# 3. SIDEBAR UTAMA (LIGHT MODE)
 # ==========================================
 with st.sidebar:
     st.markdown("<div class='app-brand'>🕵️‍♂️ DETEKTIF HUD</div>", unsafe_allow_html=True)
@@ -140,36 +162,38 @@ with st.sidebar:
 st.markdown("<div class='app-brand'>EnvironForensic Lab v5.0</div>", unsafe_allow_html=True)
 st.write("---")
 
-# --- MENU UTAMA: PEMILIHAN 5 KASUS (KASUS 1 & 2 DIBUKA SEJAK AWAL) ---
+# --- MENU UTAMA: SEMUA 5 KASUS TERBUKA ---
 if st.session_state.current_view == "MAIN_MENU":
     st.markdown("### 📁 Pilih Berkas Kasus Kriminal Lingkungan:")
     
     col_k1, col_k2, col_k3 = st.columns(3)
     with col_k1:
-        st.markdown("<div class='case-selection-card'><h3>🌊 Kasus 1</h3><p><strong>Polusi Organik Citarum</strong></p><p><span style='color: #10B981;'>🔓 Terbuka</span></p></div>", unsafe_allow_html=True)
+        st.markdown("<div class='case-selection-card'><h3>🌊 Kasus 1</h3><p><strong>Polusi Organik Citarum</strong></p><p><span style='color: #059669; font-weight: bold;'>🔓 Terbuka</span></p></div>", unsafe_allow_html=True)
         if st.button("Buka Kasus 1", key="open_c1"):
             st.session_state.current_view = "KASUS_1"
             st.rerun()
             
     with col_k2:
-        # PENGUNCIAN DIHAPUS: Kasus 2 sekarang langsung berstatus Terbuka secara bebas
-        st.markdown("<div class='case-selection-card'><h3>🌋 Kasus 2</h3><p><strong>Tragedi Merkuri Buyat</strong></p><p><span style='color: #10B981;'>🔓 Terbuka</span></p></div>", unsafe_allow_html=True)
+        st.markdown("<div class='case-selection-card'><h3>🌋 Kasus 2</h3><p><strong>Tragedi Merkuri Buyat</strong></p><p><span style='color: #059669; font-weight: bold;'>🔓 Terbuka</span></p></div>", unsafe_allow_html=True)
         if st.button("Buka Kasus 2", key="open_c2"):
             st.session_state.current_view = "KASUS_2"
             st.rerun()
                 
     with col_k3:
-        st.markdown("<div class='case-selection-card'><h3>🛢️ Kasus 3</h3><p><strong>Tumpahan Minyak Montara</strong></p><p><span style='color: #EF4444;'>🔒 Terkunci</span></p></div>", unsafe_allow_html=True)
-        st.button("Disegel", key="lock_c3", disabled=True)
+        st.markdown("<div class='case-selection-card'><h3>🛢️ Kasus 3</h3><p><strong>Tumpahan Minyak Montara</strong></p><p><span style='color: #059669; font-weight: bold;'>🔓 Terbuka</span></p></div>", unsafe_allow_html=True)
+        if st.button("Buka Kasus 3", key="open_c3"):
+            st.info("Kasus 3 siap dikembangkan!")
 
     col_k4, col_k5, col_empty = st.columns(3)
     with col_k4:
-        st.markdown("<div class='case-selection-card'><h3>🧪 Kasus 4</h3><p><strong>Kebocoran Sianida Tambang</strong></p><p><span style='color: #EF4444;'>🔒 Terkunci</span></p></div>", unsafe_allow_html=True)
-        st.button("Disegel Kasus 4", key="lock_c4", disabled=True)
+        st.markdown("<div class='case-selection-card'><h3>🧪 Kasus 4</h3><p><strong>Kebocoran Sianida Tambang</strong></p><p><span style='color: #059669; font-weight: bold;'>🔓 Terbuka</span></p></div>", unsafe_allow_html=True)
+        if st.button("Buka Kasus 4", key="open_c4"):
+            st.info("Kasus 4 siap dikembangkan!")
         
     with col_k5:
-        st.markdown("<div class='case-selection-card'><h3>🌾 Kasus 5</h3><p><strong>Eutrofikasi Danau Toba</strong></p><p><span style='color: #EF4444;'>🔒 Terkunci</span></p></div>", unsafe_allow_html=True)
-        st.button("Disegel Kasus 5", key="lock_c5", disabled=True)
+        st.markdown("<div class='case-selection-card'><h3>🌾 Kasus 5</h3><p><strong>Eutrofikasi Danau Toba</strong></p><p><span style='color: #059669; font-weight: bold;'>🔓 Terbuka</span></p></div>", unsafe_allow_html=True)
+        if st.button("Buka Kasus 5", key="open_c5"):
+            st.info("Kasus 5 siap dikembangkan!")
 
 # --- HALAMAN GAMEPLAY: KASUS 1 (CITARUM) ---
 elif st.session_state.current_view == "KASUS_1":
@@ -182,7 +206,6 @@ elif st.session_state.current_view == "KASUS_1":
     else:
         menu_tabs = st.tabs(["🔎 1. Investigasi Lapangan", "🧪 2. Uji Laboratorium", "⚖️ 3. Putusan Sidang"])
 
-        # TAB 1: AREA SAMPLING
         with menu_tabs[0]:
             st.markdown("### 🗺️ Pengambilan Sampel Sektor Sungai Citarum")
             st.markdown("<div class='lab-card'><strong>PETUNJUK:</strong> Pipa rahasia berada di zona: <strong>BETA</strong>.</div>", unsafe_allow_html=True)
@@ -196,7 +219,6 @@ elif st.session_state.current_view == "KASUS_1":
                 else:
                     apply_penalty("ZONING SALAH! Anda mendatangi pemukiman warga.")
 
-        # TAB 2: RUANG LABORATORIUM
         with menu_tabs[1]:
             st.markdown("### 🔬 Uji Titrasi Winkler Mandiri")
             if st.session_state.collected_sample == "":
@@ -229,7 +251,6 @@ elif st.session_state.current_view == "KASUS_1":
                     st.markdown("<div class='lab-card'><h4>📊 DATA UTUSAN LABORATORIUM (SAH)</h4>• Kadar DO: <strong>3.0 mg/L</strong><br>• Kadar COD: <strong>580 mg/L</strong></div>", unsafe_allow_html=True)
                     st.info("Sertifikat analisis siap dibawa ke sidang meja hijau di Tab 3.")
 
-        # TAB 3: RUANG SIDANG & EVALUASI PEMBAHASAN AKADEMIK
         with menu_tabs[2]:
             st.markdown("### ⚖️ Pengadilan Tinggi Pidana Kejahatan Lingkungan")
             if st.session_state.do_calculated == 0.0:
@@ -260,7 +281,7 @@ elif st.session_state.current_view == "KASUS_1":
                     
                     with tab_materi:
                         st.markdown("""
-                        <div class='lab-card' style='border-color: #10B981;'>
+                        <div class='lab-card' style='border-left: 5px solid #059669;'>
                         <h4> Mengapa Kadar DO Bisa Drop dan COD Melonjak?</h4>
                         Limbah cair industri tekstil kaya akan senyawa organik kompleks (seperti pewarna gugus azo). Mikroorganisme air bekerja ekstra keras memutus ikatan kimia polutan tersebut melalui proses oksidasi.
                         <br><br>
@@ -273,7 +294,7 @@ elif st.session_state.current_view == "KASUS_1":
                         
                     with tab_berita:
                         st.markdown("""
-                        <div class='lab-card' style='border-color: #06B6D4;'>
+                        <div class='lab-card' style='border-left: 5px solid #0891B2;'>
                         <h4> 📰 Fakta Riil Kasus Hukum Sungai Citarum</h4>
                         Kasus yang Anda selesaikan di game ini diangkat dari kejahatan lingkungan nyata di aliran Sungai Citarum, Jawa Barat. 
                         <br><br>
@@ -293,7 +314,6 @@ elif st.session_state.current_view == "KASUS_2":
     else:
         c2_tabs = st.tabs(["🔎 1. Investigasi Pantai", "🔬 2. Spektroskopi AAS", "⚖️ 3. Putusan Sidang Teluk"])
 
-        # TAB 1: AREA INVESTIGASI
         with c2_tabs[0]:
             st.markdown("### 🏖️ Pencarian Titik Pembuangan Tailing Tambang")
             st.markdown("<div class='lab-card'><strong>MISI INVESTIGASI:</strong> Berdasarkan laporan nelayan lokal, sedimen yang terkontaminasi raksa berat berada di area muara teluk bagian <strong>SELATAN</strong>.</div>", unsafe_allow_html=True)
@@ -307,7 +327,6 @@ elif st.session_state.current_view == "KASUS_2":
                 else:
                     apply_penalty("AREA BERSIH! Anda membuang waktu di titik wisata karang.")
 
-        # TAB 2: LABORATORIUM INSTRUMEN AAS
         with c2_tabs[1]:
             st.markdown("### 🔬 Destruksi & Analisis Logam Berat dengan AAS")
             if st.session_state.c2_sample == "":
@@ -337,10 +356,9 @@ elif st.session_state.current_view == "KASUS_2":
                             apply_penalty("SALAH PERHITUNGAN! Data ini bisa digugurkan oleh pengacara perusahaan.")
                             
                 elif st.session_state.c2_lab_step == "AAS_SUCCESS":
-                    st.markdown("<div class='lab-card'><h4>📊 SERTIFIKAT HASIL AAS (RESMI)</h4>• Analit: <strong>Merkuri (Hg) / Raksa</strong><br>• Konsentrasi: <span style='color: #EF4444;'><strong>2.5 ppm (mg/kg)</strong></span></div>", unsafe_allow_html=True)
+                    st.markdown("<div class='lab-card'><h4>📊 SERTIFIKAT HASIL AAS (RESMI)</h4>• Analit: <strong>Merkuri (Hg) / Raksa</strong><br>• Konsentrasi: <span style='color: #DC2626;'><strong>2.5 ppm (mg/kg)</strong></span></div>", unsafe_allow_html=True)
                     st.info("Kadar aman sedimen menurut standar internasional (EPA) maksimal adalah 0.15 ppm. Hasil Anda 15x lipat lebih tinggi!")
 
-        # TAB 3: PUTUSAN SIDANG
         with c2_tabs[2]:
             st.markdown("### ⚖️ Mahkamah Konstitusi & Tuntutan Ganti Rugi Korban")
             if st.session_state.c2_hg_calculated == 0.0:
