@@ -2,289 +2,296 @@ import streamlit as st
 import time
 
 # ==========================================
-# 1. KONFIGURASI HALAMAN & DESIGN THEME PREMIUM
+# 1. KONFIGURASI HALAMAN & TEMA MODERN (OrganIQ Inspired)
 # ==========================================
 st.set_page_config(
-    page_title="Environ Detective v2.5",
+    page_title="Environ Detective Pro",
     page_icon="🕵️‍♂️",
     layout="wide"
 )
 
-# Kustomisasi CSS Total: Font, Background Kasus, Warna Teks Jelas
+# Kustomisasi CSS untuk menciptakan UI Gelap, Premium, dan Berbasis Kartu
 st.markdown("""
     <style>
-    /* Mengimpor Google Fonts */
-    @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Special+Elite&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
     
-    /* Global Font Aplikasi */
-    html, body, [data-testid="stAppViewContainer"] {
+    /* Mengubah background aplikasi menjadi Dark Mode elegan */
+    [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
+        background-color: #0F172A !important;
+        color: #E2E8F0 !important;
         font-family: 'Plus Jakarta Sans', sans-serif;
     }
     
-    /* Judul Utama Bergaya Detektif / Retro Noir */
-    .detective-title {
-        font-family: 'Special Elite', cursive;
-        color: #C2185B;
-        font-size: 46px;
+    /* Menu Sidebar Gelap */
+    [data-testid="stSidebar"] {
+        background-color: #1E293B !important;
+        border-right: 1px solid #334155;
+    }
+    
+    /* Judul Utama */
+    .main-title {
+        font-size: 40px;
+        font-weight: 800;
+        background: linear-gradient(135deg, #38BDF8 0%, #06B6D4 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         text-align: center;
         margin-bottom: 5px;
-        letter-spacing: 2px;
     }
-    .detective-subtitle {
-        font-family: 'Courier Prime', monospace;
-        color: #4A5568;
-        font-size: 16px;
+    .main-subtitle {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 14px;
+        color: #94A3B8;
         text-align: center;
-        margin-bottom: 25px;
-        font-weight: bold;
+        margin-bottom: 30px;
     }
     
-    /* Perbaikan Box Laporan Kasus (Kontras Tinggi & Menarik) */
-    .report-box { 
-        padding: 25px; 
-        background-color: #F8FAFC; 
-        color: #1E293B;
-        border-left: 8px solid #C2185B; 
-        border-radius: 12px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        font-size: 16px;
-        line-height: 1.7;
+    /* Gaya Kartu/Cards Informasi (Mirip OrganIQ) */
+    .organ-card {
+        background-color: #1E293B;
+        border: 1px solid #334155;
+        border-radius: 16px;
+        padding: 24px;
         margin-bottom: 20px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
     }
     
-    /* Judul Sub Bab Kasus */
-    .case-header {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        color: #0F172A;
-        font-weight: 700;
-        font-size: 24px;
-        margin-top: 10px;
-        margin-bottom: 15px;
-    }
-    
-    /* Mengubah Gaya Tombol Utama */
-    .stButton>button { 
-        width: 100%; 
-        background: linear-gradient(135deg, #C2185B 0%, #880E4F 100%);
-        color: white !important; 
-        font-weight: bold;
-        font-size: 16px;
-        border-radius: 12px; 
+    /* Tombol Interaktif */
+    .stButton>button {
+        width: 100%;
+        background-color: #0EA5E9;
+        color: white !important;
+        font-weight: 600;
+        font-size: 15px;
+        border-radius: 12px;
         padding: 12px;
         border: none;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 6px rgba(194, 24, 91, 0.2);
+        transition: all 0.2s ease;
     }
-    .stButton>button:hover { 
-        background: linear-gradient(135deg, #E91E63 0%, #C2185B 100%);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 12px rgba(194, 24, 91, 0.3);
+    .stButton>button:hover {
+        background-color: #38BDF8;
+        transform: translateY(-1px);
+    }
+    
+    /* Elemen Pilihan Ganda (Radio Button) */
+    div[data-testid="stRadio"] label {
+        background-color: #1E293B !important;
+        color: #E2E8F0 !important;
+        border: 1px solid #334155 !important;
+        padding: 12px 20px !important;
+        border-radius: 10px !important;
+        margin-bottom: 10px !important;
     }
     </style>
 """, unsafe_allow_html=True)
 
 # ==========================================
-# 2. LOGIKA UTAMA & RESET GAME
+# 2. SISTEM STATE GAME (LOGIKA GAMEPLAY)
 # ==========================================
-def reset_game():
+def init_game_states():
+    if "stage" not in st.session_state: st.session_state.stage = "BRIEFING"
+    if "hp" not in st.session_state: st.session_state.hp = 3                   # Sistem Nyawa (Maksimal 3 salah)
+    if "score" not in st.session_state: st.session_state.score = 100           # Sistem Skor Berkurang jika salah
+    if "samples" not in st.session_state: st.session_state.samples = []         # Menyimpan list sampel terkumpul
+    if "case2_unlocked" not in st.session_state: st.session_state.case2_unlocked = False
+    if "test_executed" not in st.session_state: st.session_state.test_executed = False
+
+init_game_states()
+
+def apply_penalty(reason):
+    st.session_state.hp -= 1
+    st.session_state.score -= 25
+    st.toast(f"❌ {reason}! Nyawa berkurang. Sisa HP: {st.session_state.hp}", icon="🚨")
+
+def reset_current_case():
     st.session_state.stage = "BRIEFING"
-    st.session_state.sample_collected = False
-    st.session_state.test_done = False
-
-if "stage" not in st.session_state:
-    reset_game()
+    st.session_state.hp = 3
+    st.session_state.score = 100
+    st.session_state.samples = []
+    st.session_state.test_executed = False
 
 # ==========================================
-# 3. SIDEBAR NAVIGASI DESIGN PREMIUM
+# 3. INTERFASE NAVIGATION BAR & SIDEBAR Menu
 # ==========================================
 with st.sidebar:
-    st.markdown("<h2 style='text-align: center; color: #C2185B;'>📁 BERKAS DETEKTIF</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='color: #38BDF8; text-align:center;'>🕵️‍♂️ DASHBOARD</h2>", unsafe_allow_html=True)
     st.write("---")
     
-    st.markdown("### 👤 Identitas Analis")
-    st.success("🕵️‍♂️ **Nama:** Inspektur Analis\n\n💼 **Divisi:** Penegakan Hukum Lingkungan")
+    # Indikator Status Nyawa & Skor Game (Membuat Game Lebih Menantang)
+    st.markdown("### 📊 Status Detektif")
+    col_hp, col_score = st.columns(2)
+    col_hp.metric(label="❤️ Sisa HP", value=f"{st.session_state.hp} / 3")
+    col_score.metric(label="⭐ Skor", value=st.session_state.score)
     
-    st.markdown("### 🗂️ Pilih Berkas Kasus")
+    st.write("---")
+    st.markdown("### 🗂️ Berkas Kasus")
+    status_k2 = "🔓 Ready" if st.session_state.case2_unlocked else "🔒 Locked"
     pilihan_kasus = st.selectbox(
-        "Daftar Kasus Aktif:",
-        ["Kasus 1: Misteri Sungai Citarum 🌊", "Kasus 2: Teluk Buyat (Locked) 🔒", "Kasus 3: Karhutla Riau (Locked) 🔒"]
+        "Pilih Studi Kasus:",
+        ["Kasus 1: Polusi Organik Citarum 🌊", f"Kasus 2: Logam Berat Teluk Buyat ({status_k2})"]
     )
     
-    st.markdown("### 📖 Buku Saku Regulasi")
-    with st.expander("Lihat PP No. 22 Tahun 2021 📑"):
-        st.caption("Standar Air Sungai Kelas 2:")
-        st.write("• **DO:** Harus > 4 mg/L")
-        st.write("• **COD:** Harus < 25 mg/L")
-        st.write("• **BOD:** Harus < 3 mg/L")
+    st.write("---")
+    st.markdown("### 📖 Buku Panduan Praktikum")
+    with st.expander("Metode Uji Kualitatif Air"):
+        st.caption("**Uji DO/BOD/COD:** Mengukur tingkat deoksigenasi akibat pencemaran bahan organik (Limbah Tekstil, Domestik).")
+        st.caption("**Uji AAS (Logam Berat):** Mengukur kadar raksa/merkuri dan arsenik dari limbah anorganik (Pertambangan).")
 
     st.write("---")
-    st.markdown("### 🎵 Atmosfer Investigasi")
-    # Menggunakan URL musik instrumental yang stabil
-    audio_url = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3"
-    st.audio(audio_url, format="audio/mp3", loop=True)
-    st.caption("💡 Putar musik di atas untuk menghidupkan suasana tegang!")
+    st.markdown("### 🎵 Audio Atmosfer")
+    st.audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3", format="audio/mp3", loop=True)
 
 # ==========================================
-# 4. HALAMAN GAMEPLAY UTAMA
+# 4. ALUR UTAMA GAMEPLAY
 # ==========================================
+st.markdown("<div class='main-title'>ENVIRON DETECTIVE LAB</div>", unsafe_allow_html=True)
+st.markdown("<div class='main-subtitle'>[ INTEGRATED ENVIRONMENTAL CRIME INVESTIGATION ]</div>", unsafe_allow_html=True)
 
-# Judul Utama Aplikasi dengan Font Menarik
-st.markdown("<div class='detective-title'>🚨 ENVIRON DETECTIVE 🚨</div>", unsafe_allow_html=True)
-st.markdown("<div class='detective-subtitle'>[ LOGIKA & PEMROGRAMAN KOMPUTER - ANALISIS KIMIA ]</div>", unsafe_allow_html=True)
-st.write("---")
+# GAME OVER CEK LOGIKA
+if st.session_state.hp <= 0:
+    st.error("🚨 GAME OVER! Anda kehilangan seluruh nyawa karena salah melakukan analisis. Reputasi analis Anda hancur di mata hukum.")
+    if st.button("🔄 Ulangi Investigasi Kasus Ini"):
+        reset_current_case()
+        st.rerun()
 
-if pilihan_kasus != "Kasus 1: Misteri Sungai Citarum 🌊":
-    st.warning("⚠️ Berkas kasus ini masih disegel/terkunci! Selesaikan Kasus 1 terlebih dahulu.")
+# JIKA MEMILIH KASUS YANG MASIH TERKUNCI
+elif "Kasus 2" in pilihan_kasus and not st.session_state.case2_unlocked:
+    st.warning("🔒 **Akses Berkas Ditolak!** Selesaikan Kasus 1 dengan hasil akurat di pengadilan terlebih dahulu untuk membuka kunci Kasus Teluk Buyat.")
 
-else:
-    # ------------------------------------------
-    # TAHAP 1: BRIEFING KASUS (HALAMAN PERTAMA)
-    # ------------------------------------------
+# ==========================================
+# ALUR SKENARIO KASUS 1 (CITARUM)
+# ==========================================
+elif "Kasus 1" in pilihan_kasus:
+
+    # --- TAHAP 1: BRIEFING ---
     if st.session_state.stage == "BRIEFING":
-        st.markdown("<div class='case-header'>🌊 Kasus 1: Misteri Air Berwarna di Sungai Citarum, Jawa Barat</div>", unsafe_allow_html=True)
+        st.markdown("### 📋 Laporan Kasus: Misteri Aliran Air Berwarna")
         
-        col1, col2 = st.columns([1.1, 1])
-        
-        with col1:
-            # Menggunakan link gambar baru dari Wikimedia Commons yang terjamin aman & muncul tanpa diblokir
+        col_img, col_txt = st.columns([1.2, 1])
+        with col_img:
             st.image("https://upload.wikimedia.org/wikipedia/commons/e/ea/Citarum_River_pollution.jpg", 
-                     caption="Bukti Foto: Kondisi tumpukan limbah domestik dan industri di salah satu titik aliran Citarum.", 
-                     use_container_width=True)
-        
-        with col2:
+                     caption="Lokasi Kejadian: Sungai Citarum, Sektor Industri Tekstil", use_container_width=True)
+        with col_txt:
             st.markdown("""
-            <div class='report-box'>
-            🚨 <strong>LAPORAN TIM INTELIJEN LINGKUNGAN:</strong><br><br>
-            Warga di sekitar bantaran aliran sungai melaporkan adanya aktivitas pembuangan mencurigakan. 
-            Setiap malam hari, air sungai kerap berubah warna secara drastis menjadi kehitaman dan mengeluarkan aroma zat kimia menyengat yang memicu pusing kepala. 
+            <div class='organ-card'>
+            <strong>INFORMASI INTELIJEN:</strong><br>
+            Warga mengeluhkan air sungai berubah warna secara dinamis (kadang merah, kadang hitam pekat) disertai bau amonia yang menyengat di malam hari. Ratusan ikan mati mendadak. 
             <br><br>
-            Dalam minggu ini, ratusan biota air ditemukan mati mendadak. Kecurigaan utama mengarah pada pipa pembuangan rahasia milik salah satu Industri Tekstil raksasa di kawasan tersebut.
+            Ada 3 titik potensial. Anda dibekali 3 unit HP. Setiap kesalahan teknis sampling atau metode laboratorium akan merusak akurasi data Anda!
             </div>
             """, unsafe_allow_html=True)
             
-            st.markdown("### 📋 Agenda Investigasi Analisis Kimia:")
-            st.markdown("🔹 **1.** pergi ke lokasi peta untuk melakukan teknik sampling air sungai.")
-            st.markdown("🔹 **2.** Uji parameter kimia air yang tepat menggunakan instrumen laboratorium.")
-            st.markdown("🔹 **3.** Tuntut pelaku di pengadilan berdasarkan regulasi baku mutu hukum.")
-            
-            st.write("")
-            if st.button("Mulai Selidiki Lokasi Lapangan ➡️"):
+            if st.button("Mulai Investigasi Lapangan 🔍"):
                 st.session_state.stage = "SAMPLING"
                 st.rerun()
 
-    # ------------------------------------------
-    # TAHAP 2: SAMPLING LAPANGAN
-    # ------------------------------------------
+    # --- TAHAP 2: SAMPLING (EKSPLORASI NON-LINEAR) ---
     elif st.session_state.stage == "SAMPLING":
-        st.markdown("<div class='case-header'>📍 Peta Investigasi & Pengambilan Sampel Air</div>", unsafe_allow_html=True)
-        st.write("Gunakan instrumen botol sampling Anda pada titik-titik koordinat berikut:")
-        st.write("")
+        st.markdown("### 📍 Fase Sampling Mandiri")
+        st.write("Analisis karakteristik wilayah di bawah ini sebelum mengambil keputusan tindakan:")
         
-        col1, col2, col3 = st.columns(3)
-        
-        with col1:
-            st.markdown("### 🏡 Titik A")
-            st.info("**Hulu Sungai**\n\nDekat dengan wilayah pemukiman warga lokal.")
+        c1, c2, c3 = st.columns(3)
+        with c1:
+            st.markdown("<div class='organ-card'><h4>🏡 Titik A: Hulu Pemukiman</h4><p>Kondisi air jernih dengan sedimentasi tanah biasa akibat aktivitas domestik masyarakat.</p></div>", unsafe_allow_html=True)
             if st.button("🧺 Ambil Sampel A"):
-                st.toast("Sampel A berhasil diambil. Karakteristik fisik: Air agak keruh normal.")
+                if "Sampel A" not in st.session_state.samples:
+                    st.session_state.samples.append("Sampel A")
+                    apply_penalty("Membuang waktu pada sampel sekunder")
+                else: st.warning("Sampel A sudah ada di inventori.")
                 
-        with col2:
-            st.markdown("### 🏭 Titik B")
-            st.warning("**Kawasan Industri**\n\nTepat di bawah pipa pembuangan tersembunyi Pabrik Tekstil.")
-            if st.button("🧪 Ambil Sampel B (Target utama)"):
-                st.toast("Sampel B berhasil diambil! Karakteristik fisik: Berbau tajam, warna gelap pekat.")
-                st.session_state.sample_collected = True
+        with c2:
+            st.markdown("<div class='organ-card'><h4>🏭 Titik B: Area Outlet Industri</h4><p>Ditemukan pipa siluman tersembunyi di bawah permukaan air yang mengeluarkan busa pekat berbau asam tajam.</p></div>", unsafe_allow_html=True)
+            if st.button("🧪 Ambil Sampel B (Target Utama)"):
+                if "Sampel B" not in st.session_state.samples:
+                    st.session_state.samples.append("Sampel B")
+                    st.success("🎯 Bagus! Sampel utama limbah berbahaya berhasil diamankan.")
+                else: st.warning("Sampel B sudah ada di inventori.")
                 
-        with col3:
-            st.markdown("### 🛶 Titik C")
-            st.info("**Hilir Sungai**\n\nAliran akhir sebelum menuju muara.")
+        with c3:
+            st.markdown("<div class='organ-card'><h4>🛶 Titik C: Hilir Aliran</h4><p>Air terlihat keruh kecokelatan bercampur sampah plastik makro terapung.</p></div>", unsafe_allow_html=True)
             if st.button("🧺 Ambil Sampel C"):
-                st.toast("Sampel C berhasil diambil. Karakteristik fisik: Air berwarna kecokelatan sedimen.")
-
+                if "Sampel C" not in st.session_state.samples:
+                    st.session_state.samples.append("Sampel C")
+                    apply_penalty("Membuang waktu pada sampel sekunder")
+                else: st.warning("Sampel C sudah ada di inventori.")
+                
         st.write("---")
-        if st.session_state.sample_collected:
-            st.success("✨ **Bagus, Detektif!** Anda berhasil mengamankan Sampel B yang paling mencurigakan.")
-            if st.button("Bawa Sampel ke Laboratorium Analisis 🔬"):
+        st.markdown(f"**Inventori Botol Sampel:** {', '.join(st.session_state.samples) if st.session_state.samples else 'Kosong'}")
+        
+        if "Sampel B" in st.session_state.samples:
+            if st.button("Lanjutkan ke Laboratorium Analisis 🔬"):
                 st.session_state.stage = "LAB"
                 st.rerun()
-        else:
-            st.error("🛑 **Petunjuk:** Anda belum mengambil sampel di titik yang berpotensi menjadi sumber utama kejahatan lingkungan!")
 
-    # ------------------------------------------
-    # TAHAP 3: PENGUJIAN LABORATORIUM
-    # ------------------------------------------
+    # --- TAHAP 3: LABORATORIUM (PILIHAN PARAMETER MENANTANG) ---
     elif st.session_state.stage == "LAB":
-        st.markdown("<div class='case-header'>🔬 Laboratorium Analisis Instrumen Kimia</div>", unsafe_allow_html=True)
-        st.write("Pilih metode analisis laboratorium yang paling tepat untuk menguji karakteristik limbah cair industri pewarna tekstil.")
-        st.write("")
+        st.markdown("### 🔬 Uji Kualitatif & Kuantitatif Digital")
+        st.write("Pilih instrumen reagen pengujian yang sesuai dengan jenis kontaminan organik tekstil (pewarna/zat pengikat):")
         
-        parameter = st.selectbox(
-            "Pilih Metode & Alat Uji Kimia:", 
-            ["-- Silakan Pilih Alat --", "Metode AAS - Analisis Logam Berat Merkuri (Hg)", "Metode Titrasi & Winkler - Analisis DO, COD, & BOD", "Analisis Gas Ambien - Sulfur Dioksida (SO2)"]
+        # Grid Card seperti menu utama OrganIQ
+        col_param = st.selectbox(
+            "Pilih Metode Analisis:",
+            ["-- Klik untuk Memilih Instrumen --", "Spektrofotometri Serapan Atom (AAS)", "Kromatografi Gas Udara Ambien", "Titrasi Metode Winkler (DO / COD / BOD)"]
         )
         
-        if parameter == "Metode AAS - Analisis Logam Berat Merkuri (Hg)":
-            st.error("❌ **Kurang Tepat!** Merkuri digunakan untuk kasus pencemaran tambang emas ilegal, bukan pabrik pewarna tekstil cair.")
-        elif parameter == "Analisis Gas Ambien - Sulfur Dioksida (SO2)":
-            st.error("❌ **Salah Media!** Gas SO2 dipakai untuk analisis pencemaran kualitas udara, sampel kita berupa air.")
-        elif parameter == "Metode Titrasi & Winkler - Analisis DO, COD, & BOD":
-            st.success("🎯 **Pilihan Sempurna!** Uji DO, COD, dan BOD adalah indikator mutlak untuk mengetahui tingkat pencemaran limbah organik.")
+        if col_param == "Spektrofotometri Serapan Atom (AAS)":
+            if st.button("Jalankan Uji AAS"):
+                apply_penalty("Instrumen AAS dipakai khusus mendeteksi logam berat (bukan polutan organik)")
+        elif col_param == "Kromatografi Gas Udara Ambien":
+            if st.button("Jalankan Uji Kromatografi"):
+                apply_penalty("Salah media analisis! Ini alat ukur polusi udara")
+        elif col_param == "Titrasi Metode Winkler (DO / COD / BOD)":
+            st.success("🎯 Tepat! Parameter uji organik cair berhasil dipilih.")
             
-            if st.button("💥 Jalankan Analisis Digital"):
-                progress_bar = st.progress(0)
-                for percent_complete in range(100):
-                    time.sleep(0.006)
-                    progress_bar.progress(percent_complete + 1)
-                st.session_state.test_done = True
+            if st.button("⚙️ Mulai Proses Titrasi Instrumen"):
+                progress = st.progress(0)
+                for p in range(100):
+                    time.sleep(0.005)
+                    progress.progress(p + 1)
+                st.session_state.test_executed = True
                 
-            if st.session_state.test_done:
-                st.write("")
-                st.markdown("### 📊 DATA HASIL LABORATORIUM KELUAR:")
+            if st.session_state.test_executed:
+                st.markdown("<div class='organ-card'><h4>📊 Laporan Hasil Lab Terbit:</h4>"
+                            "• Dissolved Oxygen (DO): <strong>1.2 mg/L</strong> (Baku Mutu > 4 mg/L)<br>"
+                            "• Chemical Oxygen Demand (COD): <strong>620 mg/L</strong> (Baku Mutu < 25 mg/L)<br>"
+                            "• Biochemical Oxygen Demand (BOD): <strong>380 mg/L</strong> (Baku Mutu < 3 mg/L)</div>", unsafe_allow_html=True)
                 
-                c1, c2, c3 = st.columns(3)
-                c1.metric(label="🍂 Dissolved Oxygen (DO)", value="1.2 mg/L", delta="Sangat Rendah (Buruk)", delta_color="inverse")
-                c2.metric(label="⚗️ Chemical Oxygen Demand (COD)", value="620 mg/L", delta="Sangat Tinggi (Bahaya)", delta_color="normal")
-                c3.metric(label="🧫 Biochemical Oxygen Demand (BOD)", value="380 mg/L", delta="Sangat Tinggi (Bahaya)", delta_color="normal")
-                
-                st.write("---")
-                if st.button("Ajukan Berkas Hasil Lab ke Ruang Sidang ⚖️"):
+                if st.button("Bawa Berkas ke Meja Hijau ⚖️"):
                     st.session_state.stage = "VERDICT"
                     st.rerun()
 
-    # ------------------------------------------
-    # TAHAP 4: PERSIDANGAN & RESET TOTAL (UNTUK KEMBALI KE MENU AWAL)
-    # ------------------------------------------
+    # --- TAHAP 4: PERSIDANGAN ---
     elif st.session_state.stage == "VERDICT":
-        st.markdown("<div class='case-header'>⚖️ Sidang Pengadilan Tindak Pidana Lingkungan</div>", unsafe_allow_html=True)
-        st.write("Bandingkan hasil analisismu dengan Peraturan Pemerintah **PP No. 22 Tahun 2021 (Baku Mutu Air Sungai Kelas 2: DO > 4 mg/L dan COD < 25 mg/L)**.")
-        st.write("")
+        st.markdown("### ⚖️ Sidang Putusan Pelanggaran Lingkungan")
+        st.write("Hakim meminta kesimpulan ilmiah Anda berdasarkan data angka riil laboratorium tadi:")
         
-        st.markdown("### 📋 Berikan Kesimpulan Hukum Anda di Depan Hakim:")
-        jawaban = st.radio(
-            "Berdasarkan bukti ilmiah di atas, bagaimana kesimpulan Anda?", 
+        pilihan_sidang = st.radio(
+            "Pilih pernyataan dakwaan yang valid menurut ilmu kimia lingkungan:",
             [
-                "Air dalam kondisi aman karena nilai COD tinggi meningkatkan mineral air.",
-                "Sungai Citarum mengalami Pencemaran Berat akibat pembuangan limbah organik industri tekstil tanpa diolah, terbukti dari nilai COD/BOD melonjak tajam dan DO drop kritis.",
-                "Sungai mengalami pencemaran ringan yang disebabkan oleh sampah plastik pemukiman warga biasa."
+                "Limbah aman karena tingginya nilai COD mengindikasikan kelimpahan mineral organik menguntungkan.",
+                "Terjadi pencemaran organik berat akibat pembuangan limbah tanpa diolah, ditandai lonjakan masif COD/BOD serta defisit oksigen terlarut (DO) kaku yang membunuh biota.",
+                "Sungai hanya mengalami siklus eutrofikasi alami musiman akibat sedimentasi domestik hulu."
             ]
         )
         
-        st.write("")
-        if st.button("🔨 Ketok Palu Keputusan Hakim"):
-            if jawaban == "Sungai Citarum mengalami Pencemaran Berat akibat pembuangan limbah organik industri tekstil tanpa diolah, terbukti dari nilai COD/BOD melonjak tajam dan DO drop kritis.":
+        if st.button("🔨 Ketok Palu Sidang"):
+            if "Pencemaran organik berat" in pilihan_sidang:
                 st.balloons()
-                st.success("🎉 **KASUS BERHASIL DIPECAHKAN! (CASE CLOSED)**")
-                st.markdown("""
-                Selamat! Hasil analisis laboratorium kimia Anda sah demi hukum. Pabrik tekstil nakal terbukti bersalah membuang limbah ilegal tanpa IPAL, dikenai denda miliaran rupiah, dan diperintahkan melakukan restorasi ekosistem sungai. 
-                <br><br>
-                Logika analisis Anda berhasil menyelamatkan lingkungan! 🤝
-                """, unsafe_allow_html=True)
+                st.success(f"🎉 KASUS CITARUM BERHASIL DIPECAHKAN! Skor Akhir: {st.session_state.score} Poin.")
+                st.session_state.case2_unlocked = True
+                st.info("🔓 Kasus 2 (Teluk Buyat) sekarang telah terbuka! Silakan ganti berkas di menu samping kiri untuk melanjutkan misi berikutnya.")
             else:
-                st.error("❌ **Tuntutan Ditolak!** Hakim menganggap analisis kesimpulan Anda tidak sinkron dengan data baku mutu PP No. 22 Tahun 2021.")
-        
-        # 📌 JAWABAN POIN 3: Tombol Navigasi Reset Sempurna Kembali ke Menu Awal
+                apply_penalty("Dakwaan salah, pengacara pabrik memenangkan banding")
+                
         st.write("---")
-        st.markdown("### 🔄 Opsi Navigasi Berkas")
-        if st.button("🔙 Tutup Berkas Kasus & Kembali ke Menu Awal"):
-            reset_game()
+        if st.button("🔙 Reset Investigasi Ke Menu Utama"):
+            reset_current_case()
             st.rerun()
+
+# ==========================================
+# RUNNING SKENARIO KASUS 2 (TELUK BUYAT)
+# ==========================================
+elif "Kasus 2" in pilihan_kasus and st.session_state.case2_unlocked:
+    st.markdown("### 🌋 Kasus 2: Tragedi Merkuri Teluk Buyat, Sulawesi Utara")
+    st.image("https://upload.wikimedia.org/wikipedia/commons/d/d4/Atomic_absorption_spectrometer.jpg", caption="Instrumen AAS Laboratorium Kualitatif", use_container_width=True)
+    st.info("🎯 Anda berhasil masuk ke Kasus Baru! Di sini polutan utamanya berbeda, yaitu merkuri ($Hg$). Gunakan panduan buku saku untuk menentukan metode instrumen laboratorium yang tepat nanti.")
