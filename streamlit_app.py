@@ -17,7 +17,7 @@ st.markdown("""
     .stButton>button:hover { background-color: #3B82F6; }
     .report-box { padding: 15px; background-color: #1E1E1E; border-left: 5px solid #3B82F6; border-radius: 4px; }
     </style>
-""", unsafe_side_effect=True)
+""", unsafe_allow_html=True)
 
 # ==========================================
 # 2. INISIALISASI STATE GAME (LOGIKA PROG)
@@ -32,9 +32,8 @@ if "test_done" not in st.session_state:
 # ==========================================
 # 3. AUDIO BACKLOG (MUSIK DETEKTIF)
 # ==========================================
-# Tips: Sediakan file musik .mp3 di folder yang sama atau gunakan URL eksternal
 st.sidebar.markdown("### 🎵 Audio Kontrol")
-audio_file = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" # Ganti dengan link musik misteriusmu
+audio_file = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" 
 st.sidebar.audio(audio_file, format="audio/mp3", loop=True)
 st.sidebar.info("Aktifkan audio di atas untuk merasakan atmosfer detektif!")
 
@@ -52,7 +51,6 @@ if st.session_state.stage == "BRIEFING":
     col1, col2 = st.columns([1, 1])
     
     with col1:
-        # Gambar Nyata Kasus (Pastikan file citarum.jpg ada di GitHub nanti, atau pakai URL gambar online)
         st.image("https://upload.wikimedia.org/wikipedia/commons/e/ea/Citarum_River_pollution.jpg", 
                  caption="Kondisi visual salah satu sudut titik Sungai Citarum", use_container_width=True)
     
@@ -163,7 +161,6 @@ elif st.session_state.stage == "VERDICT":
             st.success("🎉 CASE CLOSED! Analisis Anda 100% Benar. Pabrik Tekstil terbukti membuang limbah tanpa melalui IPAL (Instalasi Pengolahan Air Limbah) sehingga menghabiskan oksigen terlarut (DO) di air. Anda naik pangkat menjadi Detektif Lingkungan Senior!")
             
             if st.button("Mainkan Kasus Selanjutnya 🔄"):
-                # Reset game state untuk kasus baru nanti
                 st.session_state.stage = "BRIEFING"
                 st.session_state.sample_collected = False
                 st.session_state.test_done = False
