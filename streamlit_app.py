@@ -217,4 +217,4 @@ if st.session_state.current_view == "MAIN_MENU":
 # ---------------------------------------------------------------------
 # HALAMAN 2: JALUR UTAMA GAMEPLAY KASUS 1 (CITARUM)
 # ---------------------------------------------------------------------
-elif st.session_state.current_view == "KAS
+elif st.session_state.current_view == "KASUS_1":
