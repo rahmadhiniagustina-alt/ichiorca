@@ -116,4 +116,4 @@ with st.sidebar:
     st.write("---")
     c_hp, c_sc = st.columns(2)
     c_hp.metric(label="❤️ Sisa HP", value=f"{st.session_state.hp} / 3")
-    c_sc.metric(label="⭐ Skor Analisis", value=st.session_state
+   c_sc.metric(label="⭐ Skor Analisis", value=st.session_state.score)
