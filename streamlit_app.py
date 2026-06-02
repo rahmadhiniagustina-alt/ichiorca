@@ -5,15 +5,15 @@ import time
 # 1. MANAGEMENT HALAMAN & THEME CYBERPUNK
 # ==========================================
 st.set_page_config(
-    page_title="EnvironForensic Pro v4.5",
+    page_title="EnvironForensic Pro v5.0",
     page_icon="🧪",
     layout="wide"
 )
 
-# CSS Kustom untuk Tampilan Premium Gelap ala OrganIQ
+# CSS Kustom untuk Tampilan Premium Gelap ala OrganIQ dengan Efek Glow Kartu Kasus
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700&family=JetBrains+Mono:wght=400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
     
     [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
         background-color: #0A0E17 !important;
@@ -43,6 +43,22 @@ st.markdown("""
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     }
     
+    /* Grid Kartu Pemilihan Kasus Utama */
+    .case-selection-card {
+        background: linear-gradient(135deg, #1E293B 0%, #0F172A 100%);
+        border: 2px solid #334155;
+        border-radius: 16px;
+        padding: 20px;
+        text-align: center;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
+    }
+    .case-selection-card:hover {
+        border-color: #06B6D4;
+        box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+        transform: translateY(-3px);
+    }
+    
     .stTextInput input, .stNumberInput input {
         background-color: #1F2937 !important;
         color: #38BDF8 !important;
@@ -68,176 +84,137 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# 2. INISIALISASI STATE UTAMA (DIPERBAIKI)
+# 2. INISIALISASI STATE UTAMA GAME
 # ==========================================
-if "hp" not in st.session_state:
-    st.session_state.hp = 3
-if "score" not in st.session_state:
-    st.session_state.score = 100
-if "collected_sample" not in st.session_state:
-    st.session_state.collected_sample = ""
-if "lab_step" not in st.session_state:
-    st.session_state.lab_step = "INPUT_REAGEN"
-if "do_calculated" not in st.session_state:
-    st.session_state.do_calculated = 0.0
+if "current_view" not in st.session_state: st.session_state.current_view = "MAIN_MENU" # Panduan Halaman Depan
+if "hp" not in st.session_state: st.session_state.hp = 3
+if "score" not in st.session_state: st.session_state.score = 100
+if "collected_sample" not in st.session_state: st.session_state.collected_sample = ""
+if "lab_step" not in st.session_state: st.session_state.lab_step = "INPUT_REAGEN"
+if "do_calculated" not in st.session_state: st.session_state.do_calculated = 0.0
+if "case1_cleared" not in st.session_state: st.session_state.case1_cleared = False
+if "show_edu_material" not in st.session_state: st.session_state.show_edu_material = False
 
 def apply_penalty(reason):
     st.session_state.hp -= 1
     st.session_state.score -= 20
     st.toast(f"❌ Kesalahan: {reason}! HP berkurang.", icon="🚨")
 
-def reset_game():
+def back_to_menu():
+    st.session_state.current_view = "MAIN_MENU"
     st.session_state.hp = 3
     st.session_state.score = 100
     st.session_state.collected_sample = ""
     st.session_state.lab_step = "INPUT_REAGEN"
     st.session_state.do_calculated = 0.0
+    st.session_state.show_edu_material = False
 
 # ==========================================
-# 3. SIDEBAR MONITOR
+# 3. SIDEBAR UTAMA & MUSIK (TIDAK DIHILANGKAN)
 # ==========================================
 with st.sidebar:
-    st.markdown("<div class='app-brand'>🕵️‍♂️ STATUS</div>", unsafe_allow_html=True)
+    st.markdown("<div class='app-brand'>🕵️‍♂️ DETEKTIF HUD</div>", unsafe_allow_html=True)
     st.write("---")
     c_hp, c_sc = st.columns(2)
     c_hp.metric(label="❤️ Sisa HP", value=f"{st.session_state.hp} / 3")
-    c_sc.metric(label="⭐ Skor Reputasi", value=st.session_state.score)
+    c_sc.metric(label="⭐ Skor Analisis", value=st.session_state.score)
     
     st.write("---")
     st.markdown("### 📖 Buku Rumus Analisis Kimia")
     with st.expander("Rumus DO (Titrasi Winkler) 🧪"):
         st.write("Untuk mencari kadar DO Air, gunakan rumus penyederhanaan berikut:")
         st.code("DO (mg/L) = Volume Titran (mL) * 2", language="markdown")
-        st.caption("Petunjuk: Catat rumus ini untuk menghitung hasil lab nanti!")
-
+        
     st.write("---")
-    if st.button("🔄 Reset Aplikasi"):
-        reset_game()
-        st.rerun()
+    st.markdown("### 🎵 Atmosfer Investigasi")
+    # Musik dimainkan otomatis secara melingkar (loop) di latar belakang
+    st.audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3", format="audio/mp3", loop=True)
+    
+    st.write("---")
+    if st.session_state.current_view != "MAIN_MENU":
+        if st.button("🚪 Keluar ke Halaman Depan"):
+            back_to_menu()
+            st.rerun()
 
 # ==========================================
-# 4. IMPLEMENTASI NAVIGATION TABS
+# 4. LOGIKA UTAMA PERCABANGAN HALAMAN
 # ==========================================
-st.markdown("<div class='app-brand'>EnvironForensic Lab v4.5</div>", unsafe_allow_html=True)
+st.markdown("<div class='app-brand'>EnvironForensic Lab v5.0</div>", unsafe_allow_html=True)
 st.write("---")
 
-if st.session_state.hp <= 0:
-    st.error("🚨 **GAME OVER!** Kesalahan analisis beruntun membuat lisensi laboratorium forensik Anda dicabut.")
-    if st.button("Ulangi Misi"):
-        reset_game()
-        st.rerun()
-else:
-    # Menggunakan container tab agar data antar halaman sinkron tanpa reload kosong
-    menu_tabs = st.tabs(["🔎 1. Posko Lapangan", "🧪 2. Pengujian Mandiri", "⚖️ 3. Ruang Sidang"])
-
-    # ------------------------------------------
-    # TAB 1: POSKO LAPANGAN
-    # ------------------------------------------
-    with menu_tabs[0]:
-        st.markdown("### 🗺️ Peta Sektor Sungai Citarum")
-        
+# ---------------------------------------------------------------------
+# HALAMAN 1: HALAMAN DEPAN / PEMILIHAN 5 KASUS (MAIN MENU)
+# ---------------------------------------------------------------------
+if st.session_state.current_view == "MAIN_MENU":
+    st.markdown("### 📁 Pilih Berkas Kasus Kriminal Lingkungan Anda:")
+    st.write("Selamat datang Inspektur. Pilih salah satu berkas perkara aktif di bawah ini untuk memulai operasi forensik kimia:")
+    
+    # Grid Kasus 1, 2, 3
+    col_k1, col_k2, col_k3 = st.columns(3)
+    
+    with col_k1:
         st.markdown("""
-        <div class='lab-card'>
-        <strong>PETUNJUK INTELIJEN:</strong><br>
-        Kami mendeteksi pembuangan ilegal pipa bawah air berada di zona koordinat yang berbau zat kimia menyengat. 
-        Zona tersebut diberi kode nama: <strong>BETA</strong>.
+        <div class='case-selection-card'>
+            <h3>🌊 Kasus 1</h3>
+            <p><strong>Polusi Organik Sungai Citarum</strong></p>
+            <p><span style='color: #10B981;'>🔓 Terbuka (Misi Aktif)</span></p>
         </div>
         """, unsafe_allow_html=True)
-        
-        lokasi_input = st.text_input("Ketik KODE ZONA LOKASI yang ingin Anda datangi untuk sampling (Gunakan HURUF KAPITAL):", key="input_lokasi")
-        
-        if st.button("Ambil Tindakan Amankan Lokasi 🧺", key="btn_sampling"):
-            if lokasi_input.strip() == "BETA":
-                st.session_state.collected_sample = "Sampel Limbah Tekstil"
-                st.success("🎯 Sukses! Anda berhasil mengamankan 'Sampel Limbah Tekstil' ke dalam tas lab Anda. Silakan klik **Tab 2** di atas.")
-            elif lokasi_input.strip() == "":
-                st.warning("Input tidak boleh kosong! Ketik kode zona terlebih dahulu.")
+        if st.button("Buka Berkas Kasus 1", key="open_c1"):
+            st.session_state.current_view = "KASUS_1"
+            st.rerun()
+            
+    with col_k2:
+        status_k2 = "🔓 Terbuka" if st.session_state.case1_cleared else "🔒 Terkunci"
+        color_k2 = "#10B981" if st.session_state.case1_cleared else "#EF4444"
+        st.markdown(f"""
+        <div class='case-selection-card'>
+            <h3>🌋 Kasus 2</h3>
+            <p><strong>Tragedi Merkuri Teluk Buyat</strong></p>
+            <p><span style='color: {color_k2};'>{status_k2}</span></p>
+        </div>
+        """, unsafe_allow_html=True)
+        if st.button("Buka Berkas Kasus 2", key="open_c2"):
+            if st.session_state.case1_cleared:
+                st.session_state.current_view = "KASUS_2"
+                st.rerun()
             else:
-                apply_penalty("ZONING SALAH! Anda mendatangi zona aman pemukiman warga.")
+                st.error("Selesaikan Kasus 1 terlebih dahulu untuk membuka kunci Kasus 2!")
+                
+    with col_k3:
+        st.markdown("""
+        <div class='case-selection-card'>
+            <h3>🛢️ Kasus 3</h3>
+            <p><strong>Tumpahan Minyak Montara</strong></p>
+            <p><span style='color: #EF4444;'>🔒 Terkunci (Sistem MA)</span></p>
+        </div>
+        """, unsafe_allow_html=True)
+        st.button("Berkas Disegel", key="lock_c3", disabled=True)
 
-    # ------------------------------------------
-    # TAB 2: PENGUJIAN MANDIRI
-    # ------------------------------------------
-    with menu_tabs[1]:
-        st.markdown("### 🔬 Ruang Praktikum Mandiri")
+    # Grid Kasus 4 & 5
+    st.write("")
+    col_k4, col_k5, col_empty = st.columns(3)
+    with col_k4:
+        st.markdown("""
+        <div class='case-selection-card'>
+            <h3>🧪 Kasus 4</h3>
+            <p><strong>Kebocoran Sianida Tambang Emas</strong></p>
+            <p><span style='color: #EF4444;'>🔒 Terkunci (Sistem MA)</span></p>
+        </div>
+        """, unsafe_allow_html=True)
+        st.button("Berkas Disegel", key="lock_c4", disabled=True)
         
-        if st.session_state.collected_sample == "":
-            st.warning("🔒 **Akses Terkunci:** Anda belum membawa botol sampel dari lapangan. Ambil sampel dulu di Tab 1!")
-        else:
-            # TAHAP 1: INPUT REAGEN
-            if st.session_state.lab_step == "INPUT_REAGEN":
-                st.markdown("""
-                <div class='lab-card'>
-                <h5>Langkah Fiksasi Oksigen:</h5>
-                Berdasarkan jurnal, untuk mengikat oksigen mula-mula masukkan larutan Mangan(II) Sulfat. 
-                <br><strong>Tugas Anda:</strong> Ketikkan <strong>RUMUS MOLEKUL KIMIA</strong> dari senyawa Mangan(II) Sulfat tersebut!
-                </div>
-                """, unsafe_allow_html=True)
-                
-                rumus_kimia = st.text_input("Ketik Rumus Molekul Reagen (Contoh: H2O, NaCl):", key="input_reagen")
-                
-                if st.button("Suntikkan Reagen Kimia 🧪", key="btn_reagen"):
-                    if rumus_kimia.strip().upper() == "MNSO4":
-                        st.success("🎯 Benar! Larutan membentuk endapan cokelat. Langkah berikutnya terbuka!")
-                        st.session_state.lab_step = "HITUNG_DO"
-                        st.rerun()
-                    elif rumus_kimia.strip() == "":
-                        st.warning("Masukkan rumus kimia terlebih dahulu!")
-                    else:
-                        apply_penalty("RUMUS SALAH! Reagen mencederai sampel.")
-            
-            # TAHAP 2: HITUNG DO
-            elif st.session_state.lab_step == "HITUNG_DO":
-                st.markdown("""
-                <div class='lab-card'>
-                <h5>Proses Titrasi Winkler Selesai:</h5>
-                Indikator amilum biru tepat menghilang pada penambahan volume buret Natrium Tiosulfat sebesar <strong>1.5 mL</strong>.
-                <br><br>
-                <strong>Tugas Anda:</strong> Hitung nilai DO (Dissolved Oxygen) air tersebut menggunakan rumus yang ada di <strong>Buku Saku Sidebar Kiri</strong>!
-                </div>
-                """, unsafe_allow_html=True)
-                
-                input_angka = st.number_input("Masukkan hasil perhitungan nilai DO Anda (mg/L):", step=0.1, key="input_do")
-                
-                if st.button("Verifikasi & Cetak Sertifikat Hasil Analisis 📊", key="btn_hitung"):
-                    if input_angka == 3.0:
-                        st.success("🎯 Perhitungan Akurat! Sertifikat lab diterbitkan. Silakan lanjut ke **Tab 3**.")
-                        st.session_state.do_calculated = 3.0
-                        st.session_state.lab_step = "LAB_SUCCESS"
-                        st.rerun()
-                    else:
-                        apply_penalty("PERHITUNGAN SALAH! Angka analisis tidak akurat.")
-            
-            # TAHAP 3: BERHASIL
-            elif st.session_state.lab_step == "LAB_SUCCESS":
-                st.markdown("<div class='lab-card'><h4>📊 DATA UTUSAN LABORATORIUM (SAH)</h4>"
-                            "• Hasil Uji Dissolved Oxygen (DO): <strong>3.0 mg/L</strong><br>"
-                            "• Hasil Uji COD: <strong>580 mg/L</strong></div>", unsafe_allow_html=True)
-                st.info("Dokumen siap. Silakan bawa berkas ini menuju **Tab 3 (Ruang Sidang)**.")
+    with col_k5:
+        st.markdown("""
+        <div class='case-selection-card'>
+            <h3>🌾 Kasus 5</h3>
+            <p><strong>Eutrofikasi Massal Danau Toba</strong></p>
+            <p><span style='color: #EF4444;'>🔒 Terkunci (Sistem MA)</span></p>
+        </div>
+        """, unsafe_allow_html=True)
+        st.button("Berkas Disegel", key="lock_c5", disabled=True)
 
-    # ------------------------------------------
-    # TAB 3: RUANG SIDANG
-    # ------------------------------------------
-    with menu_tabs[2]:
-        st.markdown("### ⚖️ Otoritas Sidang Pengadilan Tindak Pidana Lingkungan")
-        
-        if st.session_state.do_calculated == 0.0:
-            st.warning("🔒 **Sidang Terkunci:** Anda belum memiliki berkas laboratorium resmi dari Tab 2.")
-        else:
-            st.write("Bandingkan hasil pengujian Anda (DO = 3.0 mg/L) dengan kriteria **PP No.22/2021 (Baku mutu minimal DO > 4.0 mg/L)**.")
-            
-            pilihan_sidang = st.selectbox(
-                "Pilih keputusan dakwaan berdasarkan status hukum final:",
-                ["-- Pilih Dakwaan --",
-                 "Pabrik bebas karena nilai DO 3.0 mg/L membuktikan air sungai sangat sehat.",
-                 "Pabrik divonis bersalah karena hasil uji DO sebesar 3.0 mg/L berada DI BAWAH ambang batas baku mutu minimal (4.0 mg/L)."],
-                key="select_sidang"
-            )
-            
-            if st.button("🔨 KETOK PALU KEPUTUSAN HAKIM", key="btn_hakim"):
-                if "divonis bersalah" in pilihan_sidang:
-                    st.balloons()
-                    st.success("🎉 **KASUS BERHASIL DIPECAHKAN! (CASE CLOSED)**")
-                    st.markdown("Selamat! Bukti rumusan kimia dan angka hitunganmu mutlak memenangkan pengadilan lingkungan!")
-                else:
-                    apply_penalty("Hakim membatalkan gugatan karena argumen Anda keliru.")
+# ---------------------------------------------------------------------
+# HALAMAN 2: JALUR UTAMA GAMEPLAY KASUS 1 (CITARUM)
+# ---------------------------------------------------------------------
+elif st.session_state.current_view == "KAS
