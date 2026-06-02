@@ -13,7 +13,7 @@ st.set_page_config(
 # CSS Kustom untuk Tampilan Premium Gelap (Glow-in-the-dark) ala OrganIQ
 st.markdown("""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700&family=JetBrains+Mono:wght=400;700&display=swap');
     
     [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
         background-color: #0A0E17 !important;
@@ -105,40 +105,3 @@ with st.sidebar:
         st.write("Untuk mencari kadar DO Air, gunakan rumus penyederhanaan berikut:")
         st.code("DO (mg/L) = Volume Titran (mL) * 2", language="markdown")
         st.caption("Petunjuk: Catat baik-baik rumus ini untuk menghitung hasil laboratorium nanti!")
-
-    st.write("---")
-    if st.button("🔄 Reset Aplikasi"):
-        reset_game()
-        st.rerun()
-
-# ==========================================
-# 4. IMPLEMENTASI NAVIGATION TABS (OrganIQ Style)
-# ==========================================
-st.markdown("<div class='app-brand'>EnvironForensic Lab v4.0</div>", unsafe_allow_html=True)
-st.write("---")
-
-if st.session_state.hp <= 0:
-    st.error("🚨 **GAME OVER!** Kesalahan analisis beruntun membuat lisensi laboratorium forensik Anda dicabut.")
-    if st.button("Ulangi Misi"):
-        reset_game()
-        st.rerun()
-else:
-    # Navigasi tab atas seperti OrganIQ
-    menu_tabs = st.tabs(["🔎 1. Posko Lapangan", "🧪 2. Pengujian Mandiri (Ketik Manual)", "⚖️ 3. Ruang Sidang"])
-
-    # ------------------------------------------
-    # TAB 1: POSKO LAPANGAN (TEBAK LOKASI VIA TEKS)
-    # ------------------------------------------
-    with menu_tabs[0]:
-        st.markdown("### 🗺️ Peta Sektor Sungai Citarum")
-        
-        st.markdown("""
-        <div class='lab-card'>
-        <strong>PETUNJUK INTELIJEN:</strong><br>
-        Kami mendeteksi pembuangan ilegal pipa bawah air berada di zona koordinat yang berbau zat kimia menyengat. 
-        Zona tersebut diberi kode nama: <strong>BETA</strong>.
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # Pengetikan manual untuk mengambil tindakan
-        lokasi_input = st.text_input("Ketik KODE Z
