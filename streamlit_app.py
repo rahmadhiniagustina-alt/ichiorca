@@ -9,7 +9,7 @@ st.set_page_config(
     layout="wide"
 )
 
-# CSS Kustom - Mengembalikan estetika visual lab forensik secara utuh
+# CSS Kustom - Estetika visual lab forensik secara utuh
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700;800&family=JetBrains+Mono:wght=400;700&display=swap');
@@ -140,7 +140,7 @@ with st.sidebar:
 st.markdown("<div class='app-brand'>EnvironForensic Lab v5.0</div>", unsafe_allow_html=True)
 st.write("---")
 
-# --- MENU UTAMA: PEMILIHAN 5 KASUS LENGKAP ---
+# --- MENU UTAMA: PEMILIHAN 5 KASUS (KASUS 1 & 2 DIBUKA SEJAK AWAL) ---
 if st.session_state.current_view == "MAIN_MENU":
     st.markdown("### 📁 Pilih Berkas Kasus Kriminal Lingkungan:")
     
@@ -152,15 +152,11 @@ if st.session_state.current_view == "MAIN_MENU":
             st.rerun()
             
     with col_k2:
-        status_k2 = "🔓 Terbuka" if st.session_state.case1_cleared else "🔒 Terkunci"
-        color_k2 = "#10B981" if st.session_state.case1_cleared else "#EF4444"
-        st.markdown(f"<div class='case-selection-card'><h3>🌋 Kasus 2</h3><p><strong>Tragedi Merkuri Buyat</strong></p><p><span style='color: {color_k2};'>{status_k2}</span></p></div>", unsafe_allow_html=True)
+        # PENGUNCIAN DIHAPUS: Kasus 2 sekarang langsung berstatus Terbuka secara bebas
+        st.markdown("<div class='case-selection-card'><h3>🌋 Kasus 2</h3><p><strong>Tragedi Merkuri Buyat</strong></p><p><span style='color: #10B981;'>🔓 Terbuka</span></p></div>", unsafe_allow_html=True)
         if st.button("Buka Kasus 2", key="open_c2"):
-            if st.session_state.case1_cleared:
-                st.session_state.current_view = "KASUS_2"
-                st.rerun()
-            else:
-                st.error("Selesaikan Kasus 1 terlebih dahulu!")
+            st.session_state.current_view = "KASUS_2"
+            st.rerun()
                 
     with col_k3:
         st.markdown("<div class='case-selection-card'><h3>🛢️ Kasus 3</h3><p><strong>Tumpahan Minyak Montara</strong></p><p><span style='color: #EF4444;'>🔒 Terkunci</span></p></div>", unsafe_allow_html=True)
@@ -257,7 +253,6 @@ elif st.session_state.current_view == "KASUS_1":
                     else:
                         apply_penalty("Tuntutan Anda mentah karena salah memberikan kesimpulan argumentasi hukum.")
                 
-                # Menampilkan kembali pembahasan akademik yang sempat hilang
                 if st.session_state.show_edu_material:
                     st.write("---")
                     st.markdown("### 📖 EVALUASI PASCA-OPERASI (PEMBAHASAN AKADEMIK)")
@@ -286,7 +281,6 @@ elif st.session_state.current_view == "KASUS_1":
                         <em>"Satgas Citarum Harum melakukan pengecoran dan penutupan paksa pada puluhan lubang pipa pembuangan limbah rahasia milik pabrik tekstil besar di Cimahi dan Bandung Barat. Pabrik terbukti membuang air sisa produksi berwarna hitam pekat bersuhu panas tanpa melalui proses IPAL, melanggar UU No 32 Tahun 2009."</em>
                         </div>
                         """, unsafe_allow_html=True)
-                        st.info("🔓 **PEMBERITAHUAN:** Berkas Kasus 2 (Teluk Buyat) sekarang sudah terbuka di halaman depan!")
 
 # --- HALAMAN GAMEPLAY: KASUS 2 (TELUK BUYAT) ---
 elif st.session_state.current_view == "KASUS_2":
