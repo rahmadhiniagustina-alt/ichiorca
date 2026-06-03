@@ -124,7 +124,6 @@ Aplikasi ini dilengkapi dengan materi teori, alat dan bahan laboratorium, studi 
 """, unsafe_allow_html=True)
 
 st.success("✨ Selamat belajar dan semoga sukses!")
-```
 
 # ======================================================
 
