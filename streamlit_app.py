@@ -101,7 +101,7 @@ horizontal=True
 
 if menu == "🏠 Home":
 
-st.balloons()
+    st.balloons()
 
 st.markdown("""
 <div class='card'>
