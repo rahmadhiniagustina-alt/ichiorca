@@ -1,521 +1,112 @@
 import streamlit as st
 
+# Config Halaman Utama
+st.set_page_config(page_title="Eco-Analyst Quest", page_icon="🌊", layout="wide")
+
 # ==========================================
-# 1. MANAGEMENT HALAMAN & THEME LIGHT MODE
+# 🛠️ SIDEBAR NAVIGATION (Menu Samping Yang Lucu)
 # ==========================================
-st.set_page_config(
-    page_title="EnvironForensic Pro v5.0 (Mode Pemula)",
-    page_icon="🧪",
-    layout="wide"
+st.sidebar.image("https://fonts.gstatic.com/s/e/notoemoji/latest/1f9ea/512.webp", width=80) # Icon Tabung Reaksi Animasi
+st.sidebar.markdown("## 🕵️‍♂️ Menu Detektif")
+st.sidebar.write("Selesaikan semua misi untuk menyelamatkan lingkungan!")
+
+# Fitur selectbox untuk memisahkan menu
+menu = st.sidebar.radio(
+    "Pilih Ruangan:",
+    [
+        "🏠 1. Pusat Komando (Beranda)", 
+        "📚 2. Buku Saku Analis (Materi)", 
+        "🧪 3. Lab Virtual (Uji DO & BOD)", 
+        "🔥 4. Lab Virtual (Uji COD)",
+        "⚙️ 5. Stasiun Pengolahan (Solusi)"
+    ]
 )
 
-# CSS Kustom Tema Terang yang Bersih dan Nyaman
-st.markdown("""
-    <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;600;700;800&family=JetBrains+Mono:wght=400;700&display=swap');
+st.sidebar.write("---")
+st.sidebar.caption("🎮 *Tugas Logida & Pemrograman Komputer - Analisis Kimia*")
+
+# ==========================================
+# JALUR LOGIKA MENU (IF-ELIF-ELSE)
+# ==========================================
+
+# --- MENU 1: BERANDA ---
+if menu == "🏠 1. Pusat Komando (Beranda)":
+    st.title("🧪 Eco-Analyst Quest: Detektif Air 🌊")
+    st.markdown("### *Selamat Datang di Pusat Komando Analis Muda!* 🛡️")
     
-    [data-testid="stAppViewContainer"], [data-testid="stHeader"] {
-        background-color: #F8FAFC !important;
-        color: #1E293B !important;
-        font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-    [data-testid="stSidebar"] {
-        background-color: #F1F5F9 !important;
-        border-right: 2px solid #E2E8F0;
-    }
-    .app-brand {
-        font-size: 32px;
-        font-weight: 800;
-        background: linear-gradient(135deg, #059669 0%, #0891B2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    .lab-card {
-        background-color: #FFFFFF;
-        border: 1px solid #CBD5E1;
-        border-radius: 16px;
-        padding: 22px;
-        margin-bottom: 15px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        color: #334155;
-    }
-    .hint-box {
-        background-color: #EFF6FF;
-        border-left: 5px solid #3B82F6;
-        padding: 12px;
-        border-radius: 8px;
-        margin-bottom: 15px;
-        font-size: 14px;
-        color: #1E40AF;
-    }
-    .case-selection-card {
-        background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 100%);
-        border: 2px solid #CBD5E1;
-        border-radius: 16px;
-        padding: 20px;
-        text-align: center;
-        margin-bottom: 20px;
-        min-height: 160px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        color: #1E293B;
-    }
-    .stTextInput input, .stNumberInput input {
-        background-color: #FFFFFF !important;
-        color: #0F172A !important;
-        border: 1px solid #CBD5E1 !important;
-        font-family: 'JetBrains Mono', monospace !important;
-    }
-    .stButton>button {
-        width: 100%;
-        background: linear-gradient(135deg, #059669 0%, #0D9488 100%);
-        color: white !important;
-        font-weight: 600;
-        border-radius: 12px;
-        padding: 12px;
-        border: none;
-        box-shadow: 0 4px 6px rgba(5, 150, 105, 0.2);
-    }
-    .stButton>button:hover {
-        background: linear-gradient(135deg, #047857 0%, #0F766E 100%);
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-# ==========================================
-# 2. INISIALISASI STATE UTAMA GAME
-# ==========================================
-if "current_view" not in st.session_state: st.session_state.current_view = "MAIN_MENU"
-if "hp" not in st.session_state: st.session_state.hp = 3
-if "score" not in st.session_state: st.session_state.score = 100
-
-# Menggunakan satu objek untuk kontrol tampilan materi edukasi tiap kasus
-if "edu_shown" not in st.session_state:
-    st.session_state.edu_shown = {"c1": False, "c2": False, "c3": False, "c4": False, "c5": False}
-
-# Reset State untuk masing-masing kasus
-for prefix in ["c1", "c2", "c3", "c4", "c5"]:
-    if f"{prefix}_sample" not in st.session_state: st.session_state[f"{prefix}_sample"] = ""
-if "lab_step" not in st.session_state: st.session_state.lab_step = "INPUT_REAGEN"
-if "c2_lab_step" not in st.session_state: st.session_state.c2_lab_step = "SET_LAMP_AAS"
-if "c3_lab_step" not in st.session_state: st.session_state.c3_lab_step = "SET_CARRIER_GAS"
-if "c4_lab_step" not in st.session_state: st.session_state.c4_lab_step = "SET_WAVELENGTH_UV"
-if "c5_lab_step" not in st.session_state: st.session_state.c5_lab_step = "SET_WAVELENGTH_PO4"
-
-if "do_calculated" not in st.session_state: st.session_state.do_calculated = 0.0
-if "c2_hg_calculated" not in st.session_state: st.session_state.c2_hg_calculated = 0.0
-if "c3_area_calculated" not in st.session_state: st.session_state.c3_area_calculated = 0.0
-if "c4_cn_calculated" not in st.session_state: st.session_state.c4_cn_calculated = 0.0
-if "c5_po4_calculated" not in st.session_state: st.session_state.c5_po4_calculated = 0.0
-
-def apply_penalty(reason):
-    st.session_state.hp -= 1
-    st.session_state.score -= 20
-    st.toast(f"❌ Keliru: {reason}! Nyawa berkurang.", icon="🚨")
-
-def back_to_menu():
-    st.session_state.current_view = "MAIN_MENU"
-    st.session_state.hp = 3
-    st.session_state.score = 100
-    st.session_state.edu_shown = {"c1": False, "c2": False, "c3": False, "c4": False, "c5": False}
-    st.session_state.c1_sample = ""
-    st.session_state.lab_step = "INPUT_REAGEN"
-    st.session_state.do_calculated = 0.0
-    st.session_state.c2_sample = ""
-    st.session_state.c2_lab_step = "SET_LAMP_AAS"
-    st.session_state.c2_hg_calculated = 0.0
-    st.session_state.c3_sample = ""
-    st.session_state.c3_lab_step = "SET_CARRIER_GAS"
-    st.session_state.c3_area_calculated = 0.0
-    st.session_state.c4_sample = ""
-    st.session_state.c4_lab_step = "SET_WAVELENGTH_UV"
-    st.session_state.c4_cn_calculated = 0.0
-    st.session_state.c5_sample = ""
-    st.session_state.c5_lab_step = "SET_WAVELENGTH_PO4"
-    st.session_state.c5_po4_calculated = 0.0
-
-# ==========================================
-# 3. SIDEBAR ASISTEN LAB
-# ==========================================
-with st.sidebar:
-    st.markdown("<div class='app-brand'>🕵️‍♂️ ASISTEN LAB</div>", unsafe_allow_html=True)
-    st.info("💡 **Mode Pemula Aktif:** Panduan instrumen kimia disediakan langsung di setiap kotak instruksi!")
-    st.write("---")
-    c_hp, c_sc = st.columns(2)
-    c_hp.metric(label="❤️ Sisa Nyawa", value=f"{st.session_state.hp} / 3")
-    c_sc.metric(label="⭐ Skor Analisis", value=st.session_state.score)
-    st.write("---")
-    st.audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-8.mp3", format="audio/mp3", loop=True)
-    if st.session_state.current_view != "MAIN_MENU":
-        if st.button("🚪 Kembali ke Menu Utama"):
-            back_to_menu()
-            st.rerun()
-
-# ==========================================
-# 4. LOGIKA UTAMA JALUR HALAMAN
-# ==========================================
-st.markdown("<div class='app-brand'>🎓 Laboratorium Forensik Lingkungan Interaktif</div>", unsafe_allow_html=True)
-st.write("---")
-
-if st.session_state.hp <= 0:
-    st.error("🚨 **KESEHATAN HABIS!** Tenang, mari kita ulangi dan belajar lagi bersama-sama.")
-    if st.button("Mulai Ulang Game"):
-        back_to_menu()
-        st.rerun()
-
-# --- BERANDA UTAMA ---
-elif st.session_state.current_view == "MAIN_MENU":
-    st.markdown("### 📁 Selamat datang! Pilih kasus kriminal lingkungan yang ingin Anda selidiki:")
+    st.write("")
+    st.info("👋 **Halo Analis Keren!** Sungai-sungai di Indonesia sedang dalam bahaya karena limbah tak berizin. Pilih lokasi misimu hari ini:")
     
-    col_k1, col_k2, col_k3 = st.columns(3)
-    with col_k1:
-        st.markdown("<div class='case-selection-card'><h3>🌊 Kasus 1</h3><p>Polusi Organik Sungai Citarum</p><p style='color: #059669; font-weight: bold;'>🔓 Siap Dimainkan</p></div>", unsafe_allow_html=True)
-        if st.button("Masuk Kasus 1", key="open_c1"):
-            st.session_state.current_view = "KASUS_1"
-            st.rerun()
-    with col_k2:
-        st.markdown("<div class='case-selection-card'><h3>🌋 Kasus 2</h3><p>Tragedi Merkuri Teluk Buyat</p><p style='color: #059669; font-weight: bold;'>🔓 Siap Dimainkan</p></div>", unsafe_allow_html=True)
-        if st.button("Masuk Kasus 2", key="open_c2"):
-            st.session_state.current_view = "KASUS_2"
-            st.rerun()
-    with col_k3:
-        st.markdown("<div class='case-selection-card'><h3>🛢️ Kasus 3</h3><p>Tumpahan Minyak Montara</p><p style='color: #059669; font-weight: bold;'>🔓 Siap Dimainkan</p></div>", unsafe_allow_html=True)
-        if st.button("Masuk Kasus 3", key="open_c3"):
-            st.session_state.current_view = "KASUS_3"
-            st.rerun()
+    lokasi = st.selectbox("🗺️ Pilih Lokasi Kasus Nyata:", ["---", "📍 Sungai Citarum (Limbah Tekstil)", "📍 Teluk Jakarta (Limbah Domestik Kota)"])
+    
+    if lokasi != "---":
+        st.success(f"🚀 **Misi Dipilih:** Anda akan diberangkatkan menuju **{lokasi}**. Siapkan buret dan erlenmeyermu!")
 
-    col_k4, col_k5, _ = st.columns(3)
-    with col_k4:
-        st.markdown("<div class='case-selection-card'><h3>🧪 Kasus 4</h3><p>Kebocoran Sianida Tambang Emas</p><p style='color: #059669; font-weight: bold;'>🔓 Siap Dimainkan</p></div>", unsafe_allow_html=True)
-        if st.button("Masuk Kasus 4", key="open_c4"):
-            st.session_state.current_view = "KASUS_4"
-            st.rerun()
-    with col_k5:
-        st.markdown("<div class='case-selection-card'><h3>🌾 Kasus 5</h3><p>Ledakan Alga Danau Toba</p><p style='color: #059669; font-weight: bold;'>🔓 Siap Dimainkan</p></div>", unsafe_allow_html=True)
-        if st.button("Masuk Kasus 5", key="open_c5"):
-            st.session_state.current_view = "KASUS_5"
-            st.rerun()
+# --- MENU 2: MATERI ---
+elif menu == "📚 2. Buku Saku Analis (Materi)":
+    st.title("📚 Buku Saku Analis Lingkungan")
+    st.write("Pelajari senjata analisamu di sini sebelum masuk ke laboratorium fisik:")
+    
+    # Menggunakan fitur tab agar materi terlihat rapi dan tidak penuh
+    tab1, tab2, tab3 = st.tabs(["💧 Oksigen Terlarut (DO)", "🦠 Kebutuhan Oksigen Biologi (BOD)", "⚗️ Kebutuhan Oksigen Kimia (COD)"])
+    
+    with tab1:
+        st.markdown("### 🐠 DO (Dissolved Oxygen)")
+        st.write("DO adalah jumlah oksigen murni yang larut di dalam air. Semakin tinggi nilai DO, air semakin segar dan ikan-ikan semakin bahagia! 🐟")
+        st.warning("⚠️ *Metode Analisis:* Titrasi Iodometri (Winkler) menggunakan amilum sebagai indikator.")
+        
+    with tab2:
+        st.markdown("### 🧫 BOD (Biochemical Oxygen Demand)")
+        st.write("BOD adalah banyaknya oksigen yang dibutuhkan oleh mikroorganisme untuk memakan zat organik. Jika BOD tinggi, berarti bakteri sedang pesta pora karena airnya penuh kotoran!")
+        st.warning("⚠️ *Metode Analisis:* Selisih nilai DO hari ke-0 ($DO_0$) dengan DO setelah inkubasi 5 hari ($DO_5$).")
 
-# --- KASUS 1: CITARUM ---
-elif st.session_state.current_view == "KASUS_1":
-    tabs = st.tabs(["🔎 1. Ambil Sampel", "🧪 2. Uji Kimia Lab", "⚖️ 3. Putusan Sidang"])
-    with tabs[0]:
-        st.markdown("### 🗺️ Lokasi Pembuangan Limbah Tekstil")
-        st.markdown("<div class='lab-card'>Ada pabrik nakal membuang limbah cair rahasia tanpa diolah. Intelijen memberi tahu lokasinya ada di zona <strong>BETA</strong>.</div>", unsafe_allow_html=True)
-        st.markdown("<div class='hint-box'>💡 <strong>Petunjuk Mudah:</strong> Ketik kata <strong>BETA</strong> di kolom bawah untuk mengambil sampelnya.</div>", unsafe_allow_html=True)
-        lokasi = st.text_input("Masukkan Kode Lokasi:", key="c1_loc")
-        if st.button("Ambil Sampel Air 🧺", key="btn_c1_sam"):
-            if lokasi.strip().upper() == "BETA":
-                st.session_state.c1_sample = "Limbah Citarum"
-                st.success("🎯 Sukses! Botol sampel berhasil diambil. Sekarang, silakan klik **Tab 2 (Uji Kimia Lab)** di bagian atas!")
-            else: apply_penalty("Kata sandi lokasi salah, coba ketik BETA.")
-    with tabs[1]:
-        st.markdown("### 🔬 Menghitung Kadar Oksigen Air (Titrasi Winkler)")
-        if st.session_state.c1_sample == "": st.warning("Ambil botol sampelmu di Tab 1 dulu ya!")
-        else:
-            if st.session_state.lab_step == "INPUT_REAGEN":
-                st.markdown("<div class='lab-card'><strong>Penjelasan:</strong> Kita perlu memasukkan zat kimia pengikat oksigen bernama Mangan(II) Sulfat agar air berubah warna menjadi cokelat.</div>", unsafe_allow_html=True)
-                st.markdown("<div class='hint-box'>💡 <strong>Petunjuk Mudah:</strong> Rumus kimia molekulnya adalah <strong>MnSO4</strong> (Perhatikan huruf besar kecilnya). Ketik di bawah!</div>", unsafe_allow_html=True)
-                reagen = st.text_input("Ketik rumus molekul reagen:", key="c1_reag")
-                if st.button("Suntikkan Reagen Ke Botol 🧪"):
-                    if reagen.strip() == "MnSO4":
-                        st.success("🎯 Bagus! Cairannya berubah warna. Langkah hitungan otomatis terbuka!")
-                        st.session_state.lab_step = "HITUNG_DO"
-                        st.rerun()
-                    else: apply_penalty("Rumus kimia kurang tepat, pastikan mengetik MnSO4.")
-            elif st.session_state.lab_step == "HITUNG_DO":
-                st.markdown("<div class='lab-card'><strong>Cara Menghitung:</strong> Di lab, volume cairan buret yang terpakai adalah 1.5 mL. Rumus mencari kadar oksigen (DO) adalah: <code>Volume Terpakai x 2</code></div>", unsafe_allow_html=True)
-                st.markdown("<div class='hint-box'>💡 <strong>Petunjuk Mudah:</strong> Hitung 1.5 dikali 2, hasilnya adalah <strong>3.0</strong>. Masukkan angka 3.0 di bawah!</div>", unsafe_allow_html=True)
-                angka = st.number_input("Hasil kadar DO (mg/L):", step=0.1, key="c1_num")
-                if st.button("Kunci Angka Laboratorium"):
-                    if angka == 3.0:
-                        st.success("🎯 Hebat! Perhitunganmu 100% akurat. Lanjut ke **Tab 3 (Putusan Sidang)**!")
-                        st.session_state.do_calculated = 3.0
-                        st.session_state.lab_step = "LAB_SUCCESS"
-                        st.rerun()
-                    else: apply_penalty("Hitunganmu keliru, coba isi dengan angka 3.0.")
-            elif st.session_state.lab_step == "LAB_SUCCESS":
-                st.markdown("<div class='lab-card'><h4>📊 SERTIFIKAT LAB SUDAH TERBIT</h4>• Kadar Oksigen Air Anda: <strong>3.0 mg/L</strong><br>• Ambang batas aman minimal pemerintah: <strong>4.0 mg/L</strong></div>", unsafe_allow_html=True)
-    with tabs[2]:
-        st.markdown("### ⚖️ Ruang Sidang Meja Hijau")
-        if st.session_state.do_calculated == 0.0: st.warning("Selesaikan analisis uji lab di Tab 2 dulu!")
-        else:
-            pilihan = st.selectbox("Pilih Kesimpulan Dakwaan:", ["-- Pilih Kalimat --", "Bebaskan Pabrik", "Pabrik divonis bersalah karena kadar oksigen 3.0 mg/L melanggar aturan baku mutu."], key="c1_sd")
-            if st.button("🔨 KETOK PALU KEPUTUSAN HAKIM"):
-                if "divonis bersalah" in pilihan:
-                    st.balloons()
-                    st.session_state.edu_shown["c1"] = True
-                    st.success("🎉 KASUS 1 SELESAI DENGAN INDAH!")
-                else: apply_penalty("Tuntutanmu keliru, pabrik merusak alam harus dihukum!")
-            
-            if st.session_state.edu_shown["c1"]:
-                st.write("---")
-                st.markdown("### 📖 EVALUASI & BUKTI NYATA KASUS 1")
-                st.markdown("""
-                <div class='lab-card' style='border-left: 5px solid #059669;'>
-                <h4>📚 Pembahasan Teori Kimia (DO & COD)</h4>
-                Limbah organik tekstil memicu perkembangbiakan mikroba pembusuk. Mikroba mengonsumsi <strong>DO (Dissolved Oxygen)</strong> air untuk mengoksidasi senyawa pewarna, sehingga jumlah oksigen turun drastis (hanya 3.0 mg/L). Hal ini menaikkan nilai <strong>COD (Chemical Oxygen Demand)</strong> yang mencerminkan beban polusi kimia di sungai.
-                <br><br>
-                <h4>📰 Bukti Riil Kasus Dunia Nyata</h4>
-                Kasus ini terinspirasi dari penegakan hukum Satgas Citarum Harum di Jawa Barat. Puluhan pipa pembuangan limbah tersembunyi (pipa siluman) milik pabrik tekstil nakal dicor beton karena membuang limbah cair berwarna hitam pekat beracun langsung tanpa lewat instalasi IPAL resmi.
-                </div>
-                """, unsafe_allow_html=True)
+    with tab3:
+        st.markdown("### 🔥 COD (Chemical Oxygen Demand)")
+        st.write("COD adalah jumlah oksigen yang dibutuhkan untuk menghancurkan limbah secara kimiawi menggunakan oksidator kuat seperti Kalium Bikromat ($K_2Cr_2O_7$).")
+        st.warning("⚠️ *Metode Analisis:* Refluks terbuka diikuti titrasi balik menggunakan larutan FAS dengan indikator Ferroin.")
 
-# --- KASUS 2: TELUK BUYAT (AAS) ---
-elif st.session_state.current_view == "KASUS_2":
-    tabs = st.tabs(["🔎 1. Ambil Sampel Pantai", "🔬 2. Alat AAS (Merkuri)", "⚖️ 3. Putusan Sidang"])
-    with tabs[0]:
-        st.markdown("### 🏖️ Investigasi Logam Berat")
-        st.markdown("<div class='lab-card'>Limbah raksa dari penambangan mencemari muara laut. Warga melapor titik pembuangannya ada di wilayah <strong>SELATAN</strong>.</div>", unsafe_allow_html=True)
-        st.markdown("<div class='hint-box'>💡 <strong>Petunjuk Mudah:</strong> Ketik kata <strong>SELATAN</strong> untuk mengambil sampel pasir/sedimen laut.</div>", unsafe_allow_html=True)
-        lokasi = st.text_input("Ketik Lokasi:", key="c2_loc")
-        if st.button("Amankan Sedimen Pantai 🧺"):
-            if lokasi.strip().upper() == "SELATAN":
-                st.session_state.c2_sample = "Sedimen Buyat"
-                st.success("🎯 Berhasil mengambil sampel sedimen! Mari lanjut ke **Tab 2**.")
-            else: apply_penalty("Lokasi salah, ketik SELATAN.")
-    with tabs[1]:
-        st.markdown("### 🔬 Mengenal Alat AAS (Spektroskopi Serapan Atom)")
-        if st.session_state.c2_sample == "": st.warning("Ambil sampel di Tab 1 dulu!")
-        else:
-            if st.session_state.c2_lab_step == "SET_LAMP_AAS":
-                st.markdown("<div class='lab-card'><strong>Cara Kerja Alat:</strong> Alat AAS mendeteksi raksa (Merkuri) menggunakan lampu katoda khusus. Agar sinar pas menyerap atom Merkuri, panjang gelombang alat harus dikalibrasi.</div>", unsafe_allow_html=True)
-                st.markdown("<div class='hint-box'>💡 <strong>Petunjuk Mudah:</strong> Panjang gelombang emas Merkuri (Hg) adalah <strong>253.7</strong> nm. Masukkan angka itu di bawah!</div>", unsafe_allow_html=True)
-                wave = st.number_input("Atur Panjang Gelombang (nm):", step=0.1, key="c2_w")
-                if st.button("Tembakkan Laser Kalibrasi 💥"):
-                    if wave == 253.7:
-                        st.success("🎯 Alat AAS berhasil menangkap sinyal raksa. Menu hitungan terbuka!")
-                        st.session_state.c2_lab_step = "HITUNG_AAS"
-                        st.rerun()
-                    else: apply_penalty("Masukkan angka panjang gelombang raksa yang benar: 253.7")
-            elif st.session_state.c2_lab_step == "HITUNG_AAS":
-                st.markdown("<div class='lab-card'><strong>Membaca Hasil Alat:</strong> Detektor AAS memunculkan nilai serapan warna (Absorbansi) sebesar 0.25. Rumus kadarnya: <code>Nilai Absorbansi / 0.1</code></div>", unsafe_allow_html=True)
-                st.markdown("<div class='hint-box'>💡 <strong>Petunjuk Mudah:</strong> 0.25 dibagi 0.1 hasilnya adalah <strong>2.5</strong>. Ketik angka 2.5 di bawah!</div>", unsafe_allow_html=True)
-                hg = st.number_input("Kadar Merkuri (ppm):", step=0.1, key="c2_hg")
-                if st.button("Kunci Sertifikat Logam"):
-                    if hg == 2.5:
-                        st.success("🎯 Sempurna! Lanjut ke **Tab 3**.")
-                        st.session_state.c2_hg_calculated = 2.5
-                        st.session_state.c2_lab_step = "AAS_SUCCESS"
-                        st.rerun()
-                    else: apply_penalty("Hitungan salah, jawabannya adalah 2.5")
-            elif st.session_state.c2_lab_step == "AAS_SUCCESS":
-                st.markdown("<div class='lab-card'><h4>📊 HASIL UJI SPEKTROSKOPI AAS</h4>• Kadar Merkuri: <strong>2.5 ppm</strong><br>• Batas Maksimal Aman Internasional: <strong>0.15 ppm</strong></div>", unsafe_allow_html=True)
-    with tabs[2]:
-        st.markdown("### ⚖️ Putusan Mahkamah")
-        if st.session_state.c2_hg_calculated == 0.0: st.warning("Selesaikan uji lab di Tab 2 dulu!")
-        else:
-            pilihan = st.selectbox("Tuntutan Hukum:", ["-- Pilih --", "Bebaskan Perusahaan", "Perusahaan wajib membayar ganti rugi karena merkuri 2.5 ppm meracuni ikan dan nelayan."], key="c2_sd")
-            if st.button("🔨 KETOK PALU SIDANG"):
-                if "wajib membayar ganti rugi" in pilihan:
-                    st.balloons()
-                    st.session_state.edu_shown["c2"] = True
-                    st.success("🎉 KASUS 2 CLOSED! Keadilan berhasil ditegakkan!")
-                else: apply_penalty("Pilih dakwaan yang membela lingkungan warga.")
-            
-            if st.session_state.edu_shown["c2"]:
-                st.write("---")
-                st.markdown("### 📖 EVALUASI & BUKTI NYATA KASUS 2")
-                st.markdown("""
-                <div class='lab-card' style='border-left: 5px solid #0891B2;'>
-                <h4>📚 Pembahasan Teori Kimia (Spektroskopi Serapan Atom / AAS)</h4>
-                Alat AAS bekerja menguapkan sampel sedimen pantai menggunakan api atau sistem uap dingin. Atom gas <strong>Merkuri (Hg)</strong> bebas tersebut menyerap energi cahaya dari lampu katoda secara spesifik pada panjang gelombang <strong>253.7 nm</strong>. Semakin tinggi serapannya (absorbansi), semakin pekat kandungan logam berat beracunnya.
-                <br><br>
-                <h4>📰 Bukti Riil Kasus Dunia Nyata</h4>
-                Diangkat dari peristiwa pencemaran lingkungan historis di <strong>Teluk Buyat, Sulawesi Utara (2004)</strong>. Limbah sisa (tailing) dari aktivitas pertambangan emas raksasa dibuang ke dasar laut teluk, memicu masalah kesehatan neurologis mirip penyakit Minamata pada komunitas nelayan lokal akibat akumulasi raksa pada ikan konsumsi.
-                </div>
-                """, unsafe_allow_html=True)
+# --- MENU 3: LAB DO & BOD ---
+elif menu == "🧪 3. Lab Virtual (Uji DO & BOD)":
+    st.title("🧪 Meja Analisis DO & BOD (Metode Winkler)")
+    st.write("Mari lakukan titrasi manual untuk mengukur kadar oksigen terlarut.")
+    
+    st.caption("*(Gunakan slider di bawah untuk meniru volume tetesan tiosulfat dari buret)*")
+    v_tiosulfat = st.slider("📐 Volume Na₂S₂O₃ terpakai (mL):", 0.0, 15.0, 6.2, step=0.1)
+    
+    # Rumus simulasi DO sederhana
+    hasil_do = (v_tiosulfat * 0.1 * 8 * 1000) / 250 # Asumsi volume botol winkler 250 mL
+    st.metric("Hasil DO Hari Ini", f"{hasil_do:.2f} mg/L")
 
-# --- KASUS 3: MONTARA (GC-FID) ---
-elif st.session_state.current_view == "KASUS_3":
-    tabs = st.tabs(["🔎 1. Ambil Sampel Laut", "⛽ 2. Alat GC (Minyak)", "⚖️ 3. Putusan Sidang"])
-    with tabs[0]:
-        st.markdown("### 🛢️ Investigasi Tumpahan Minyak Lepas Pantai")
-        st.markdown("<div class='lab-card'>Minyak mentah bocor di tengah laut. Satelit mendeteksi area pencemaran paling tebal ada di blok <strong>TIMUR</strong>.</div>", unsafe_allow_html=True)
-        st.markdown("<div class='hint-box'>💡 <strong>Petunjuk Mudah:</strong> Ketik kata <strong>TIMUR</strong> di kolom input untuk mengambil sampel air laut berminyak.</div>", unsafe_allow_html=True)
-        lokasi = st.text_input("Ketik Blok Koordinat:", key="c3_loc")
-        if st.button("Ambil Sampel Minyak 🌊"):
-            if lokasi.strip().upper() == "TIMUR":
-                st.session_state.c3_sample = "Minyak Bumi"
-                st.success("🎯 Berhasil mengisolasi sampel minyak mentah! Silakan buka **Tab 2**.")
-            else: apply_penalty("Salah koordinat, ketik TIMUR.")
-    with tabs[1]:
-        st.markdown("### 🔬 Mengenal Kromatografi Gas (GC)")
-        if st.session_state.c3_sample == "": st.warning("Ambil sampel di Tab 1 dulu!")
-        else:
-            if st.session_state.c3_lab_step == "SET_CARRIER_GAS":
-                st.markdown("<div class='lab-card'><strong>Cara Kerja Alat:</strong> Alat Kromatografi Gas (GC) memisahkan komponen minyak bumi dengan cara menyemburkan cairan sampel ke tabung kolom gas menggunakan bantuan tiupan 'Gas Pembawa' yang tidak merusak komponen sampel.</div>", unsafe_allow_html=True)
-                st.markdown("<div class='hint-box'>💡 <strong>Petunjuk Mudah:</strong> Gas pembawa standar lab yang tidak mudah bereaksi (inert) bernama gas <strong>Helium</strong>. Ketik Helium di bawah!</div>", unsafe_allow_html=True)
-                gas = st.text_input("Nama Gas Pembawa:", key="c3_gas")
-                if st.button("Injeksi & Alirkan Gas"):
-                    if gas.strip().upper() in ["HELIUM", "HE"]:
-                        st.success("🎯 Gas menyembur stabil! Mesin GC berhasil memisahkan komponen hidrokarbon.")
-                        st.session_state.c3_lab_step = "HITUNG_GC"
-                        st.rerun()
-                    else: apply_penalty("Alat tersumbat! Ketik kata Helium.")
-            elif st.session_state.c3_lab_step == "HITUNG_GC":
-                st.markdown("<div class='lab-card'><strong>Membaca Grafik Alat:</strong> Mesin GC memunculkan grafik puncak dengan luas area 10.000 unit. Rumus persentase kandungan minyak di air adalah: <code>Luas Area / 5000</code></div>", unsafe_allow_html=True)
-                st.markdown("<div class='hint-box'>💡 <strong>Petunjuk Mudah:</strong> 10.000 dibagi 5.000 hasilnya adalah <strong>2.0</strong>. Masukkan angka 2.0 di bawah!</div>", unsafe_allow_html=True)
-                persen = st.number_input("Total Hidrokarbon Minyak (%):", step=0.1, key="c3_pct")
-                if st.button("Sahkan Grafik Kromatogram"):
-                    if persen == 2.0:
-                        st.success("🎯 Tepat sekali! Kadar tumpahan terdata resmi. Lanjut ke **Tab 3**!")
-                        st.session_state.c3_area_calculated = 2.0
-                        st.session_state.c3_lab_step = "GC_SUCCESS"
-                        st.rerun()
-                    else: apply_penalty("Jawaban salah, ketik angka 2.0.")
-            elif st.session_state.c3_lab_step == "GC_SUCCESS":
-                st.markdown("<div class='lab-card'><h4>📊 SERTIFIKAT FORENSIK GC-FID</h4>• Kadar TPH Minyak Bumi: <strong>2.0%</strong><br>• Dampak: Sangat Beracun bagi Terumbu Karang dan Perikanan</div>", unsafe_allow_html=True)
-    with tabs[2]:
-        st.markdown("### ⚖️ Putusan Sidang Hukum Maritim")
-        if st.session_state.c3_area_calculated == 0.0: st.warning("Selesaikan uji GC di Tab 2 dulu!")
-        else:
-            pilihan = st.selectbox("Keputusan Sidang:", ["-- Pilih --", "Gugatan Gugur", "Operator kilang lepas pantai dinyatakan bersalah dan wajib mendanai pembersihan laut."], key="c3_sd")
-            if st.button("🔨 KETOK PALU MARITIM"):
-                if "dinyatakan bersalah" in pilihan:
-                    st.balloons()
-                    st.session_state.edu_shown["c3"] = True
-                    st.success("🎉 KASUS 3 CLOSED!")
-                else: apply_penalty("Pilih keputusan hukum yang adil untuk kelestarian laut.")
-            
-            if st.session_state.edu_shown["c3"]:
-                st.write("---")
-                st.markdown("### 📖 EVALUASI & BUKTI NYATA KASUS 3")
-                st.markdown("""
-                <div class='lab-card' style='border-left: 5px solid #EA580C;'>
-                <h4>📚 Pembahasan Teori Kimia (Kromatografi Gas / GC-FID)</h4>
-                Minyak mentah tersusun dari campuran senyawa hidrokarbon yang kompleks. Komponen minyak dipisahkan di dalam kolom instrumen <strong>Kromatografi Gas (GC)</strong> berdasarkan titik didihnya menggunakan gas pembawa <strong>Helium (He)</strong>. Detektor <strong>FID (Flame Ionization Detector)</strong> kemudian membakar hidrokarbon tersebut hingga membentuk ion listrik yang grafiknya dihitung sebagai luas area konsentrasi polutan.
-                <br><br>
-                <h4>📰 Bukti Riil Kasus Dunia Nyata</h4>
-                Diangkat dari tragedi lingkungan skala internasional: <strong>Tumpahan Minyak Montara (2009)</strong> di Laut Timor. Ladang minyak lepas pantai milik perusahaan Australia meledak dan menumpahkan jutaan liter minyak mentah selama berbulan-bulan, mencemari wilayah perairan budidaya rumput laut dan merugikan puluhan ribu nelayan di Nusa Tenggara Timur (NTT). Gugatan hukum ini akhirnya dimenangkan oleh Indonesia di pengadilan federal.
-                </div>
-                """, unsafe_allow_html=True)
+# --- MENU 4: LAB COD ---
+elif menu == "🔥 4. Lab Virtual (Uji COD)":
+    st.title("🔥 Meja Analisis COD (Titrasi Balik)")
+    st.write("Zat organik sudah direfluks panas bersama asam sulfat. Sekarang saatnya menitrasi sisa bikromat!")
+    
+    v_blanko = st.slider("📐 Volume FAS untuk Blanko (mL):", 15.0, 25.0, 20.0, step=0.1)
+    v_sampel = st.slider("🧪 Volume FAS untuk Sampel Air (mL):", 5.0, 20.0, 11.2, step=0.1)
+    
+    # Hitung COD
+    hasil_cod = ((v_blanko - v_sampel) * 0.1 * 8 * 1000) / 50
+    st.metric("Kadar COD Hasil Analisis", f"{hasil_cod:.2f} mg/L")
+    
+    # Simpan angka COD secara otomatis agar bisa dipakai di menu 5
+    st.session_state['hasil_cod'] = hasil_cod
 
-# --- KASUS 4: SIANIDA TAMBANG (UV-VIS) ---
-elif st.session_state.current_view == "KASUS_4":
-    tabs = st.tabs(["🔎 1. Ambil Sampel Sungai", "🧪 2. Alat Spektrofotometer", "⚖️ 3. Putusan Sidang"])
-    with tabs[0]:
-        st.markdown("### 🧪 Kebocoran Racun Sianida Tambang Emas")
-        st.markdown("<div class='lab-card'>Limbah cair pengolahan emas bocor ke sungai desa. Laporan warga menyatakan titik pencemaran berasal dari aliran sungai sektor <strong>UTARA</strong>.</div>", unsafe_allow_html=True)
-        st.markdown("<div class='hint-box'>💡 <strong>Petunjuk Mudah:</strong> Ketik kata <strong>UTARA</strong> untuk mengambil sampel air sungai beracun tersebut.</div>", unsafe_allow_html=True)
-        lokasi = st.text_input("Ketik Sektor Sungai:", key="c4_loc")
-        if st.button("Ambil Sampel Air Racun 🧺"):
-            if lokasi.strip().upper() == "UTARA":
-                st.session_state.c4_sample = "Sianida Cair"
-                st.success("🎯 Botol sampel racun sianida berhasil diamankan! Lanjut ke **Tab 2**.")
-            else: apply_penalty("Salah rute, ketik UTARA.")
-    with tabs[1]:
-        st.markdown("### 🔬 Mengenal Spektrofotometer UV-Vis")
-        if st.session_state.c4_sample == "": st.warning("Ambil sampel di Tab 1 dulu!")
-        else:
-            if st.session_state.c4_lab_step == "SET_WAVELENGTH_UV":
-                st.markdown("<div class='lab-card'><strong>Cara Kerja Alat:</strong> Alat ini menembakkan cahaya dengan warna khusus untuk mendeteksi kepekatan zat warna cairan kimia. Larutan uji sianida yang sudah diberi pereaksi pembentuk senyawa kompleks biru dibaca pada panjang gelombang khusus.</div>", unsafe_allow_html=True)
-                st.markdown("<div class='hint-box'>💡 <strong>Petunjuk Mudah:</strong> Sesuai standar baku mutu kimia lab, ketik angka panjang gelombang optimalnya yaitu <strong>578</strong> nm di bawah!</div>", unsafe_allow_html=True)
-                wave = st.number_input("Atur Panjang Gelombang Alat (nm):", step=1, key="c4_w")
-                if st.button("Set Warna Cahaya Monokromator"):
-                    if wave == 578:
-                        st.success("🎯 Alat Spektro berhasil mendeteksi warna kompleks sianida.")
-                        st.session_state.c4_lab_step = "HITUNG_UV"
-                        st.rerun()
-                    else: apply_penalty("Masukkan angka panjang gelombang: 578")
-            elif st.session_state.c4_lab_step == "HITUNG_UV":
-                st.markdown("<div class='lab-card'><strong>Membaca Layar Alat:</strong> Nilai serapan cahaya (Absorbansi) yang muncul adalah 0.30. Rumus mencari kadar racunnya adalah: <code>Nilai Absorbansi x 2</code></div>", unsafe_allow_html=True)
-                st.markdown("<div class='hint-box'>💡 <strong>Petunjuk Mudah:</strong> 0.30 dikali 2 hasilnya adalah <strong>0.6</strong>. Masukkan angka 0.6 di bawah!</div>", unsafe_allow_html=True)
-                cn = st.number_input("Kadar Racun Sianida (mg/L):", step=0.01, key="c4_cn")
-                if st.button("Validasi Hasil Detektor"):
-                    if cn == 0.6:
-                        st.success("🎯 Sempurna! Data forensik sah diterbitkan. Silakan ke **Tab 3**!")
-                        st.session_state.c4_cn_calculated = 0.6
-                        st.session_state.c4_lab_step = "UV_SUCCESS"
-                        st.rerun()
-                    else: apply_penalty("Hitungan kurang tepat, masukkan angka 0.6.")
-            elif st.session_state.c4_lab_step == "UV_SUCCESS":
-                st.markdown("<div class='lab-card'><h4>📊 LAPORAN SAH SPEKTROFOTOMETRI UV-VIS</h4>• Sianida Bebas (CN⁻): <strong>0.6 mg/L</strong><br>• Batas Maksimal Aman Baku Mutu: <strong>0.05 mg/L</strong></div>", unsafe_allow_html=True)
-    with tabs[2]:
-        st.markdown("### ⚖️ Sidang Pidana Korporasi")
-        if st.session_state.c4_cn_calculated == 0.0: st.warning("Selesaikan uji lab di Tab 2 dulu!")
-        else:
-            pilihan = st.selectbox("Dakwaan Jaksa:", ["-- Pilih --", "Bebaskan Direktur", "Manajemen perusahaan dijatuhi hukuman pidana akibat kelalaian kebocoran pipa sianida tambang."], key="c4_sd")
-            if st.button("🔨 EKSEKUSI TUNTUTAN PIDANA"):
-                if "dijatuhi hukuman pidana" in pilihan:
-                    st.balloons()
-                    st.session_state.edu_shown["c4"] = True
-                    st.success("🎉 KASUS 4 CLOSED!")
-                else: apply_penalty("Pilih dakwaan hukuman pidana bagi perusak sungai warga.")
-            
-            if st.session_state.edu_shown["c4"]:
-                st.write("---")
-                st.markdown("### 📖 EVALUASI & BUKTI NYATA KASUS 4")
-                st.markdown("""
-                <div class='lab-card' style='border-left: 5px solid #DC2626;'>
-                <h4>📚 Pembahasan Teori Kimia (Spektrofotometri Sianida)</h4>
-                <strong>Sianida (CN⁻)</strong> adalah racun maut yang menghambat sistem respirasi sel makhluk hidup. Dalam pengujian, sianida direaksikan dengan kloramin-T dan asam barbiturat hingga membentuk larutan berwarna biru. Melalui prinsip hukum Lambert-Beer pada alat <strong>Spektrofotometer UV-Vis</strong>, warna biru ini menyerap energi cahaya paling tinggi pada panjang gelombang <strong>578 nm</strong> untuk ditentukan konsentrasi sisa racunnya.
-                <br><br>
-                <h4>📰 Bukti Riil Kasus Dunia Nyata</h4>
-                Kasus kebocoran zat kimia berbahaya ini sering menimpa ekosistem air akibat jebolnya dinding kolam penampung limbah (tailing dam) perusahaan ekstraksi pertambangan emas skala besar maupun kecil (PETI). Sianida dipakai dalam industri pertambangan untuk memisahkan bijih emas murni dari batuan batuan alam, sehingga kebocorannya memicu kematian massal ikan-ikan liar di sungai desa.
-                </div>
-                """, unsafe_allow_html=True)
-
-# --- KASUS 5: EUTROFIKASI TOBA (MOLIBDAT BIRU) ---
-elif st.session_state.current_view == "KASUS_5":
-    tabs = st.tabs(["🔎 1. Ambil Sampel Air", "🧪 2. Alat Spektrofotometer (Fosfat)", "⚖️ 3. Sanksi Administrasi"])
-    with tabs[0]:
-        st.markdown("### 🌾 Kasus Ledakan Alga Hijau pekat ( Blooming Algae )")
-        st.markdown("<div class='lab-card'>Sisa pakan ikan dari keramba raksasa komersial memicu penumpukan fosfat. Kematian ikan massal paling parah terjadi di sektor keramba wilayah <strong>BARAT</strong>.</div>", unsafe_allow_html=True)
-        st.markdown("<div class='hint-box'>💡 <strong>Petunjuk Mudah:</strong> Ketik kata <strong>BARAT</strong> untuk mengambil sampel air danau yang berwarna hijau keruh.</div>", unsafe_allow_html=True)
-        lokasi = st.text_input("Ketik Wilayah Danau:", key="c5_loc")
-        if st.button("Ambil Sampel Air Danau 🧺"):
-            if lokasi.strip().upper() == "BARAT":
-                st.session_state.c5_sample = "Fosfat Air"
-                st.success("🎯 Sampel air kaya nutrisi fosfat berhasil dikumpulkan! Ayo buka **Tab 2**.")
-            else: apply_penalty("Salah area sampling, ketik BARAT.")
-    with tabs[1]:
-        st.markdown("### 🔬 Analisis Kadar Nutrien Pupuk Fosfat")
-        if st.session_state.c5_sample == "": st.warning("Ambil sampel di Tab 1 dulu!")
-        else:
-            if st.session_state.c5_lab_step == "SET_WAVELENGTH_PO4":
-                st.markdown("<div class='lab-card'><strong>Cara Kerja Metode:</strong> Air danau dicampur reagen amonium molibdat dan asam askorbat hingga berubah menjadi kompleks warna biru molibdat. Warna pekat biru ini dibaca menggunakan pancaran sinar inframerah dekat agar kadarnya ketahuan.</div>", unsafe_allow_html=True)
-                st.markdown("<div class='hint-box'>💡 <strong>Petunjuk Mudah:</strong> Panjang gelombang standar baku untuk mengukur senyawa kompleks ini adalah <strong>880</strong> nm. Ketik angka 880 di bawah!</div>", unsafe_allow_html=True)
-                wave = st.number_input("Atur Panjang Gelombang Inframerah (nm):", step=1, key="c5_w")
-                if st.button("Nyalakan Sinar Monokromator 🔎"):
-                    if wave == 880:
-                        st.success("🎯 Sinar terkalibrasi pas! Detektor siap membaca kepekatan cairan.")
-                        st.session_state.c5_lab_step = "HITUNG_PO4"
-                        st.rerun()
-                    else: apply_penalty("Salah gelombang cahaya, ketik angka: 880")
-            elif st.session_state.c5_lab_step == "HITUNG_PO4":
-                st.markdown("<div class='lab-card'><strong>Membaca Nilai Layar:</strong> Hasil ukur nilai Absorbansi larutan adalah 0.15. Rumus konversi kadar fosfatnya: <code>Nilai Absorbansi / 0.5</code></div>", unsafe_allow_html=True)
-                st.markdown("<div class='hint-box'>💡 <strong>Petunjuk Mudah:</strong> 0.15 dibagi 0.5 hasilnya adalah <strong>0.3</strong>. Masukkan angka 0.3 di kolom bawah!</div>", unsafe_allow_html=True)
-                po4 = st.number_input("Kadar Fosfat Danau (ppm):", step=0.01, key="c5_po4")
-                if st.button("Sertifikasi Kadar Nutrien"):
-                    if po4 == 0.3:
-                        st.success("🎯 Luar biasa tepat! Hasil laboratorium terkunci dengan sah. Silakan menuju **Tab 3**!")
-                        st.session_state.c5_po4_calculated = 0.3
-                        st.session_state.c5_lab_step = "PO4_SUCCESS"
-                        st.rerun()
-                    else: apply_penalty("Hitungan salah, jawabannya adalah 0.3")
-            elif st.session_state.c5_lab_step == "PO4_SUCCESS":
-                st.markdown("<div class='lab-card'><h4>📊 HASIL SAH SPEKTROFOTOMETRI DANAU</h4>• Kadar Ortofosfat (PO₄³⁻): <strong>0.3 ppm</strong><br>• Ambang Batas Aman Alami Danau: <strong>0.02 ppm</strong></div>", unsafe_allow_html=True)
-    with tabs[2]:
-        st.markdown("### ⚖️ Ruang Sanksi Dinas Lingkungan Hidup")
-        if st.session_state.c5_po4_calculated == 0.0: st.warning("Selesaikan uji lab di Tab 2 dulu!")
-        else:
-            pilihan = st.selectbox("Tindakan Tegas Pemerintah:", ["-- Pilih --", "Biarkan Saja Operasionalnya", "Pemerintah mencabut izin usaha keramba raksasa komersial karena terbukti memicu pencemaran fosfat 0.3 ppm."], key="c5_sd")
-            if st.button("🔨 KETOK PALU SANKSI ADMINISTRASI"):
-                if "mencabut izin" in pilihan:
-                    st.balloons()
-                    st.session_state.edu_shown["c5"] = True
-                    st.success("🎉 KASUS 5 CLOSED! SEMUA BERKAS BERHASIL DISELESAIKAN!")
-                else: apply_penalty("Ekosistem danau hancur total karena pembiaran!")
-            
-            if st.session_state.edu_shown["c5"]:
-                st.write("---")
-                st.markdown("### 📖 EVALUASI & BUKTI NYATA KASUS 5")
-                st.markdown("""
-                <div class='lab-card' style='border-left: 5px solid #8B5CF6;'>
-                <h4>📚 Pembahasan Teori Kimia (Eutrofikasi & Kompleks Molibdat)</h4>
-                Akumulasi senyawa nutrien seperti <strong>Fosfat (PO₄³⁻)</strong> dan Nitrat yang berlebih di danau memicu fenomena <strong>Eutrofikasi</strong> (ledakan populasi tanaman air/alga). Ketika alga mati dan membusuk, proses dekomposisi menghabiskan cadangan oksigen terlarut dalam danau. Pengujian kadar fosfat dilakukan secara spektrofotometri membentuk zat kompleks berwarna biru yang terbaca akurat pada wilayah inframerah dekat yaitu <strong>880 nm</strong>.
-                <br><br>
-                <h4>📰 Bukti Riil Kasus Dunia Nyata</h4>
-                Diangkat dari masalah ekologi nyata di kawasan pariwisata super prioritas <strong>Danau Toba, Sumatera Utara</strong>. Keberadaan Keramba Jaring Apung (KJA) korporasi raksasa yang melebihi kapasitas daya dukung lingkungan menyumbang ribuan ton sisa pakan ikan (pelet) kaya fosfat ke dasar danau. Hal ini mengakibatkan air danau berbau, berwarna hijau pekat, serta memicu kematian massal jutaan ikan budidaya secara berkala karena sesak napas.
-                </div>
-                """, unsafe_allow_html=True)
+# --- MENU 5: SOLUSI & PENGOLAHAN ---
+elif menu == "⚙️ 5. Stasiun Pengolahan (Solusi)":
+    st.title("⚙️ Stasiun Akhir: Rekayasa & Solusi")
+    
+    # Mengambil data dari Menu 4 (jika belum diisi, otomatis diset 150 mg/L)
+    cod_tercatat = st.session_state.get('hasil_cod', 150.0)
+    st.info(f"📋 Data Masuk dari Lab COD: **{cod_tercatat:.2f} mg/L**")
+    
+    debit = st.number_input("🚛 Masukkan Debit Air Limbah (m³/hari):", min_value=1, value=400)
+    beban = (cod_tercatat * debit) / 1000
+    st.write(f"⚖️ Beban pencemaran yang masuk ke sungai: **{beban:.2f} kg COD/hari**")
+    
+    st.write("---")
+    metode = st.selectbox("🛠️ Pilih Metode IPAL Konvensional:", ["---", "Koagulasi-Flokulasi", "Lumpur Aktif"])
+    
+    if metode == "Lumpur Aktif":
+        st.balloons() # Efek animasi lucu!
+        st.success("🎉 **Bakteri Aerob Berhasil Bekerja!** Kadar COD turun 85% dan air sekarang AMAN dibuang ke lingkungan!")
