@@ -368,4 +368,3 @@ st.markdown("""
 ✨ Kelompok 8 kelas 1A ✨
 </div>
 """, unsafe_allow_html=True)
-```
