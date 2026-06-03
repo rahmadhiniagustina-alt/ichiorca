@@ -131,7 +131,7 @@ st.success("✨ Selamat belajar dan semoga sukses!")
 
 # ======================================================
 
-elif menu == "📚 Teori":
+    elif menu == "📚 Teori":
 
 st.title("📚 Menu 1 — Teori")
 
