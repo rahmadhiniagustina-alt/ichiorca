@@ -1,80 +1,102 @@
+```python
 import streamlit as st
 import pandas as pd
 
-# =====================================
+# ==========================================
 # KONFIGURASI HALAMAN
-# =====================================
+# ==========================================
 st.set_page_config(
     page_title="ModulDigital-Oxy",
     page_icon="🧪",
     layout="wide"
 )
 
-# =====================================
-# CSS
-# =====================================
+# ==========================================
+# CUSTOM CSS MODERN
+# ==========================================
 st.markdown("""
 <style>
 
-.stApp{
+/* Background utama */
+.stApp {
     background: linear-gradient(to bottom right, #dff6ff, #e8fff1);
 }
 
-.main-title{
-    text-align:center;
-    font-size:50px;
-    color:#0077b6;
-    font-weight:bold;
+/* Navbar */
+.navbar {
+    background: linear-gradient(90deg, #00b4db, #00c9a7);
+    padding: 15px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
 }
 
-.subtitle{
-    text-align:center;
-    color:#009688;
-    font-size:20px;
-    margin-bottom:20px;
+/* Judul utama */
+.main-title {
+    font-size: 45px;
+    font-weight: bold;
+    text-align: center;
+    color: #0077b6;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'Trebuchet MS', sans-serif;
 }
 
-.card{
-    background:white;
-    padding:20px;
-    border-radius:20px;
-    box-shadow:0px 4px 12px rgba(0,0,0,0.1);
-    margin-bottom:20px;
+/* Subjudul */
+.subtitle {
+    text-align: center;
+    color: #009688;
+    font-size: 20px;
+    margin-bottom: 30px;
 }
 
-.footer{
-    text-align:center;
-    color:gray;
-    padding:20px;
-    margin-top:50px;
+/* Card */
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    color: gray;
+    font-size: 14px;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
-# =====================================
+# ==========================================
 # HEADER
-# =====================================
-st.markdown(
-    "<div class='main-title'>🧪 ModulDigital-Oxy</div>",
-    unsafe_allow_html=True
-)
+# ==========================================
+st.markdown("""
+<div class='navbar'>
+    <h1 style='color:white;'>🧪 ModulDigital-Oxy</h1>
+</div>
+""", unsafe_allow_html=True)
 
-st.markdown(
-    "<div class='subtitle'>Media Pembelajaran Interaktif DO, BOD, dan COD 💧</div>",
-    unsafe_allow_html=True
-)
+st.markdown("<div class='subtitle'>Media Pembelajaran Interaktif DO, BOD, dan COD 💧</div>", unsafe_allow_html=True)
 
-# =====================================
-# MENU
-# =====================================
+# ==========================================
+# MENU ATAS
+# ==========================================
 menu = st.radio(
     "",
     [
         "🏠 Home",
         "📚 Teori",
         "🧪 Alat & Bahan",
-        "🧐 Studi Kasus",
+        "🕹️ Simulasi",
         "🧮 Kalkulator",
         "📊 Interpretasi",
         "🎮 Kuis"
@@ -82,336 +104,269 @@ menu = st.radio(
     horizontal=True
 )
 
-# =====================================
+# ==========================================
 # HOME
-# =====================================
+# ==========================================
 if menu == "🏠 Home":
 
     st.balloons()
 
     st.markdown("""
     <div class='card'>
-    <h2>👋 Selamat Datang di ModulDigital-Oxy</h2>
-
+    <h2>👋 Selamat Datang!</h2>
     <p>
-    ModulDigital-Oxy merupakan media pembelajaran interaktif untuk memahami:
+    ModulDigital-Oxy adalah media pembelajaran interaktif untuk memahami:
     </p>
 
     <ul>
-        <li>💧 Dissolved Oxygen (DO)</li>
-        <li>🌱 Biochemical Oxygen Demand (BOD)</li>
-        <li>🔥 Chemical Oxygen Demand (COD)</li>
+    <li>💧 Dissolved Oxygen (DO)</li>
+    <li>🌱 Biochemical Oxygen Demand (BOD)</li>
+    <li>🔥 Chemical Oxygen Demand (COD)</li>
     </ul>
 
     <p>
-    Aplikasi ini dilengkapi teori, alat dan bahan, studi kasus,
-    kalkulator otomatis, interpretasi kualitas air,
-    serta kuis evaluasi mandiri.
+    Aplikasi ini dibuat lebih modern dan interaktif agar pembelajaran laboratorium menjadi lebih menyenangkan 🎉
     </p>
-
     </div>
     """, unsafe_allow_html=True)
 
-    st.success("✨ Selamat belajar!")
+    st.success("✨ Yuk mulai belajar dari menu di atas!")
 
-# =====================================
+# ==========================================
 # TEORI
-# =====================================
+# ==========================================
 elif menu == "📚 Teori":
 
-    st.title("📚 Menu 1 — Teori")
+    st.markdown("<h2 style='color:#009688;'>📚 Materi Teori</h2>", unsafe_allow_html=True)
 
-    tab1, tab2, tab3 = st.tabs([
-        "💧 Uji DO",
-        "🌱 Uji BOD",
-        "🔥 Uji COD"
-    ])
+    tab1, tab2, tab3 = st.tabs(["💧 DO", "🌱 BOD", "🔥 COD"])
 
-    # ============================
-    # DO
-    # ============================
     with tab1:
+        st.markdown("""
+        <div class='card'>
+        <h3>💧 Dissolved Oxygen (DO)</h3>
+        <p>
+        DO adalah jumlah oksigen terlarut dalam air yang dibutuhkan organisme akuatik.
+        </p>
+        </div>
+        """, unsafe_allow_html=True)
 
-        st.subheader("💧 Uji DO (Dissolved Oxygen) – Metode Winkler")
+        st.latex(r'''
+        I_2 + 2Na_2S_2O_3 \rightarrow 2NaI + Na_2S_4O_6
+        ''')
 
-        st.write("""
-Jumlah iodin yang terbentuk sebanding dengan jumlah oksigen terlarut dalam sampel.
-Metode Winkler menentukan kadar oksigen terlarut melalui pembentukan iodin
-yang kemudian dititrasi dengan natrium tiosulfat.
-""")
-
-        st.write("a. Pembentukan endapan mangan(II) hidroksida")
-        st.latex(r"MnSO_4 + 2KOH \rightarrow Mn(OH)_2 + K_2SO_4")
-
-        st.write("b. Oksidasi mangan oleh oksigen terlarut")
-        st.latex(r"2Mn(OH)_2 + O_2 \rightarrow 2MnO(OH)_2")
-
-        st.write("c. Pembebasan iodin dalam suasana asam")
-        st.latex(r"MnO(OH)_2 + 2I^- + 4H^+ \rightarrow Mn^{2+} + I_2 + 3H_2O")
-
-        st.write("d. Titrasi iodin dengan natrium tiosulfat")
-        st.latex(r"I_2 + 2Na_2S_2O_3 \rightarrow 2NaI + Na_2S_4O_6")
-
-    # ============================
-    # BOD
-    # ============================
     with tab2:
+        st.markdown("""
+        <div class='card'>
+        <h3>🌱 Biochemical Oxygen Demand (BOD)</h3>
+        <p>
+        BOD menunjukkan jumlah oksigen yang dibutuhkan mikroorganisme untuk menguraikan bahan organik.
+        </p>
+        </div>
+        """, unsafe_allow_html=True)
 
-        st.subheader("🌱 Uji BOD (Biochemical Oxygen Demand)")
-
-        st.write("""
-Mikroorganisme menggunakan oksigen terlarut untuk menguraikan bahan organik.
-Penurunan DO selama inkubasi 5 hari digunakan untuk menghitung nilai BOD.
-""")
-
-        st.latex(r"Bahan\ Organik + O_2 \rightarrow CO_2 + H_2O + Energi")
-
-        st.write("Contoh oksidasi glukosa")
-        st.latex(r"C_6H_{12}O_6 + 6O_2 \rightarrow 6CO_2 + 6H_2O")
-
-    # ============================
-    # COD
-    # ============================
     with tab3:
+        st.markdown("""
+        <div class='card'>
+        <h3>🔥 Chemical Oxygen Demand (COD)</h3>
+        <p>
+        COD menunjukkan jumlah oksigen yang dibutuhkan untuk mengoksidasi bahan organik secara kimia.
+        </p>
+        </div>
+        """, unsafe_allow_html=True)
 
-        st.subheader("🔥 Uji COD (Chemical Oxygen Demand)")
-
-        st.write("""
-Pada metode COD, senyawa organik dioksidasi oleh kalium dikromat
-dalam suasana asam.
-""")
-
-        st.write("a. Oksidasi bahan organik")
-        st.latex(r"Bahan\ Organik + Cr_2O_7^{2-} + H^+ \rightarrow CO_2 + H_2O + Cr^{3+}")
-
-        st.write("b. Reduksi ion dikromat")
-        st.latex(r"Cr_2O_7^{2-} + 14H^+ + 6e^- \rightarrow 2Cr^{3+} + 7H_2O")
-
-        st.write("c. Titrasi sisa dikromat dengan FAS")
-        st.latex(r"Cr_2O_7^{2-} + 6Fe^{2+} + 14H^+ \rightarrow 2Cr^{3+} + 6Fe^{3+} + 7H_2O")
-
-# =====================================
-# ALAT DAN BAHAN
-# =====================================
+# ==========================================
+# ALAT & BAHAN
+# ==========================================
 elif menu == "🧪 Alat & Bahan":
 
-    st.title("🧪 Menu 2 — Alat dan Bahan")
+    st.markdown("<h2 style='color:#009688;'>🧪 Alat Laboratorium Interaktif</h2>", unsafe_allow_html=True)
 
-    pilihan = st.selectbox(
-        "Pilih Pengujian",
-        ["💧 Uji DO", "🌱 Uji BOD", "🔥 Uji COD"]
+    col1, col2, col3 = st.columns(3)
+
+    # CARD 1
+    with col1:
+        st.markdown("""
+        <div class='card'>
+        <h3>🧪 Buret</h3>
+        <p>Digunakan untuk titrasi.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.image(
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Burette.png/220px-Burette.png",
+            width=150
+        )
+
+        with st.expander("📖 Cara Penggunaan"):
+            st.write("""
+            1. Isi buret dengan larutan titran  
+            2. Pastikan tidak ada gelembung udara  
+            3. Baca skala awal dan akhir  
+            """)
+
+    # CARD 2
+    with col2:
+        st.markdown("""
+        <div class='card'>
+        <h3>⚗️ Erlenmeyer</h3>
+        <p>Wadah reaksi dan titrasi.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.image(
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Erlenmeyer_flask.jpg/220px-Erlenmeyer_flask.jpg",
+            width=150
+        )
+
+        with st.expander("📖 Cara Penggunaan"):
+            st.write("""
+            1. Masukkan sampel  
+            2. Tambahkan indikator  
+            3. Gunakan saat titrasi berlangsung  
+            """)
+
+    # CARD 3
+    with col3:
+        st.markdown("""
+        <div class='card'>
+        <h3>🧫 Botol DO</h3>
+        <p>Digunakan untuk pengambilan sampel air.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.image(
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/BOD_bottle.jpg/220px-BOD_bottle.jpg",
+            width=150
+        )
+
+        with st.expander("📖 Cara Penggunaan"):
+            st.write("""
+            1. Isi penuh tanpa gelembung  
+            2. Tutup rapat  
+            3. Analisis segera  
+            """)
+
+    st.success("✨ Klik bagian 'Cara Penggunaan' untuk melihat detail alat!")
+
+# ==========================================
+# SIMULASI
+# ==========================================
+elif menu == "🕹️ Simulasi":
+
+    st.markdown("<h2 style='color:#009688;'>🕹️ Simulasi Interaktif</h2>", unsafe_allow_html=True)
+
+    simulasi = st.selectbox(
+        "Pilih Simulasi",
+        ["💧 Simulasi DO", "🌱 Simulasi BOD", "🔥 Simulasi COD"]
     )
 
-    if pilihan == "💧 Uji DO":
+    if simulasi == "💧 Simulasi DO":
 
-        st.subheader("💧 Alat Uji DO")
+        st.info("💡 Tambahkan reagen MnSO₄")
 
-        alat_do = {
-            "Botol DO/BOD": "Menampung sampel air.",
-            "Buret": "Meneteskan larutan titran.",
-            "Erlenmeyer": "Wadah titrasi.",
-            "Pipet Volumetrik": "Mengambil volume reagen.",
-            "Gelas Ukur": "Mengukur volume larutan."
-        }
+        if st.button("Tambahkan Reagen"):
+            st.toast("✅ Reagen berhasil ditambahkan!")
+            st.balloons()
 
-        for alat, fungsi in alat_do.items():
-            with st.expander(f"🧪 {alat}"):
-                st.write(fungsi)
-
-        st.subheader("⚗️ Bahan Uji DO")
-
-        bahan_do = {
-            "MnSO₄": "Mengikat oksigen terlarut.",
-            "H₂SO₄": "Membebaskan iodin.",
-            "Na₂S₂O₃": "Larutan titrasi.",
-            "Amilum": "Indikator titik akhir."
-        }
-
-        for bahan, fungsi in bahan_do.items():
-            with st.expander(f"⚗️ {bahan}"):
-                st.write(fungsi)
-
-# =====================================
-# STUDI KASUS
-# =====================================
-elif menu == "🧐 Studi Kasus":
-
-    st.title("🧐 Studi Kasus Evaluasi Lapangan")
-
-    st.markdown("""
-### Data Pengujian Air Sungai
-
-- 💧 DO = 2.1 mg/L
-- 🌱 BOD = 15 mg/L
-- 🔥 COD = 180 mg/L
-""")
-
-    st.text_input("1. Bagaimana kualitas air sampel tersebut?")
-    st.text_input("2. Apakah terjadi pencemaran organik?")
-
-    if st.button("Lihat Jawaban"):
-
-        st.success("""
-✅ Air tergolong tercemar berat.
-
-✅ Terjadi pencemaran organik karena nilai BOD dan COD sangat tinggi,
-sedangkan DO sangat rendah.
-""")
-
-# =====================================
-# KALKULATOR
-# =====================================
-elif menu == "🧮 Kalkulator":
-
-    st.title("🧮 Kalkulator Parameter")
-
-    tab1, tab2, tab3 = st.tabs([
-        "💧 DO",
-        "🌱 BOD",
-        "🔥 COD"
-    ])
-
-    # ============================
-    # DO
-    # ============================
-    with tab1:
-
-        v = st.number_input("Volume Titran (mL)", value=7.0)
-        n = st.number_input("Normalitas", value=0.025)
-        vs = st.number_input("Volume Sampel (mL)", value=200.0)
+        v = st.number_input("Masukkan Volume Titrasi", value=6.4)
 
         if st.button("Hitung DO"):
+            hasil = (v * 0.025 * 8000) / 200
+            st.success(f"🎉 Nilai DO = {hasil:.2f} mg/L")
 
-            hasil = (v * n * 8000) / vs
+    elif simulasi == "🌱 Simulasi BOD":
 
-            st.success(f"💧 DO = {hasil:.2f} mg/L")
-
-    # ============================
-    # BOD
-    # ============================
-    with tab2:
-
-        do0 = st.number_input("DO Awal", value=8.2)
-        do5 = st.number_input("DO Akhir", value=4.0)
+        do0 = st.number_input("DO Awal", value=8.5)
+        do5 = st.number_input("DO Akhir", value=3.2)
 
         if st.button("Hitung BOD"):
-
             hasil = do0 - do5
+            st.success(f"🌱 Nilai BOD = {hasil:.2f} mg/L")
+            st.snow()
 
-            st.success(f"🌱 BOD = {hasil:.2f} mg/L")
-
-    # ============================
-    # COD
-    # ============================
-    with tab3:
+    elif simulasi == "🔥 Simulasi COD":
 
         blanko = st.number_input("Volume Blanko", value=20.0)
         sampel = st.number_input("Volume Sampel", value=12.0)
-        nfas = st.number_input("Normalitas FAS", value=0.1)
-        vsampel = st.number_input("Volume Sampel COD", value=50.0)
 
         if st.button("Hitung COD"):
+            hasil = ((blanko - sampel) * 0.1 * 8000) / 50
+            st.success(f"🔥 Nilai COD = {hasil:.2f} mg/L")
+            st.balloons()
 
-            hasil = ((blanko - sampel) * nfas * 8000) / vsampel
+# ==========================================
+# KALKULATOR
+# ==========================================
+elif menu == "🧮 Kalkulator":
 
-            st.success(f"🔥 COD = {hasil:.2f} mg/L")
+    st.markdown("<h2 style='color:#009688;'>🧮 Kalkulator Otomatis</h2>", unsafe_allow_html=True)
 
-# =====================================
+    parameter = st.selectbox(
+        "Pilih Parameter",
+        ["DO", "BOD", "COD"]
+    )
+
+    if parameter == "DO":
+
+        v = st.number_input("Volume Titran", value=7.0)
+        n = st.number_input("Normalitas", value=0.025)
+        vs = st.number_input("Volume Sampel", value=200.0)
+
+        if st.button("Hitung"):
+            hasil = (v * n * 8000) / vs
+            st.metric("Hasil DO", f"{hasil:.2f} mg/L")
+
+# ==========================================
 # INTERPRETASI
-# =====================================
+# ==========================================
 elif menu == "📊 Interpretasi":
 
-    st.title("📊 Interpretasi Kualitas Air")
+    st.markdown("<h2 style='color:#009688;'>📊 Interpretasi Air</h2>", unsafe_allow_html=True)
 
-    st.subheader("💧 Parameter DO")
-
-    df_do = pd.DataFrame({
-        "DO (mg/L)": [">6", "4-6", "2-4", "<2"],
-        "Interpretasi": [
-            "Sangat Baik",
-            "Baik",
-            "Tercemar Sedang",
-            "Tercemar Berat"
-        ]
+    data = pd.DataFrame({
+        "Kategori": ["Bersih", "Sedang", "Berat"],
+        "DO": [">6", "2-6", "<2"]
     })
 
-    st.table(df_do)
+    st.table(data)
 
-    st.subheader("🌱 Parameter BOD")
+    st.success("🟢 Semakin tinggi DO maka kualitas air semakin baik")
 
-    df_bod = pd.DataFrame({
-        "BOD (mg/L)": ["<3", "3-6", "6-12", ">12"],
-        "Interpretasi": [
-            "Air Bersih",
-            "Tercemar Ringan",
-            "Tercemar Sedang",
-            "Tercemar Berat"
-        ]
-    })
-
-    st.table(df_bod)
-
-    st.subheader("🔥 Parameter COD")
-
-    df_cod = pd.DataFrame({
-        "COD (mg/L)": ["<25", "25-50", "50-100", ">100"],
-        "Interpretasi": [
-            "Air Bersih",
-            "Tercemar Ringan",
-            "Tercemar Sedang",
-            "Tercemar Berat"
-        ]
-    })
-
-    st.table(df_cod)
-
-# =====================================
+# ==========================================
 # KUIS
-# =====================================
+# ==========================================
 elif menu == "🎮 Kuis":
 
-    st.title("🎮 Kuis Evaluasi")
+    st.markdown("<h2 style='color:#009688;'>🎮 Kuis Interaktif</h2>", unsafe_allow_html=True)
 
-    nama = st.text_input("Masukkan Nama Lengkap")
+    score = 0
 
     q1 = st.radio(
-        "Apa fungsi utama pengukuran DO?",
+        "Apa kepanjangan DO?",
         [
-            "Mengukur jumlah mikroorganisme",
-            "Mengukur kandungan logam berat",
-            "Mengukur oksigen terlarut dalam air",
-            "Mengukur pH air"
+            "Dissolved Oxygen",
+            "Digital Oxygen",
+            "Double Oxygen"
         ]
     )
 
-    if st.button("Submit"):
+    if st.button("Submit Jawaban"):
 
-        skor = 0
+        if q1 == "Dissolved Oxygen":
+            score += 100
 
-        if q1 == "Mengukur oksigen terlarut dalam air":
-            skor += 100
+        st.success(f"🎉 Skor Kamu = {score}")
 
-        st.success(f"🎉 Skor Anda = {skor}")
-
-        if skor == 100:
-
+        if score == 100:
             st.balloons()
 
-            st.markdown(f"""
-## 📜 Sertifikat Kelulusan
-
-Diberikan kepada:
-
-### {nama}
-
-Telah menyelesaikan pembelajaran ModulDigital-Oxy.
-""")
-
-# =====================================
+# ==========================================
 # FOOTER
-# =====================================
+# ==========================================
 st.markdown("""
 <div class='footer'>
 ✨ Kelompok 8 kelas 1A ✨
 </div>
 """, unsafe_allow_html=True)
+```
