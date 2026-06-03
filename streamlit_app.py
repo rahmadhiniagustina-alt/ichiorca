@@ -246,7 +246,6 @@ with tab3:
     st.latex(r'''
     Cr_2O_7^{2-} + 6Fe^{2+} + 14H^+ \rightarrow 2Cr^{3+} + 6Fe^{3+} + 7H_2O
     ''')
-```
 
 # ======================================================
 
@@ -256,7 +255,6 @@ with tab3:
 
 elif menu == "🧪 Alat & Bahan":
 
-```
 st.title("🧪 Menu 2 — Alat dan Bahan")
 
 pilihan = st.selectbox(
@@ -380,7 +378,6 @@ elif pilihan == "🔥 Uji COD":
 
     for bahan in bahan_cod:
         st.success(f"⚗️ {bahan}")
-```
 
 # ======================================================
 
@@ -390,7 +387,6 @@ elif pilihan == "🔥 Uji COD":
 
 elif menu == "🧐 Studi Kasus":
 
-```
 st.title("🧐 Studi Kasus Evaluasi Lapangan")
 
 st.markdown("""
@@ -412,7 +408,6 @@ if st.button("Kirim Jawaban"):
     ✅ Terjadi pencemaran organik tinggi karena nilai BOD dan COD sangat tinggi
     sedangkan DO sangat rendah.
     """)
-```
 
 # ======================================================
 
@@ -422,7 +417,6 @@ if st.button("Kirim Jawaban"):
 
 elif menu == "🧮 Kalkulator":
 
-```
 st.title("🧮 Kalkulator Parameter")
 
 tab1, tab2, tab3 = st.tabs([
@@ -460,7 +454,6 @@ with tab3:
     if st.button("Hitung COD"):
         hasil = ((blanko-sampel)*nfas*8000)/vsampel
         st.success(f"🔥 COD = {hasil:.2f} mg/L")
-```
 
 # ======================================================
 
@@ -470,7 +463,6 @@ with tab3:
 
 elif menu == "📊 Interpretasi":
 
-```
 st.title("📊 Interpretasi Kualitas Air")
 
 st.subheader("💧 Parameter DO")
@@ -526,7 +518,6 @@ st.table(df_cod)
 
 elif menu == "🎮 Kuis":
 
-```
 st.title("🎮 Menu 6 — Kuis Evaluasi")
 
 nama = st.text_input("Masukkan Nama Lengkap")
