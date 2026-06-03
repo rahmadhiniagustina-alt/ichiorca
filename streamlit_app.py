@@ -101,7 +101,6 @@ horizontal=True
 
 if menu == "🏠 Home":
 
-```
 st.balloons()
 
 st.markdown("""
