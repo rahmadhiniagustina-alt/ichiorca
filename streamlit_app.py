@@ -133,7 +133,6 @@ st.success("✨ Selamat belajar dan semoga sukses!")
 
 elif menu == "📚 Teori":
 
-```
 st.title("📚 Menu 1 — Teori")
 
 tab1, tab2, tab3 = st.tabs([
