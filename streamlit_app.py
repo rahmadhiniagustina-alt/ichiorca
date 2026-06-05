@@ -61,7 +61,7 @@ st.markdown("""
 }
 
 .card:hover {
-    transform: scale(1.03);
+    transform: scale(1.01);
 }
 
 /* Footer */
@@ -132,7 +132,7 @@ if menu == "🏠 Home":
     st.success("✨ Yuk mulai belajar dari menu di atas!")
 
 # ==========================================
-# TEORI (REVISI RUMUS COD LEBIH RAPI DI KOTAK PUTIH)
+# TEORI
 # ==========================================
 elif menu == "📚 Teori":
 
@@ -238,7 +238,7 @@ elif menu == "📚 Teori":
         """, unsafe_allow_html=True)
 
 # ==========================================
-# ALAT & BAHAN
+# ALAT & BAHAN (REVISI LAYOUT TOTAL & MENARIK)
 # ==========================================
 elif menu == "🧪 Alat & Bahan":
 
@@ -255,41 +255,47 @@ elif menu == "🧪 Alat & Bahan":
     if pilihan_materi == "Daftar Alat & Bahan Uji DO":
         st.markdown("### 💧 Komponen Analisis Uji DO (Dissolved Oxygen)")
         
-        try:
-            st.image("Gambar Alat DO.png", caption="Rangkaian Alat Analisis Parameter DO", use_container_width=True)
-        except:
-            st.warning("⚠️ File 'Gambar Alat DO.png' tidak ditemukan. Pastikan file gambar berada di folder yang sama dengan script python ini.")
+        # Layout 2 Kolom: Kiri Gambar, Kanan Keterangan Alat
+        col_img, col_txt = st.columns([1.2, 1])
+        
+        with col_img:
+            try:
+                st.image("Gambar Alat DO.png", caption="Rangkaian Alat Analisis Parameter DO", use_container_width=True)
+            except:
+                st.warning("⚠️ File 'Gambar Alat DO.png' tidak ditemukan di folder aplikasi.")
 
-        st.markdown("""
-        <div class='card'>
-        <h4>📋 Alat yang Digunakan beserta Fungsinya:</h4>
-        <ul>
-            <li><b>Botol Winkler (botol DO/BOD bottle):</b> Untuk pengambilan sampel air tanpa udara.</li>
-            <li><b>Pipet volumetrik / pipet ukur:</b> Digunakan untuk menambahkan reagen secara tepat (MnSO₄, KI-NaOH-azida, H₂SO₄).</li>
-            <li><b>Buret:</b> Digunakan untuk melakukan titrasi dengan larutan penitar Na₂S₂O₃ (natrium tiosulfat).</li>
-            <li><b>Erlenmeyer (±150 mL):</b> Sebagai wadah penampung larutan selama proses titrasi berlangsung.</li>
-            <li><b>Gelas ukur / labu ukur:</b> Digunakan untuk keperluan pengenceran serta preparasi larutan kerja.</li>
-            <li><b>Statif dan klem:</b> Untuk menyangga dan menopang buret agar berdiri tegak lurus.</li>
-            <li><b>Botol reagen gelap (dark bottle):</b> Tempat penyimpanan larutan pereaksi yang sensitif terhadap paparan cahaya.</li>
-            <li><b>Pipet tetes:</b> Digunakan untuk menambahkan indikator amilum secara bertetes-tetes.</li>
-            <li><b>Termometer (opsional):</b> Untuk melakukan pengukuran kondisi suhu awal pada sampel air uji.</li>
-        </ul>
-        </div>
-        """, unsafe_allow_html=True)
+        with col_txt:
+            st.markdown("""
+            <div class='card' style='height: 100%; overflow-y: auto;'>
+            <h4>📋 Alat yang Digunakan beserta Fungsinya:</h4>
+            <ul>
+                <li><b>Botol Winkler (botol DO):</b> Untuk pengambilan sampel air tanpa udara.</li>
+                <li><b>Pipet volumetrik / pipet ukur:</b> Menambahkan reagen secara tepat (MnSO₄, KI-NaOH-azida, H₂SO₄).</li>
+                <li><b>Buret:</b> Melakukan titrasi dengan larutan penitar Na₂S₂O₃.</li>
+                <li><b>Erlenmeyer (±150 mL):</b> Wadah penampung larutan selama proses titrasi.</li>
+                <li><b>Gelas ukur / labu ukur:</b> Keperluan pengenceran & preparasi larutan kerja.</li>
+                <li><b>Statif dan klem:</b> Menyangga buret agar berdiri tegak lurus.</li>
+                <li><b>Botol reagen gelap:</b> Menyimpan larutan pereaksi yang sensitif cahaya.</li>
+                <li><b>Pipet tetes:</b> Menambahkan indikator amilum secara bertetes.</li>
+                <li><b>Termometer (opsional):</b> Mengukur suhu awal pada sampel air uji.</li>
+            </ul>
+            </div>
+            """, unsafe_allow_html=True)
 
+        # Bagian Bahan di Bawahnya
         st.markdown("""
         <div class='card' style='border-left: 5px solid #00b4db;'>
         <h3>📋 Bahan yang Digunakan:</h3>
         <ul>
             <li>Contoh air (air limbah / air sungai / air uji)</li>
-            <li><b>MnSO₄ (Mangan(II) sulfat):</b> Berfungsi untuk membentuk endapan Mn(OH)₂ di dalam sampel.</li>
-            <li><b>Alkali iodida azida (KI + NaOH + NaN₃):</b> Berfungsi membebaskan senyawa I₂ secara tidak langsung.</li>
-            <li><b>H₂SO₄ pekat:</b> Memberikan suasana asam kuat serta melarutkan kembali flok endapan yang terbentuk.</li>
+            <li><b>MnSO₄ (Mangan(II) sulfat):</b> Membentuk endapan Mn(OH)₂ di dalam sampel.</li>
+            <li><b>Alkali iodida azida (KI + NaOH + NaN₃):</b> Membebaskan senyawa I₂ secara tidak langsung.</li>
+            <li><b>H₂SO₄ pekat:</b> Memberikan suasana asam kuat & melarutkan kembali flok endapan.</li>
             <li><b>Na₂S₂O₃ (natrium tiosulfat):</b> Bertindak sebagai larutan titran standar.</li>
-            <li><b>Indikator amilum (kanji/starch):</b> Penunjuk titik akhir titrasi (perubahan warna: dari biru tepat menjadi hilang/jernih).</li>
-            <li><b>K₂Cr₂O₇ (kalium dikromat):</b> Digunakan sebagai larutan standar oksidator primer.</li>
-            <li><b>KI (kalium iodida):</b> Digunakan untuk membantu reaksi pembentukan I₂.</li>
-            <li><b>Air suling / aquadest:</b> Digunakan sebagai pelarut pereaksi dan pembilas alat gelas.</li>
+            <li><b>Indikator amilum (kanji/starch):</b> Penunjuk titik akhir titrasi (biru tepat menjadi hilang/jernih).</li>
+            <li><b>K₂Cr₂O₇ (kalium dikromat):</b> Larutan standar oksidator primer.</li>
+            <li><b>KI (kalium iodida):</b> Membantu reaksi pembentukan I₂.</li>
+            <li><b>Air suling / aquadest:</b> Pelarut pereaksi dan pembilas alat gelas.</li>
         </ul>
         </div>
         """, unsafe_allow_html=True)
@@ -300,33 +306,42 @@ elif menu == "🧪 Alat & Bahan":
     elif pilihan_materi == "Daftar Alat & Bahan Uji BOD":
         st.markdown("### 🌱 Komponen Analisis Uji BOD (Biochemical Oxygen Demand)")
         
-        try:
-            st.image("Gambar Alat BOD.png", caption="Rangkaian Alat Analisis Parameter BOD", use_container_width=True)
-        except:
-            st.warning("⚠️ File 'Gambar Alat BOD.png' tidak ditemukan. Pastikan file gambar berada di folder yang sama dengan script python ini.")
+        # Layout 2 Kolom: Kiri Gambar, Kanan Keterangan Alat
+        col_img, col_txt = st.columns([1.2, 1])
+        
+        with col_img:
+            try:
+                st.image("Gambar Alat BOD.png", caption="Rangkaian Alat Analisis Parameter BOD", use_container_width=True)
+            except:
+                st.warning("⚠️ File 'Gambar Alat BOD.png' tidak ditemukan di folder aplikasi.")
 
-        st.markdown("""
-        <div class='card'>
-        <h4>📋 Alat yang Digunakan beserta Fungsinya:</h4>
-        <ul>
-            <li><b>Botol Winkler (botol DO/BOD bottle):</b> Untuk wadah inkubasi dan pengambilan sampel air tanpa udara.</li>
-            <li><b>Pipet volumetrik / pipet ukur:</b> Digunakan untuk mengambil volume larutan contoh air secara presisi dan tepat.</li>
-            <li><b>Buret:</b> Untuk meneteskan larutan titran natrium tiosulfat secara teliti dan terkendali.</li>
-            <li><b>Erlenmeyer (±150 mL):</b> Sebagai wadah titrasi campuran larutan uji sampel h-0 dan h-5.</li>
-            <li><b>Inkubator (20°C):</b> Berfungsi untuk menginkubasi sampel air selama masa pengujian penguraian biologis (5 hari).</li>
-        </ul>
-        </div>
-        """, unsafe_allow_html=True)
+        with col_txt:
+            st.markdown("""
+            <div class='card' style='height: 100%; overflow-y: auto;'>
+            <h4>📋 Alat yang Digunakan beserta Fungsinya:</h4>
+            <ul>
+                <li><b>Botol Winkler (botol BOD):</b> Wadah inkubasi dan pengambilan sampel air tanpa udara.</li>
+                <li><b>Pipet volumetrik / pipet ukur:</b> Mengambil volume larutan contoh air secara presisi.</li>
+                <li><b>Buret:</b> Meneteskan larutan titran natrium tiosulfat secara teliti.</li>
+                <li><b>Erlenmeyer (±150 mL):</b> Wadah titrasi campuran larutan uji sampel h-0 dan h-5.</li>
+                <li><b>Inkubator (20°C):</b> Menginkubasi sampel air selama masa pengujian penguraian biologis (5 hari).</li>
+                <li><b>Statif dan klem:</b> Menopang buret agar berdiri stabil saat titrasi.</li>
+            </ul>
+            </div>
+            """, unsafe_allow_html=True)
 
+        # Bagian Bahan di Bawahnya
         st.markdown("""
         <div class='card' style='border-left: 5px solid #00c9a7;'>
         <h3>📋 Bahan yang Digunakan:</h3>
         <ul>
-            <li><b>Mangan(II) sulfat (MnSO₄):</b> Berfungsi untuk mengikat molekul oksigen terlarut alami dalam sampel air.</li>
+            <li>Sampel air uji (hari ke-0 dan inkubasi hari ke-5)</li>
+            <li><b>Mangan(II) sulfat (MnSO₄):</b> Mengikat molekul oksigen terlarut alami dalam sampel air.</li>
             <li><b>Larutan alkali-iodida-azida:</b> Membentuk kondisi lingkungan basa dan membantu pembentukan senyawa iodin.</li>
-            <li><b>Asam sulfat pekat (H₂SO₄):</b> Untuk melarutkan kembali flok endapan coklat dan membebaskan molekul iodin bebas.</li>
-            <li><b>Larutan natrium tiosulfat (Na₂S₂O₃):</b> Berperan sebagai larutan penitar (titran) utama pada penentuan nilai DO h-0 dan h-5.</li>
-            <li><b>Indikator pati (amilum):</b> Digunakan untuk menunjukkan titik akhir penataran secara visual.</li>
+            <li><b>Asam sulfat pekat (H₂SO₄):</b> Melarutkan kembali flok endapan coklat dan membebaskan molekul iodin bebas.</li>
+            <li><b>Larutan natrium tiosulfat (Na₂S₂O₃):</b> Larutan penitar (titran) utama pada penentuan nilai DO h-0 dan h-5.</li>
+            <li><b>Indikator pati (amilum):</b> Menunjukkan titik akhir penataran secara visual (biru menjadi jernih).</li>
+            <li><b>Air suling / aquadest:</b> Untuk pengenceran medium jika diperlukan.</li>
         </ul>
         </div>
         """, unsafe_allow_html=True)
@@ -337,47 +352,51 @@ elif menu == "🧪 Alat & Bahan":
     elif pilihan_materi == "Daftar Alat & Bahan Uji COD":
         st.markdown("### 🔥 Komponen Analisis Uji COD (Chemical Oxygen Demand)")
         
-        try:
-            st.image("Gambar Alat COD.jpg", caption="Rangkaian Alat Analisis Parameter COD", use_container_width=True)
-        except:
-            st.warning("⚠️ File 'Gambar Alat COD.jpg' tidak ditemukan. Pastikan file gambar berada di folder yang sama dengan script python ini.")
+        # Layout 2 Kolom: Kiri Gambar, Kanan Keterangan Alat
+        col_img, col_txt = st.columns([1.2, 1])
+        
+        with col_img:
+            try:
+                st.image("Gambar Alat COD.jpg", caption="Rangkaian Alat Analisis Parameter COD", use_container_width=True)
+            except:
+                st.warning("⚠️ File 'Gambar Alat COD.jpg' tidak ditemukan di folder aplikasi.")
 
-        st.markdown("""
-        <div class='card'>
-        <h4>📋 Alat yang Digunakan beserta Fungsinya:</h4>
-        <ul>
-            <li><b>Labu refluks (reflux flask):</b> Wadah utama tempat terjadinya reaksi destruksi dan oksidasi sampel air organik.</li>
-            <li><b>Kondensor refluks (pendingin balik):</b> Berfungsi mengembunkan uap asam kembali ke labu agar tidak terbuang bebas.</li>
-            <li><b>Pemanas listrik / heating mantle / hot plate:</b> Sumber panas eksternal untuk proses digesti campuran reagen pada ±150°C.</li>
-            <li><b>Erlenmeyer (±250 mL):</b> Wadah penampung larutan dingin hasil refluks untuk melangsungkan titrasi.</li>
-            <li><b>Buret:</b> Digunakan untuk meneteskan larutan penitar FAS (Ferrous Ammonium Sulfate) secara teliti.</li>
-            <li><b>Pipet volumetrik / pipet ukur:</b> Digunakan untuk mengambil volume cuplikan sampel air serta larutan reagen utama.</li>
-            <li><b>Gelas ukur:</b> Berfungsi untuk melakukan pengukuran volume reagen pelarut kasar.</li>
-            <li><b>Corong kaca:</b> Alat bantu memindahkan cairan asam korosif agar tidak tumpah di luar mulut leher labu.</li>
-            <li><b>Statif dan klem:</b> Untuk menopang serta menjaga kestabilan susunan buret beserta rangkaian alat gelas refluks.</li>
-            <li><b>Termometer (opsional):</b> Digunakan untuk mengonfirmasi ketepatan suhu operasional proses digesti.</li>
-            <li><b>Botol semprot aquadest:</b> Digunakan sebagai pembilas dinding sisa-sisa zat reagen pada alat gelas laboratorium.</li>
-        </ul>
-        </div>
-        """, unsafe_allow_html=True)
+        with col_txt:
+            st.markdown("""
+            <div class='card' style='height: 100%; overflow-y: auto;'>
+            <h4>📋 Alat yang Digunakan beserta Fungsinya:</h4>
+            <ul>
+                <li><b>Labu refluks (reflux flask):</b> Wadah utama reaksi destruksi dan oksidasi zat organik.</li>
+                <li><b>Kondensor refluks (pendingin balik):</b> Mengembunkan uap asam kembali ke labu agar tidak terbuang bebas.</li>
+                <li><b>Pemanas listrik / heating mantle / hot plate:</b> Sumber panas eksternal untuk proses digesti pada ±150°C.</li>
+                <li><b>Erlenmeyer (±250 mL):</b> Wadah penampung larutan dingin hasil refluks untuk titrasi.</li>
+                <li><b>Buret:</b> Meneteskan larutan penitar FAS (Ferrous Ammonium Sulfate) secara teliti.</li>
+                <li><b>Pipet volumetrik / pipet ukur:</b> Mengambil volume cuplikan sampel air serta larutan reagen utama.</li>
+                <li><b>Gelas ukur & Corong kaca:</b> Pengukuran volume kasar & alat bantu memindahkan cairan asam korosif.</li>
+                <li><b>Statif dan klem:</b> Menopang serta menjaga kestabilan buret dan rangkaian alat gelas refluks.</li>
+                <li><b>Botol semprot aquadest:</b> Pembilas dinding sisa-sisa zat reagen pada alat gelas laboratorium.</li>
+            </ul>
+            </div>
+            """, unsafe_allow_html=True)
 
+        # Bagian Bahan di Bawahnya
         st.markdown("""
         <div class='card' style='border-left: 5px solid #0077b6;'>
         <h3>📋 Bahan yang Digunakan:</h3>
         <ul>
             <li>Sampel air limbah / air uji</li>
-            <li><b>Kalium dikromat (K₂Cr₂O₇):</b> Bertindak sebagai agen oksidator utama penyerang zat organik.</li>
-            <li><b>Asam sulfat pekat (H₂SO₄):</b> Untuk menciptakan suasana lingkungan asam kuat yang ekstrem.</li>
-            <li><b>Perak sulfat (Ag₂SO₄):</b> Digunakan sebagai bahan katalis untuk mempercepat jalannya laju oksidasi senyawa.</li>
+            <li><b>Kalium dikromat (K₂Cr₂O₇):</b> Agen oksidator utama penyerang zat organik.</li>
+            <li><b>Asam sulfat pekat (H₂SO₄):</b> Menciptakan suasana lingkungan asam kuat yang ekstrem.</li>
+            <li><b>Perak sulfat (Ag₂SO₄):</b> Bahan katalis untuk mempercepat jalannya laju oksidasi senyawa.</li>
             <li><b>Merkuri sulfat (HgSO₄):</b> Berfungsi khusus mengikat ion klorida agar tidak menimbulkan interferensi pembacaan Cl⁻.</li>
             <li><b>Larutan FAS (Ferrous Ammonium Sulfate):</b> Larutan standar sekunder yang berperan sebagai zat penitar (titran).</li>
-            <li><b>Indikator ferroin:</b> Senyawa kompleks penunjuk titik akhir titrasi (perubahan warna: biru-kehijauan menjadi coklat-kemerahan).</li>
+            <li><b>Indikator ferroin:</b> Senyawa kompleks penunjuk titik akhir titrasi (biru-kehijauan menjadi coklat-kemerahan).</li>
             <li><b>Aquadest / air bebas ion:</b> Digunakan sebagai larutan blanko pembanding sekaligus pelarut sistem.</li>
         </ul>
         </div>
         """, unsafe_allow_html=True)
 
-    st.success("✨ Pembaruan Berhasil! Menu Alat & Bahan menggunakan 1 gambar ringkas per materi tanpa merusak bagian lainnya.")
+    st.success("✨ Pembaruan Tampilan Berhasil! Tampilan jauh lebih rapi, modern, dan gambar tunggal langsung muncul.")
 
 # ==========================================
 # SIMULASI
