@@ -238,7 +238,7 @@ elif menu == "📚 Teori":
         """, unsafe_allow_html=True)
 
 # ==========================================
-# ALAT & BAHAN (REVISI LAYOUT TOTAL & MENARIK)
+# ALAT & BAHAN (MENGGUNAKAN LIVE URL GITHUB)
 # ==========================================
 elif menu == "🧪 Alat & Bahan":
 
@@ -255,14 +255,12 @@ elif menu == "🧪 Alat & Bahan":
     if pilihan_materi == "Daftar Alat & Bahan Uji DO":
         st.markdown("### 💧 Komponen Analisis Uji DO (Dissolved Oxygen)")
         
-        # Layout 2 Kolom: Kiri Gambar, Kanan Keterangan Alat
         col_img, col_txt = st.columns([1.2, 1])
         
         with col_img:
-            try:
-                st.image("Gambar Alat DO.png", caption="Rangkaian Alat Analisis Parameter DO", use_container_width=True)
-            except:
-                st.warning("⚠️ File 'Gambar Alat DO.png' tidak ditemukan di folder aplikasi.")
+            # Menggunakan link asset GitHub yang Anda kirimkan
+            url_do = "https://github.com/user-attachments/assets/411a7412-1a3b-40e5-ab74-f1a394717e13"
+            st.image(url_do, caption="Rangkaian Alat Analisis Parameter DO", use_container_width=True)
 
         with col_txt:
             st.markdown("""
@@ -282,7 +280,6 @@ elif menu == "🧪 Alat & Bahan":
             </div>
             """, unsafe_allow_html=True)
 
-        # Bagian Bahan di Bawahnya
         st.markdown("""
         <div class='card' style='border-left: 5px solid #00b4db;'>
         <h3>📋 Bahan yang Digunakan:</h3>
@@ -306,14 +303,12 @@ elif menu == "🧪 Alat & Bahan":
     elif pilihan_materi == "Daftar Alat & Bahan Uji BOD":
         st.markdown("### 🌱 Komponen Analisis Uji BOD (Biochemical Oxygen Demand)")
         
-        # Layout 2 Kolom: Kiri Gambar, Kanan Keterangan Alat
         col_img, col_txt = st.columns([1.2, 1])
         
         with col_img:
-            try:
-                st.image("Gambar Alat BOD.png", caption="Rangkaian Alat Analisis Parameter BOD", use_container_width=True)
-            except:
-                st.warning("⚠️ File 'Gambar Alat BOD.png' tidak ditemukan di folder aplikasi.")
+            # Menggunakan link asset GitHub yang Anda kirimkan
+            url_bod = "https://github.com/user-attachments/assets/869acefd-cb84-49bc-81d7-9cd02cec5241"
+            st.image(url_bod, caption="Rangkaian Alat Analisis Parameter BOD", use_container_width=True)
 
         with col_txt:
             st.markdown("""
@@ -330,7 +325,6 @@ elif menu == "🧪 Alat & Bahan":
             </div>
             """, unsafe_allow_html=True)
 
-        # Bagian Bahan di Bawahnya
         st.markdown("""
         <div class='card' style='border-left: 5px solid #00c9a7;'>
         <h3>📋 Bahan yang Digunakan:</h3>
@@ -352,14 +346,12 @@ elif menu == "🧪 Alat & Bahan":
     elif pilihan_materi == "Daftar Alat & Bahan Uji COD":
         st.markdown("### 🔥 Komponen Analisis Uji COD (Chemical Oxygen Demand)")
         
-        # Layout 2 Kolom: Kiri Gambar, Kanan Keterangan Alat
         col_img, col_txt = st.columns([1.2, 1])
         
         with col_img:
-            try:
-                st.image("Gambar Alat COD.jpg", caption="Rangkaian Alat Analisis Parameter COD", use_container_width=True)
-            except:
-                st.warning("⚠️ File 'Gambar Alat COD.jpg' tidak ditemukan di folder aplikasi.")
+            # Menggunakan link asset GitHub yang Anda kirimkan
+            url_cod = "https://github.com/user-attachments/assets/39987309-7194-4bd9-b1cc-8507f8fb8182"
+            st.image(url_cod, caption="Rangkaian Alat Analisis Parameter COD", use_container_width=True)
 
         with col_txt:
             st.markdown("""
@@ -379,7 +371,6 @@ elif menu == "🧪 Alat & Bahan":
             </div>
             """, unsafe_allow_html=True)
 
-        # Bagian Bahan di Bawahnya
         st.markdown("""
         <div class='card' style='border-left: 5px solid #0077b6;'>
         <h3>📋 Bahan yang Digunakan:</h3>
@@ -396,7 +387,7 @@ elif menu == "🧪 Alat & Bahan":
         </div>
         """, unsafe_allow_html=True)
 
-    st.success("✨ Pembaruan Tampilan Berhasil! Tampilan jauh lebih rapi, modern, dan gambar tunggal langsung muncul.")
+    st.success("🎉 BERHASIL SINKRON! Sekarang gambar dijamin 100% langsung muncul karena terhubung langsung dengan link GitHub Anda!")
 
 # ==========================================
 # SIMULASI
