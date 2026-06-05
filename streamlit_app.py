@@ -433,7 +433,7 @@ elif menu == "📋 Cara Kerja":
             <li><b>Titrasi:</b>
                 <ul>
                     <li>Titrasi menggunakan Na₂S₂O₃ (natrium tiosulfat).</li>
-                    <li>Tambahkan indikator amilum (kanji) saat warna mulai kuning pucat.</li>
+                    <li>Tambahkan indikator amilum (kanji) saat warna mulai kuning... kuning pucat.</li>
                     <li>Lanjutkan titrasi sampai: warna biru tepat hilang → ini adalah titik akhir titrasi.</li>
                 </ul>
             </li>
@@ -456,7 +456,7 @@ elif menu == "📋 Cara Kerja":
             <br>
             <li><b>Inkubasi:</b>
                 <ul>
-                    <li>Sampel diinkubasi selama 5 hari pada suhu 20°C tanpa gangguan.</li>
+                    <li>Sampel diinkubasi selama 5 days pada suhu 20°C tanpa gangguan.</li>
                     <li>Setelah inkubasi, tambahkan asam sulfat pekat untuk melarutkan endapan. Reaksi ini menghasilkan iodin bebas.</li>
                 </ul>
             </li>
@@ -619,7 +619,7 @@ elif menu == "🧮 Kalkulator":
                 st.balloons()
 
 # ==========================================
-# ANALISIS (MENGGANTIKAN INTERPRETASI)
+# ANALISIS
 # ==========================================
 elif menu == "📊 Analisis":
     st.markdown("<h2 style='color:#009688;'>📊 Analisis Kualitas Air</h2>", unsafe_allow_html=True)
@@ -644,7 +644,7 @@ elif menu == "📊 Analisis":
     if st.button("Analisis Kualitas Air", key="btn_interpretasi"):
         st.markdown("#### 📢 Hasil Analisis Sistem:")
         
-        # Logika Evaluasi Sederhana Terintegrasi
+        # Logika Evaluasi Sederhana
         if input_do >= 6.0 and input_bod <= 2.0 and input_cod <= 10.0:
             st.success("🟢 KATEGORI: AIR BERSIH (Memenuhi Baku Mutu Kelas 1)\n\nAir dalam kondisi sangat baik, kaya oksigen, rendah cemaran organik, aman untuk ekosistem dan bahan baku air minum.")
         elif input_do >= 3.0 and input_bod <= 6.0 and input_cod <= 40.0:
@@ -686,6 +686,12 @@ elif menu == "📊 Analisis":
 elif menu == "🎮 Kuis":
     st.markdown("<h2 style='color:#009688;'>🎮 Kuis Interaktif Parameter Air</h2>", unsafe_allow_html=True)
     st.write("Silakan jawab pertanyaan di bawah ini secara teliti untuk menguji pemahaman materi laboratorium Anda.")
+
+    # Inisialisasi Session State untuk melacak status pengiriman kuis
+    if "kuis_disubmit" not in st.session_state:
+        st.session_state.kuis_disubmit = False
+    if "skor_akhir" not in st.session_state:
+        st.session_state.skor_akhir = 0
 
     # Data Soal Kuis 
     soal_list = [
@@ -761,16 +767,28 @@ elif menu == "🎮 Kuis":
         }
     ]
 
-    # Render Pertanyaan Kuis dengan kondisi bulatan kosong (index=None) di awal
+    # Render Pertanyaan Kuis dan Evaluasi Langsung Di Bawah Soal
     jawaban_user = {}
     for item in soal_list:
         st.markdown(f"<div class='card'><b>{item['tanya']}</b></div>", unsafe_allow_html=True)
+        
         jawaban_user[item["id"]] = st.radio(
             "Pilih Jawaban Anda:",
             item["opsi"],
-            index=None,  # Membuat pilihan default kosong/tidak ada yang terisi di awal
+            index=None,
             key=f"radio_{item['id']}"
         )
+        
+        # JIKA kuis sudah disubmit, langsung munculkan hasilnya di bawah soal bersangkutan
+        if st.session_state.kuis_disubmit:
+            pilihan = jawaban_user[item["id"]]
+            if pilihan == item["kunci"]:
+                st.success(f"🔹 JAWABAN ANDA BENAR ({pilihan})")
+            else:
+                st.error(f"🔸 JAWABAN ANDA SALAH. Anda memilih ({pilihan if pilihan is not None else 'Belum Diisi'})")
+            
+            st.info(f"💡 *Alasan/Pembahasan:* {item['alasan']}")
+            
         st.write("")
 
     # Tombol Evaluasi Nilai Kuis
@@ -780,34 +798,33 @@ elif menu == "🎮 Kuis":
         
         if belum_diisi:
             st.warning(f"⚠️ Tolong isi semua pertanyaan terlebih dahulu! Nomor yang belum diisi: {', '.join(belum_diisi)}")
+            st.session_state.kuis_disubmit = False
         else:
+            # Hitung skor akhir
             total_skor = 0
-            st.markdown("### 📋 Hasil Evaluasi Kuis:")
-            
             for item in soal_list:
-                pilihan = jawaban_user[item["id"]]
-                if pilihan == item["kunci"]:
-                    total_skor += 10  # 1 soal benar bernilai 10 poin
-                    st.success(f"🔹 {item['tanya']} -> JAWABAN ANDA BENAR ({pilihan})")
-                else:
-                    st.error(f"🔸 {item['tanya']} -> JAWABAN ANDA SALAH. Anda memilih ({pilihan})")
-                
-                # Tampilkan Alasan Pembahasan Berdasarkan Dokumen
-                st.info(f"💡 *Alasan/Pembahasan:* {item['alasan']}")
-                st.write("---")
-                
-            # Tampilkan Total Skor Akhir berbasis /100
-            st.markdown(f"""
-            <div style='background-color: #f0f7ff; padding: 20px; border-radius: 15px; border-left: 5px solid #00b4db; text-align: center;'>
-                <h3 style='margin:0; color:#0077b6;'>📊 Total Skor Anda</h3>
-                <b style='font-size: 40px; color:#00b4db;'>{total_skor} / 100</b>
-            </div>
-            """, unsafe_allow_html=True)
+                if jawaban_user[item["id"]] == item["kunci"]:
+                    total_skor += 10
             
-            if total_skor == 100:
-                st.balloons()
-            elif total_skor >= 70:
-                st.snow()
+            # Simpan status ke session state dan picu jalannya penampilan interpretasi bawah soal
+            st.session_state.kuis_disubmit = True
+            st.session_state.skor_akhir = total_skor
+            st.rerun()
+
+    # Tampilkan Total Skor Akhir di bagian paling bawah setelah disubmit
+    if st.session_state.kuis_disubmit:
+        st.markdown("---")
+        st.markdown(f"""
+        <div style='background-color: #f0f7ff; padding: 20px; border-radius: 15px; border-left: 5px solid #00b4db; text-align: center; margin-top:20px; margin-bottom:20px;'>
+            <h3 style='margin:0; color:#0077b6;'>📊 Total Skor Anda</h3>
+            <b style='font-size: 40px; color:#00b4db;'>{st.session_state.skor_akhir} / 100</b>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        if st.session_state.skor_akhir == 100:
+            st.balloons()
+        elif st.session_state.skor_akhir >= 70:
+            st.snow()
 
 # ==========================================
 # FOOTER
