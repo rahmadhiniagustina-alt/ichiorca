@@ -132,7 +132,7 @@ if menu == "🏠 Home":
     st.success("✨ Yuk mulai belajar dari menu di atas!")
 
 # ==========================================
-# TEORI
+# TEORI (MATERI SUPER LENGKAP DIKEMBALIKAN UTUH)
 # ==========================================
 elif menu == "📚 Teori":
 
@@ -144,38 +144,94 @@ elif menu == "📚 Teori":
         st.markdown("""
         <div class='card'>
         <h3>💧 Dissolved Oxygen (DO)</h3>
-        <p>
-        DO adalah jumlah oksigen terlarut dalam air yang dibutuhkan organisme akuatik.
-        </p>
+        <p><b>Definisi:</b><br>
+        Oksigen terlarut atau <i>dissolved oxygen</i> (DO) adalah elemen esensial yang dibutuhkan untuk mengoksidasi seluruh polutan yang terdapat dalam badan air baik secara kimiawi maupun secara biokimia. Secara tidak langsung, DO juga berpengaruh pada kadar padatan tersuspensi total (<i>total suspended solids</i> / TSS) yang terkandung pada badan air.</p>
+        
+        <p><b>Metode Uji & Prinsip:</b><br>
+        Nilai DO dapat diukur menggunakan cara konvensional melalui metode titrimetri, yakni <b>iodometri</b> seperti yang disarankan pada <b>Standar Nasional Indonesia Nomor 6989 Tahun 2004</b>. Secara prinsip, metode iodometri dilakukan dengan teknik titrasi yang melibatkan proses reaksi reduksi dan oksidasi (redoks).</p>
+        
+        <p>Dalam metode ini, oksigen yang terlarut dalam sampel akan bereaksi dengan ion mangan (II) dalam suasana basa sehingga menghasilkan mangan hidroksida [Mn(OH)₂] di mana zat ini akan direduksi kembali menjadi mangan (II) dengan adanya penambahan larutan iodida (I⁻) dalam suasana asam. Pertukaran elektron terjadi sehingga reaksi ini membebaskan iodin (I₂) yang akan diukur kadarnya melalui titrasi dengan natrium tiosulfat (Na₂S₂O₃) menggunakan indikator amilum.</p>
+        
+        <p><b>Persamaan Reaksi:</b></p>
         </div>
         """, unsafe_allow_html=True)
 
-        st.latex(r'''
-        I_2 + 2Na_2S_2O_3 \rightarrow 2NaI + Na_2S_4O_6
-        ''')
+        st.markdown("**Reaksi Preparasi:**")
+        st.latex(r'''Mn^{2+}_{(aq)} + 2OH^{-}_{(aq)} \rightarrow Mn(OH)_{2(s)}''')
+        
+        st.markdown("**Reaksi Titrasi:**")
+        st.latex(r'''I_2 + 2S_2O_3^{2-} \xrightarrow{H^+} S_4O_6^{2-} + 2I^-''')
+
+        st.markdown("""
+        <div class='card'>
+        <p><b>Rumus Perhitungan Nilai DO:</b></p>
+        </div>
+        """, unsafe_allow_html=True)
+        st.latex(r'''DO\ (mg/L) = \frac{V \times N \times 8000 \times F}{50\ mL}''')
 
     with tab2:
         st.markdown("""
         <div class='card'>
         <h3>🌱 Biochemical Oxygen Demand (BOD)</h3>
-        <p>
-        BOD menunjukkan jumlah oksigen yang dibutuhkan mikroorganisme untuk menguraikan bahan organik.
-        </p>
+        <p><b>Definisi:</b><br>
+        Biochemical oxygen demand (BOD) atau kebutuhan oksigen biologis (KOB) adalah salah satu parameter wajib ukur pada air limbah.</p>
+        
+        <p><b>Metode Uji & Prinsip:</b><br>
+        Cara ujinya tertera pada <b>Standar Nasional Indonesia Nomor 6989 Bagian 72 Tahun 2009</b> yang diadaptasi dari <i>American Public Health Association</i> (APHA) 5210. Pengujian BOD dapat dilakukan dengan menggunakan metode Winkler yakni melalui titrasi iodometri yang merupakan metode referensi <i>United States Environmental Protection Agency</i> (USEPA).</p>
+        
+        <p>Secara prinsip, titrasi iodometri merupakan titrasi reduksi-oksidasi (redoks) yang menggunakan Mangan klorida (MnCl₂), Larutan kalium iodida dalam natrium hidroksida (NaOH-KI), asam sulfat (H₂SO₄), dan natrium tiosulfat (Na₂S₂O₃). Prinsipnya adalah dengan menambahkan sampel dengan mangan klorida dan larutan kalium iodida dalam natrium hidroksida yang kemudian dikondisikan pada keadaan asam dengan penambahan asam sulfat sehingga ion iodida pada vessel titrat berubah menjadi iodin yang ekivalen dengan kadar oksigen terlarut. Vessel titrat kemudian dititrasi dengan larutan natrium tiosulfat dengan menggunakan indikator kanji.</p>
+        
+        <p><b>Persamaan Reaksi:</b></p>
         </div>
         """, unsafe_allow_html=True)
+
+        st.markdown("**Reaksi Pengendapan (Pengikatan Oksigen):**")
+        st.latex(r'''Mn^{2+} + 2OH^- + \frac{1}{2}O_2 \rightarrow MnO_2\cdot H_2O\ \text{(endapan coklat)}''')
+        
+        st.markdown("**Reaksi Pengasaman (Pelepasan Iodin):**")
+        st.latex(r'''MnO_2\cdot H_2O + 2I^- + 4H^+ \rightarrow Mn^{2+} + I_2 + 3H_2O''')
+        
+        st.markdown("**Reaksi Titrasi:**")
+        st.latex(r'''I_2 + 2S_2O_3^{2-} \rightarrow 2I^- + S_4O_6^{2-}''')
+
+        st.markdown("""
+        <div class='card'>
+        <p><b>Rumus Perhitungan Nilai BOD:</b></p>
+        </div>
+        """, unsafe_allow_html=True)
+        st.latex(r'''BOD\ (mg/L) = 5 \times (DO_{awal} - DO_{akhir})''')
 
     with tab3:
         st.markdown("""
         <div class='card'>
         <h3>🔥 Chemical Oxygen Demand (COD)</h3>
-        <p>
-        COD menunjukkan jumlah oksigen yang dibutuhkan untuk mengoksidasi bahan organik secara kimia.
-        </p>
+        <p><b>Definisi:</b><br>
+        Chemical oxygen demand (COD) adalah suatu parameter yang mengukur kebutuhan oksigen untuk mengoksidasi partikel-partikel yang terdapat dalam sampel air limbah melalui jalur kimia, yakni reaksi oksidasi dan reduksi.</p>
+        
+        <p><b>Metode Uji & Prinsip:</b><br>
+        Berdasarkan <b>Standar Nasional Indonesia Nomor 6989 Tahun 2019</b>, COD dapat diukur dengan cara teknik titrasi (titrimetri). Prinsip pengujian dilakukan dengan dua tahapan, yakni tahap destruksi dan tahap pengujian.</p>
+        
+        <ul>
+            <li><b>Tahap Destruksi:</b> Dilakukan dengan cara refluks (terbuka ataupun tertutup) yang berfungsi untuk mereaksikan kalium dikromat (K₂Cr₂O₇) dalam suasana asam dan mengubahnya menjadi ion kromat (Cr³⁺). Yang membedakan kedua cara ini adalah alat destruksi serta kuantitas reagen yang digunakan.</li>
+            <li><b>Tahap Pengujian:</b> Analis perlu menitar sampel hasil destruksi dengan larutan titran Ferro Ammonium Sulfat (FAS). Ion besi (II) (Fe²⁺) yang ada dalam larutan FAS akan mereduksi ion kromium heksavalen (Cr⁶⁺) menjadi ion krom (Cr³⁺) yang menghasilkan perubahan dari larutan <b>biru-kehijauan</b> menjadi warna <b>coklat-kemerahan</b> yang merupakan indikasi dari warna ion besi (III) (Fe³⁺).</li>
+        </ul>
+        
+        <p><b>Persamaan Reaksi Tahap Destruksi:</b></p>
         </div>
         """, unsafe_allow_html=True)
 
+        st.latex(r'''C_nH_aO_bN_c + cCr_2O_7^{2-} + 8cH^+ \rightarrow nCO_2 + \left(\frac{a+8c}{2}\right)H_2O + 2cCr^{3+}''')
+
+        st.markdown("""
+        <div class='card'>
+        <p><b>Rumus Perhitungan Nilai COD:</b><br>
+        Jumlah volume larutan FAS yang dibutuhkan sampai terjadinya perubahan warna dicatat dan dihitung dengan rumus:</p>
+        </div>
+        """, unsafe_allow_html=True)
+        st.latex(r'''COD\ (mg/L) = \frac{(V_b - V_c) \times N_{FAS} \times 8000}{V_S}''')
+
 # ==========================================
-# ALAT & BAHAN (REVISI SATU GAMBAR UTUH PER UJI)
+# ALAT & BAHAN (1 GAMBAR INDIVIDU LENGKAP PER UJI)
 # ==========================================
 elif menu == "🧪 Alat & Bahan":
 
@@ -192,13 +248,11 @@ elif menu == "🧪 Alat & Bahan":
     if pilihan_materi == "Daftar Alat & Bahan Uji DO":
         st.markdown("### 💧 Komponen Analisis Uji DO (Dissolved Oxygen)")
         
-        # Menampilkan satu gambar tunggal lokal yang sudah mencakup semua alat DO
         try:
             st.image("Gambar Alat DO.png", caption="Rangkaian Alat Analisis Parameter DO", use_container_width=True)
         except:
             st.warning("⚠️ File 'Gambar Alat DO.png' tidak ditemukan. Pastikan file gambar berada di folder yang sama dengan script python ini.")
 
-        # Detail nama alat beserta fungsinya dalam bentuk card
         st.markdown("""
         <div class='card'>
         <h4>📋 Alat yang Digunakan beserta Fungsinya:</h4>
@@ -216,7 +270,6 @@ elif menu == "🧪 Alat & Bahan":
         </div>
         """, unsafe_allow_html=True)
 
-        # Daftar Bahan Kimia DO
         st.markdown("""
         <div class='card' style='border-left: 5px solid #00b4db;'>
         <h3>📋 Bahan yang Digunakan:</h3>
@@ -240,13 +293,11 @@ elif menu == "🧪 Alat & Bahan":
     elif pilihan_materi == "Daftar Alat & Bahan Uji BOD":
         st.markdown("### 🌱 Komponen Analisis Uji BOD (Biochemical Oxygen Demand)")
         
-        # Menampilkan satu gambar tunggal lokal yang sudah mencakup semua alat BOD
         try:
             st.image("Gambar Alat BOD.png", caption="Rangkaian Alat Analisis Parameter BOD", use_container_width=True)
         except:
             st.warning("⚠️ File 'Gambar Alat BOD.png' tidak ditemukan. Pastikan file gambar berada di folder yang sama dengan script python ini.")
 
-        # Detail nama alat beserta fungsinya dalam bentuk card
         st.markdown("""
         <div class='card'>
         <h4>📋 Alat yang Digunakan beserta Fungsinya:</h4>
@@ -260,7 +311,6 @@ elif menu == "🧪 Alat & Bahan":
         </div>
         """, unsafe_allow_html=True)
 
-        # Daftar Bahan Kimia BOD
         st.markdown("""
         <div class='card' style='border-left: 5px solid #00c9a7;'>
         <h3>📋 Bahan yang Digunakan:</h3>
@@ -280,13 +330,11 @@ elif menu == "🧪 Alat & Bahan":
     elif pilihan_materi == "Daftar Alat & Bahan Uji COD":
         st.markdown("### 🔥 Komponen Analisis Uji COD (Chemical Oxygen Demand)")
         
-        # Menampilkan satu gambar tunggal lokal yang sudah mencakup semua alat COD
         try:
             st.image("Gambar Alat COD.jpg", caption="Rangkaian Alat Analisis Parameter COD", use_container_width=True)
         except:
             st.warning("⚠️ File 'Gambar Alat COD.jpg' tidak ditemukan. Pastikan file gambar berada di folder yang sama dengan script python ini.")
 
-        # Detail nama alat beserta fungsinya dalam bentuk card
         st.markdown("""
         <div class='card'>
         <h4>📋 Alat yang Digunakan beserta Fungsinya:</h4>
@@ -306,7 +354,6 @@ elif menu == "🧪 Alat & Bahan":
         </div>
         """, unsafe_allow_html=True)
 
-        # Daftar Bahan Kimia COD
         st.markdown("""
         <div class='card' style='border-left: 5px solid #0077b6;'>
         <h3>📋 Bahan yang Digunakan:</h3>
@@ -323,7 +370,7 @@ elif menu == "🧪 Alat & Bahan":
         </div>
         """, unsafe_allow_html=True)
 
-    st.success("✨ Pembaruan Berhasil! Struktur menu Alat & Bahan kini telah rapi dengan 1 gambar utuh referensi per parameter uji.")
+    st.success("✨ Pembaruan Berhasil! Menu Alat & Bahan menggunakan 1 gambar ringkas per materi tanpa merusak bagian lainnya.")
 
 # ==========================================
 # SIMULASI
