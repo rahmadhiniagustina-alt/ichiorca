@@ -132,7 +132,7 @@ if menu == "🏠 Home":
     st.success("✨ Yuk mulai belajar dari menu di atas!")
 
 # ==========================================
-# TEORI (DIPERBAIKIKAN DENGAN MATERI LENGKAP DOCX)
+# TEORI
 # ==========================================
 elif menu == "📚 Teori":
 
@@ -231,78 +231,248 @@ elif menu == "📚 Teori":
         st.latex(r'''COD\ (mg/L) = \frac{(V_b - V_c) \times N_{FAS} \times 8000}{V_S}''')
 
 # ==========================================
-# ALAT & BAHAN
+# ALAT & BAHAN (DIPERBAIKIKAN SESUAI FILE DOCX DAN DATA REFERENSI)
 # ==========================================
 elif menu == "🧪 Alat & Bahan":
 
-    st.markdown("<h2 style='color:#009688;'>🧪 Alat Laboratorium Interaktif</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='color:#009688;'>🧪 Daftar Alat & Bahan Laboratorium</h2>", unsafe_allow_html=True)
+    
+    pilihan_materi = st.selectbox(
+        "Pilih Parameter Pengujian:",
+        ["Daftar Alat & Bahan Uji DO", "Daftar Alat & Bahan Uji BOD", "Daftar Alat & Bahan Uji COD"]
+    )
+    
+    # ------------------------------------------
+    # SUB-BAGIAN: ALAT & BAHAN UJI DO
+    # ------------------------------------------
+    if pilihan_materi == "Daftar Alat & Bahan Uji DO":
+        st.markdown("### 💧 Komponen Analisis Uji DO (Dissolved Oxygen)")
+        
+        # Grid Tampilan Alat Uji DO (Menggunakan Layout Columns Sesuai Gambar Alat DO.png)
+        col1, col2, col3, col4 = st.columns(4)
+        
+        with col1:
+            st.markdown("<div class='card'><h4>🧴 Botol Winkler</h4><p style='font-size:13px; color:#555;'>Untuk pengambilan sampel tanpa udara.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/BOD_bottle.jpg/220px-BOD_bottle.jpg", use_container_width=True)
+            with st.expander("📖 Cara Penggunaan"):
+                st.write("Isi botol dengan contoh air perlahan hingga meluap, pastikan tidak terbentuk gelembung udara, lalu segera tutup rapat.")
+                
+        with col2:
+            st.markdown("<div class='card'><h4>🧪 Pipet Volumetrik</h4><p style='font-size:13px; color:#555;'>Menambahkan reagen secara presisi.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Pipettes_with_bulbs.jpg/220px-Pipettes_with_bulbs.jpg", use_container_width=True)
+            with st.expander("📖 Cara Penggunaan"):
+                st.write("Gunakan pro-pipet untuk memipet larutan reagen pembentuk endapan tepat pada tanda batas volume.")
+                
+        with col3:
+            st.markdown("<div class='card'><h4>🧪 Buret</h4><p style='font-size:13px; color:#555;'>Untuk titrasi larutan Na₂S₂O₃.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Burette.png/220px-Burette.png", use_container_width=True)
+            with st.expander("📖 Cara Penggunaan"):
+                st.write("Bilas dan isi buret dengan larutan natrium tiosulfat standar, pastikan keran tidak bocor dan skala terbaca jelas.")
+                
+        with col4:
+            st.markdown("<div class='card'><h4>⚗️ Erlenmeyer</h4><p style='font-size:13px; color:#555;'>Sebagai wadah proses titrasi.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Erlenmeyer_flask.jpg/220px-Erlenmeyer_flask.jpg", use_container_width=True)
+            with st.expander("📖 Cara Penggunaan"):
+                st.write("Pindahkan sebagian larutan contoh terasidifikasi dari botol winkler ke dalam erlenmeyer sebelum dititrasi.")
 
-    col1, col2, col3 = st.columns(3)
+        col5, col6, col7, col8 = st.columns(4)
+        
+        with col5:
+            st.markdown("<div class='card'><h4>🧪 Gelas Ukur</h4><p style='font-size:13px; color:#555;'>Pengenceran & preparasi larutan kasar.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Graduated_cylinder.jpg/180px-Graduated_cylinder.jpg", use_container_width=True)
+            with st.expander("📖 Cara Penggunaan"):
+                st.write("Tuangkan larutan penunjang atau aquadest sampai garis skala volume kasar yang diinginkan.")
+                
+        with col6:
+            st.markdown("<div class='card'><h4>🗼 Statif & Klem</h4><p style='font-size:13px; color:#555;'>Menopang tegak buret titrasi.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Retort_stand.jpg/120px-Retort_stand.jpg", use_container_width=True)
+            with st.expander("📖 Cara Penggunaan"):
+                st.write("Jepit buret dengan kuat pada klem statif secara vertikal agar stabil saat proses penitaran berlangsung.")
+                
+        with col7:
+            st.markdown("<div class='card'><h4>🟫 Botol Reagen Gelap</h4><p style='font-size:13px; color:#555;'>Penyimpanan larutan sensitif cahaya.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Amber_glass_bottles.jpg/220px-Amber_glass_bottles.jpg", use_container_width=True)
+            with st.expander("📖 Cara Penggunaan"):
+                st.write("Gunakan untuk menaruh stok larutan peka cahaya seperti tiosulfat atau iodida azida.")
+                
+        with col8:
+            st.markdown("<div class='card'><h4>🧪 Pipet Tetes</h4><p style='font-size:13px; color:#555;'>Penambahan indikator amilum.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Dropping_pipette_1.jpg/120px-Dropping_pipette_1.jpg", use_container_width=True)
+            with st.expander("📖 Cara Penggunaan"):
+                st.write("Ambil beberapa tetes larutan kanji/amilum untuk dimasukkan menjelang titik akhir titrasi tercapai.")
 
-    # CARD 1
-    with col1:
+        st.markdown("<div class='card'><h4>🌡️ Alat Tambahan Lainnya (Opsional)</h4><p>• <b>Termometer:</b> Digunakan untuk mengukur kondisi suhu awal dari sampel air lapangan.</p></div>", unsafe_allow_html=True)
+
+        # Bagian Daftar Bahan Kimia DO
         st.markdown("""
-        <div class='card'>
-        <h3>🧪 Buret</h3>
-        <p>Digunakan untuk titrasi.</p>
+        <div class='card' style='border-left: 5px solid #00b4db;'>
+        <h3>📋 Daftar Bahan Kimia yang Digunakan (Uji DO)</h3>
+        <ul>
+            <li><b>Contoh air:</b> Air limbah, air sungai, atau air uji lapangan.</li>
+            <li><b>MnSO₄ (Mangan(II) sulfat):</b> Berfungsi membentuk endapan Mn(OH)₂ di dalam reaktor.</li>
+            <li><b>Alkali iodida azida (KI + NaOH + NaN₃):</b> Berfungsi membebaskan I₂ secara tidak langsung.</li>
+            <li><b>H₂SO₄ pekat:</b> Berfungsi memberikan suasana asam kuat dan melarutkan kembali endapan coklat.</li>
+            <li><b>Na₂S₂O₃ (Natrium tiosulfat):</b> Bertindak sebagai larutan penitar standar (titran).</li>
+            <li><b>Indikator amilum (kanji/starch):</b> Sebagai penentu titik akhir titrasi (perubahan warna: biru menjadi hilang jernih).</li>
+            <li><b>K₂Cr₂O₇ (Kalium dikromat):</b> Digunakan sebagai larutan standar oksidator primer.</li>
+            <li><b>KI (Kalium iodida):</b> Digunakan untuk membantu menghasilkan senyawa iodin bebas.</li>
+            <li><b>Air suling / Aquadest:</b> Digunakan sebagai pembilas alat gelas dan pelarut pereaksi.</li>
+        </ul>
         </div>
         """, unsafe_allow_html=True)
 
-        st.image(
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Burette.png/220px-Burette.png",
-            width=150
-        )
+    # ------------------------------------------
+    # SUB-BAGIAN: ALAT & BAHAN UJI BOD
+    # ------------------------------------------
+    elif pilihan_materi == "Daftar Alat & Bahan Uji BOD":
+        st.markdown("### 🌱 Komponen Analisis Uji BOD (Biochemical Oxygen Demand)")
+        
+        # Grid Tampilan Alat Uji BOD (Menggunakan Layout Columns Sesuai Gambar Alat BOD.png)
+        col1, col2, col3 = st.columns(3)
+        
+        with col1:
+            st.markdown("<div class='card'><h4>🧴 Botol Winkler (Botol DO/BOD)</h4><p style='font-size:13px; color:#555;'>Wadah sampel tanpa kontak udara.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/BOD_bottle.jpg/220px-BOD_bottle.jpg", use_container_width=True)
+            with st.expander("📖 Cara Penggunaan"):
+                st.write("Gunakan dua buah botol secara terpisah untuk penentuan kadar oksigen terlarut hari ke-0 (DO-0) dan hari ke-5 (DO-5).")
+                
+        with col2:
+            st.markdown("<div class='card'><h4>🧪 Pipet Volumetrik / Pipet Ukur</h4><p style='font-size:13px; color:#555;'>Mengambil volume larutan dengan tepat.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Pipettes_with_bulbs.jpg/220px-Pipettes_with_bulbs.jpg", use_container_width=True)
+            with st.expander("📖 Cara Penggunaan"):
+                st.write("Gunakan untuk mengukur volume sampel air limbah secara presisi saat melakukan pengenceran.")
+                
+        with col3:
+            st.markdown("<div class='card'><h4>🧪 Buret Titrasi</h4><p style='font-size:13px; color:#555;'>Meneteskan titran secara teliti.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Burette.png/220px-Burette.png", use_container_width=True)
+            with st.expander("📖 Cara Penggunaan"):
+                st.write("Gunakan untuk meneteskan larutan natrium tiosulfat secara konstan perlahan-lahan ke wadah titrat.")
 
-        with st.expander("📖 Cara Penggunaan"):
-            st.write("""
-            1. Isi buret dengan larutan titran  
-            2. Pastikan tidak ada gelembung udara  
-            3. Baca skala awal dan akhir  
-            """)
+        col4, col5, col6 = st.columns(3)
+        
+        with col4:
+            st.markdown("<div class='card'><h4>⚗ ... Erlenmeyer</h4><p style='font-size:13px; color:#555;'>Wadah titrasi iodometri.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Erlenmeyer_flask.jpg/220px-Erlenmeyer_flask.jpg", use_container_width=True)
+            with st.expander("📖 Cara Penggunaan"):
+                st.write("Gunakan untuk menghomogenkan campuran zat uji selama tetesan tiosulfat ditambahkan.")
+                
+        with col5:
+            st.markdown("<div class='card'><h4>🗼 Statif & Klem</h4><p style='font-size:13px; color:#555;'>Penyangga peralatan gelas.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Retort_stand.jpg/120px-Retort_stand.jpg", use_container_width=True)
+            with st.expander("📖 Cara Penggunaan"):
+                st.write("Pastikan tiang statif diletakkan pada permukaan meja kerja laboratorium yang rata.")
+                
+        with col6:
+            st.markdown("<div class='card'><h4>📦 Inkubator BOD</h4><p style='font-size:13px; color:#555;'>Inkubasi sampel terkendali suhu 20°C.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Incubator_%28laboratory%29.jpg/220px-Incubator_%28laboratory%29.jpg", use_container_width=True)
+            with st.expander("📖 Cara Penggunaan"):
+                st.write("Masukkan botol BOD inkubasi 5 hari ke dalam ruang inkubator, kunci suhu di posisi stabil 20°C dan pertahankan kondisi gelap gulita.")
 
-    # CARD 2
-    with col2:
+        # Bagian Daftar Bahan Kimia BOD
         st.markdown("""
-        <div class='card'>
-        <h3>⚗️ Erlenmeyer</h3>
-        <p>Wadah reaksi dan titrasi.</p>
+        <div class='card' style='border-left: 5px solid #00c9a7;'>
+        <h3>📋 Daftar Bahan Kimia yang Digunakan (Uji BOD)</h3>
+        <ul>
+            <li><b>Mangan(II) sulfat (MnSO₄):</b> Mengikat senyawa gas oksigen terlarut alami dalam sampel air.</li>
+            <li><b>Larutan alkali-iodida-azida:</b> Membentuk kondisi lingkungan basa kuat dan membantu pelepasan iodin ekivalen.</li>
+            <li><b>Asam sulfat pekat (H₂SO₄):</b> Membantu melarutkan kembali flok endapan suspensi dan membebaskan molekul iodin bebas.</li>
+            <li><b>Larutan natrium tiosulfat (Na₂S₂O₃):</b> Berperan utama sebagai zat penitar/titran penentu kuantitas DO.</li>
+            <li><b>Indikator pati (amilum):</b> Menunjukkan titik akhir jalannya titrasi secara visual melalui hilangnya kompleks warna biru.</li>
+        </ul>
         </div>
         """, unsafe_allow_html=True)
 
-        st.image(
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Erlenmeyer_flask.jpg/220px-Erlenmeyer_flask.jpg",
-            width=150
-        )
+    # ------------------------------------------
+    # SUB-BAGIAN: ALAT & BAHAN UJI COD
+    # ------------------------------------------
+    elif pilihan_materi == "Daftar Alat & Bahan Uji COD":
+        st.markdown("### 🔥 Komponen Analisis Uji COD (Chemical Oxygen Demand)")
+        
+        # Grid Tampilan Alat Uji COD (Menggunakan Layout Columns Sesuai Gambar Alat COD.jpg)
+        col1, col2, col3, col4, col5 = st.columns(5)
+        
+        with col1:
+            st.markdown("<div class='card'><h4>⚗️ Labu Refluks</h4><p style='font-size:12px;'>Wadah reaksi destruksi.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Florentine_flask.jpg/120px-Florentine_flask.jpg", use_container_width=True)
+            with st.expander("📖 Fungsi & Pakai"):
+                st.write("Tempat terjadinya proses pemutusan ikatan rantai senyawa karbon organik menggunakan campuran oksidator kuat.")
+                
+        with col2:
+            st.markdown("<div class='card'><h4>🧪 Kondensor Refluks</h4><p style='font-size:12px;'>Pendingin balik uap asam.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Liebig_condenser_labeled.svg/220px-Liebig_condenser_labeled.svg.png", use_container_width=True)
+            with st.expander("📖 Fungsi & Pakai"):
+                st.write("Mengembunkan kembali uap asam sulfat pekat yang menguap agar tidak terbuang bebas ke udara luar.")
+                
+        with col3:
+            st.markdown("<div class='card'><h4>♨️ Hot Plate / Pemanas</h4><p style='font-size:12px;'>Digesti sampel pada ±150°C.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Laboratory_hot_plate.jpg/220px-Laboratory_hot_plate.jpg", use_container_width=True)
+            with st.expander("📖 Fungsi & Pakai"):
+                st.write("Sumber panas konstan untuk mendidihkan campuran cairan destruksi selama durasi waktu 2 jam.")
+                
+        with col4:
+            st.markdown("<div class='card'><h4>⚗️ Erlenmeyer (250 mL)</h4><p style='font-size:12px;'>Tempat titrasi sisa dikromat.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Erlenmeyer_flask.jpg/220px-Erlenmeyer_flask.jpg", use_container_width=True)
+            with st.expander("📖 Fungsi & Pakai"):
+                st.write("Tempat menampung filtrat hasil destruksi dingin yang siap direaksikan dengan larutan titran FAS.")
+                
+        with col5:
+            st.markdown("<div class='card'><h4>🧪 Buret Hidro</h4><p style='font-size:12px;'>Titrasi dengan larutan FAS.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Burette.png/220px-Burette.png", use_container_width=True)
+            with st.expander("📖 Fungsi & Pakai"):
+                st.write("Mengukur secara teliti mililiter pemakaian larutan garam FAS sampai indikator berubah warna merah coklat.")
 
-        with st.expander("📖 Cara Penggunaan"):
-            st.write("""
-            1. Masukkan sampel  
-            2. Tambahkan indikator  
-            3. Gunakan saat titrasi berlangsung  
-            """)
+        col6, col7, col8, col9, col10 = st.columns(5)
+        
+        with col6:
+            st.markdown("<div class='card'><h4>🧪 Pipet Volumetrik</h4><p style='font-size:12px;'>Mengambil volume reagen.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/1/1a/Pipettes_with_bulbs.jpg/220px-Pipettes_with_bulbs.jpg", use_container_width=True)
+            with st.expander("📖 Fungsi & Pakai"):
+                st.write("Mengambil porsi volume sampel air limbah dan kalium dikromat standar secara mengikat dan kuantitatif.")
+                
+        with col7:
+            st.markdown("<div class='card'><h4>🧪 Gelas Ukur</h4><p style='font-size:12px;'>Ukur volume reagen kasar.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Graduated_cylinder.jpg/180px-Graduated_cylinder.jpg", use_container_width=True)
+            with st.expander("📖 Fungsi & Pakai"):
+                st.write("Mengukur asam sulfat pekat pembawa katalisator di lemari asam sebelum dicampurkan.")
+                
+        with col8:
+            st.markdown("<div class='card'><h4>📐 Corong Kaca</h4><p style='font-size:12px;'>Membantu pindah larutan.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Glass_funnel.jpg/180px-Glass_funnel.jpg", use_container_width=True)
+            with st.expander("📖 Fungsi & Pakai"):
+                st.write("Mencegah terjadinya tumpahan cairan korosif berbahaya di luar bibir mulut wadah labu.")
+                
+        with col9:
+            st.markdown("<div class='card'><h4>🗼 Statif & Klem</h4><p style='font-size:12px;'>Menopang buret & refluks.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Retort_stand.jpg/120px-Retort_stand.jpg", use_container_width=True)
+            with st.expander("📖 Fungsi & Pakai"):
+                st.write("Menjaga posisi leher labu dan pendingin balik agar tetap kokoh bertautan di atas hotplate.")
+                
+        with col10:
+            st.markdown("<div class='card'><h4>🧴 Botol Semprot</h4><p style='font-size:12px;'>Pembilasan sisa alat gelas.</p></div>", unsafe_allow_html=True)
+            st.image("https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/Wash_bottle.jpg/150px-Wash_bottle.jpg", use_container_width=True)
+            with st.expander("📖 Fungsi & Pakai"):
+                st.write("Menyemprotkan air bebas ion untuk membilas sisa zat reagen yang menempel di dinding dalam alat.")
 
-    # CARD 3
-    with col3:
+        st.markdown("<div class='card'><h4>🌡️ Komponen Tambahan (Opsional)</h4><p>• <b>Termometer:</b> Memastikan temperatur operasional destilasi berjalan di kisaran suhu yang tepat.</p></div>", unsafe_allow_html=True)
+
+        # Bagian Daftar Bahan Kimia COD
         st.markdown("""
-        <div class='card'>
-        <h3>🧫 Botol DO</h3>
-        <p>Digunakan untuk pengambilan sampel air.</p>
+        <div class='card' style='border-left: 5px solid #0077b6;'>
+        <h3>📋 Daftar Bahan Kimia yang Digunakan (Uji COD)</h3>
+        <ul>
+            <li><b>Sampel air limbah / air uji:</b> Sumber utama material organik yang hendak ditentukan nilai kebutuhan oksigen kimiawinya.</li>
+            <li><b>Kalium dikromat (K₂Cr₂O₇):</b> Berperan vital sebagai agen oksidator utama penyerang senyawa organik.</li>
+            <li><b>Asam sulfat pekat (H₂SO₄):</b> Memberikan kondisi keasaman ekstrem yang memicu daya kerja oksidasi dikromat.</li>
+            <li><b>Perak sulfat (Ag₂SO₄):</b> Bertindak sebagai katalisator untuk mempercepat laju pembongkaran rantai karbon organik.</li>
+            <li><b>Merkuri sulfat (HgSO₄):</b> Bahan spesifik yang mengikat gangguan ion klorida (menghindari interferensi pembacaan Cl⁻).</li>
+            <li><b>Larutan FAS (Ferrous Ammonium Sulfate):</b> Bertindak sebagai agen pereduksi sisa dikromat sekaligus larutan titran resmi.</li>
+            <li><b>Indikator ferroin:</b> Senyawa kompleks penentu titik akhir reaksi (perubahan warna: biru-kehijauan menjadi coklat-kemerahan).</li>
+            <li><b>Aquadest / air bebas ion:</b> Digunakan sebagai cairan blanko pembanding dan pelarut utama.</li>
+        </ul>
         </div>
         """, unsafe_allow_html=True)
 
-        st.image(
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/BOD_bottle.jpg/220px-BOD_bottle.jpg",
-            width=150
-        )
-
-        with st.expander("📖 Cara Penggunaan"):
-            st.write("""
-            1. Isi penuh tanpa gelembung  
-            2. Tutup rapat  
-            3. Analisis segera  
-            """)
-
-    st.success("✨ Klik bagian 'Cara Penggunaan' untuk melihat detail alat!")
+    st.success("✨ Seluruh informasi gambar, fungsi alat, dan daftar reagen telah disesuaikan dengan instruksi kerja laboratorium!")
 
 # ==========================================
 # SIMULASI
