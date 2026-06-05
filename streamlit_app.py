@@ -51,7 +51,7 @@ st.markdown("""
 /* Grid Grid Kecil untuk Alat & Bahan */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     gap: 12px;
     margin-top: 10px;
     margin-bottom: 25px;
@@ -205,7 +205,7 @@ elif menu == "📚 Teori":
         """, unsafe_allow_html=True)
 
 # ==========================================
-# ALAT & BAHAN (TAMPILAN KARTU VISUAL MODERN)
+# ALAT & BAHAN (FOTO DI ATAS DAFTARNYA)
 # ==========================================
 elif menu == "🧪 Alat & Bahan":
 
@@ -223,40 +223,38 @@ elif menu == "🧪 Alat & Bahan":
     if pilihan_materi == "Daftar Alat & Bahan Uji DO":
         st.markdown("### 💧 Parameter Analisis DO (Dissolved Oxygen)")
         
-        col_img, col_cards = st.columns([1, 1.5])
-        
-        with col_img:
-            url_do = "https://github.com/user-attachments/assets/411a7412-1a3b-40e5-ab74-f1a394717e13"
-            st.image(url_do, caption="Rangkaian Alat Analisis Parameter DO", use_container_width=True)
+        # Foto diletakkan di atas melebar penuh
+        url_do = "https://github.com/user-attachments/assets/411a7412-1a3b-40e5-ab74-f1a394717e13"
+        st.image(url_do, caption="Rangkaian Alat Analisis Parameter DO", use_container_width=True)
 
-        with col_cards:
-            st.markdown("#### 🛠️ Daftar Alat Kerja")
-            st.markdown("""
-            <div class='grid-container'>
-                <div class='tool-item'><div class='item-title'>🧪 Botol Winkler</div><div class='item-desc'>Tempat pengambilan & fiksasi sampel air tanpa udara bebas.</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Pipet Volumetrik</div><div class='item-desc'>Mengambil & menambah volume reagen (MnSO₄, alkali) secara presisi.</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Buret & Statif</div><div class='item-desc'>Wadah penitar larutan standar Natrium Tiosulfat (Na₂S₂O₃).</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Erlenmeyer 150mL</div><div class='item-desc'>Wadah menampung sampel air olahan selama proses titrasi berlangsung.</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Gelas Ukur</div><div class='item-desc'>Mengukur volume pengenceran atau reagen kasar laboratorium.</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Botol Gelap</div><div class='item-desc'>Tempat penyimpanan stok larutan yang sensitif terhadap paparan cahaya.</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Pipet Tetes</div><div class='item-desc'>Membantu penambahan indikator larutan amilum secara bertahap.</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Termometer</div><div class='item-desc'><i>(Opsional)</i> Digunakan untuk mendata suhu aktual awal sampel air.</div></div>
-            </div>
-            """, unsafe_allow_html=True)
+        # Konten list diletakkan di bawah foto
+        st.markdown("#### 🛠️ Daftar Alat Kerja")
+        st.markdown("""
+        <div class='grid-container'>
+            <div class='tool-item'><div class='item-title'>🔵 Botol Winkler</div><div class='item-desc'>Tempat pengambilan & fiksasi sampel air tanpa udara bebas.</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Pipet Volumetrik</div><div class='item-desc'>Mengambil & menambah volume reagen (MnSO₄, alkali) secara presisi.</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Buret & Statif</div><div class='item-desc'>Wadah penitar larutan standar Natrium Tiosulfat (Na₂S₂O₃).</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Erlenmeyer 150mL</div><div class='item-desc'>Wadah menampung sampel air olahan selama proses titrasi berlangsung.</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Gelas Ukur</div><div class='item-desc'>Mengukur volume pengenceran atau reagen kasar laboratorium.</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Botol Gelap</div><div class='item-desc'>Tempat penyimpanan stok larutan yang sensitif terhadap paparan cahaya.</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Pipet Tetes</div><div class='item-desc'>Membantu penambahan indikator larutan amilum secara bertahap.</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Termometer</div><div class='item-desc'><i>(Opsional)</i> Digunakan untuk mendata suhu aktual awal sampel air.</div></div>
+        </div>
+        """, unsafe_allow_html=True)
 
-            st.markdown("#### 🧪 Daftar Bahan Kimia")
-            st.markdown("""
-            <div class='grid-container'>
-                <div class='chem-item'><div class='item-title'>💧 Sampel Air</div><div class='item-desc'>Air limbah, sungai, atau air uji yang akan ditentukan kadar oksigennya.</div></div>
-                <div class='chem-item'><div class='item-title'>💧 Mangan Sulfat (MnSO₄)</div><div class='item-desc'>Zat kimia utama pengikat molekul oksigen terlarut alami.</div></div>
-                <div class='chem-item'><div class='item-title'>💧 Alkali Iodida Azida</div><div class='item-desc'>Pereaksi campuran (KI+NaOH+NaN₃) pembentuk senyawa kompleks iodin.</div></div>
-                <div class='chem-item'><div class='item-title'>💧 Asam Sulfat (H₂SO₄)</div><div class='item-desc'>Asam pekat untuk memberikan suasana asam & melarutkan flok endapan.</div></div>
-                <div class='chem-item'><div class='item-title'>💧 Natrium Tiosulfat</div><div class='item-desc'>Larutan standar (Na₂S₂O₃) yang bertindak selaku zat penitar (titran).</div></div>
-                <div class='chem-item'><div class='item-title'>💧 Indikator Amilum</div><div class='item-desc'>Larutan kanji penanda titik akhir titrasi (warna biru tepat hilang).</div></div>
-                <div class='chem-item'><div class='item-title'>💧 Kalium Dikromat</div><div class='item-desc'>Senyawa (K₂Cr₂O₇) standar primer untuk keperluan standardisasi titran.</div></div>
-                <div class='chem-item'><div class='item-title'>💧 Aquadest</div><div class='item-desc'>Air murni suling untuk pelarutan pereaksi dan pembersihan alat gelas.</div></div>
-            </div>
-            """, unsafe_allow_html=True)
+        st.markdown("#### 🧪 Daftar Bahan Kimia")
+        st.markdown("""
+        <div class='grid-container'>
+            <div class='chem-item'><div class='item-title'>🟢 Sampel Air</div><div class='item-desc'>Air limbah, sungai, atau air uji yang akan ditentukan kadar oksigennya.</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Mangan Sulfat (MnSO₄)</div><div class='item-desc'>Zat kimia utama pengikat molekul oksigen terlarut alami.</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Alkali Iodida Azida</div><div class='item-desc'>Pereaksi campuran (KI+NaOH+NaN₃) pembentuk senyawa kompleks iodin.</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Asam Sulfat (H₂SO₄)</div><div class='item-desc'>Asam pekat untuk memberikan suasana asam & melarutkan flok endapan.</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Natrium Tiosulfat</div><div class='item-desc'>Larutan standar (Na₂S₂O₃) yang bertindak selaku zat penitar (titran).</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Indikator Amilum</div><div class='item-desc'>Larutan kanji penanda titik akhir titrasi (warna biru tepat hilang).</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Kalium Dikromat</div><div class='item-desc'>Senyawa (K₂Cr₂O₇) standar primer untuk keperluan standardisasi titran.</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Aquadest</div><div class='item-desc'>Air murni suling untuk pelarutan pereaksi dan pembersihan alat gelas.</div></div>
+        </div>
+        """, unsafe_allow_html=True)
 
     # ------------------------------------------
     # SUB-BAGIAN: UJI BOD
@@ -264,35 +262,33 @@ elif menu == "🧪 Alat & Bahan":
     elif pilihan_materi == "Daftar Alat & Bahan Uji BOD":
         st.markdown("### 🌱 Parameter Analisis BOD (Biochemical Oxygen Demand)")
         
-        col_img, col_cards = st.columns([1, 1.5])
-        
-        with col_img:
-            url_bod = "https://github.com/user-attachments/assets/869acefd-cb84-49bc-81d7-9cd02cec5241"
-            st.image(url_bod, caption="Rangkaian Alat Analisis Parameter BOD", use_container_width=True)
+        # Foto diletakkan di atas melebar penuh
+        url_bod = "https://github.com/user-attachments/assets/869acefd-cb84-49bc-81d7-9cd02cec5241"
+        st.image(url_bod, caption="Rangkaian Alat Analisis Parameter BOD", use_container_width=True)
 
-        with col_cards:
-            st.markdown("#### 🛠️ Daftar Alat Kerja")
-            st.markdown("""
-            <div class='grid-container'>
-                <div class='tool-item'><div class='item-title'>🧪 Botol BOD (Winkler)</div><div class='item-desc'>Wadah khusus kedap udara untuk proses inkubasi sampel h-0 dan h-5.</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Inkubator 20°C</div><div class='item-desc'>Kondisi ruang stabil untuk pengeraman mikroorganisme selama 5 hari.</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Buret & Statif</div><div class='item-desc'>Alat penetes larutan sekunder natrium tiosulfat dengan skala ketelitian tinggi.</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Pipet Volumetrik</div><div class='item-desc'>Mengambil larutan air medium pengencer atau contoh limbah secara presisi.</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Erlenmeyer 150mL</div><div class='item-desc'>Wadah penampungan titrat contoh uji guna mendeteksi titik akhir.</div></div>
-            </div>
-            """, unsafe_allow_html=True)
+        # Konten list diletakkan di bawah foto
+        st.markdown("#### 🛠️ Daftar Alat Kerja")
+        st.markdown("""
+        <div class='grid-container'>
+            <div class='tool-item'><div class='item-title'>🔵 Botol BOD (Winkler)</div><div class='item-desc'>Wadah khusus kedap udara untuk proses inkubasi sampel h-0 dan h-5.</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Inkubator 20°C</div><div class='item-desc'>Kondisi ruang stabil untuk pengeraman mikroorganisme selama 5 hari.</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Buret & Statif</div><div class='item-desc'>Alat penetes larutan sekunder natrium tiosulfat dengan skala ketelitian tinggi.</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Pipet Volumetrik</div><div class='item-desc'>Mengambil larutan air medium pengencer atau contoh limbah secara presisi.</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Erlenmeyer 150mL</div><div class='item-desc'>Wadah penampungan titrat contoh uji guna mendeteksi titik akhir.</div></div>
+        </div>
+        """, unsafe_allow_html=True)
 
-            st.markdown("#### 🧪 Daftar Bahan Kimia")
-            st.markdown("""
-            <div class='grid-container'>
-                <div class='chem-item'><div class='item-title'>🌱 Air Sampel Uji</div><div class='item-desc'>Bahan uji air limbah terbagi dua fasa (Hari ke-0 dan inkubasi Hari ke-5).</div></div>
-                <div class='chem-item'><div class='item-title'>🌱 Reagen Winkler</div><div class='item-desc'>Larutan MnSO₄ beserta larutan Alkali Iodida Azida pembentuk flok.</div></div>
-                <div class='chem-item'><div class='item-title'>🌱 H₂SO₄ Pekat</div><div class='item-desc'>Zat pengkondisi asam ekstrem guna membebaskan molekul iodin bebas.</div></div>
-                <div class='chem-item'><div class='item-title'>🌱 Larutan Na₂S₂O₃</div><div class='item-desc'>Larutan kimia penitar kuantitas kandungan oksigen terlarut sisa sediaan.</div></div>
-                <div class='chem-item'><div class='item-title'>🌱 Indikator Pati</div><div class='item-desc'>Indikator kanji pemberi warna biru kompleks sebelum titik akhir dicapai.</div></div>
-                <div class='chem-item'><div class='item-title'>🌱 Air Pengencer</div><div class='item-desc'>Air suling jenuh oksigen diperkaya nutrisi (bila sampel pekat).</div></div>
-            </div>
-            """, unsafe_allow_html=True)
+        st.markdown("#### 🧪 Daftar Bahan Kimia")
+        st.markdown("""
+        <div class='grid-container'>
+            <div class='chem-item'><div class='item-title'>🟢 Air Sampel Uji</div><div class='item-desc'>Bahan uji air limbah terbagi dua fasa (Hari ke-0 dan inkubasi Hari ke-5).</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Reagen Winkler</div><div class='item-desc'>Larutan MnSO₄ beserta larutan Alkali Iodida Azida pembentuk flok.</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 H₂SO₄ Pekat</div><div class='item-desc'>Zat pengkondisi asam ekstrem guna membebaskan molekul iodin bebas.</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Larutan Na₂S₂O₃</div><div class='item-desc'>Larutan kimia penitar kuantitas kandungan oksigen terlarut sisa sediaan.</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Indikator Pati</div><div class='item-desc'>Indikator kanji pemberi warna biru kompleks sebelum titik akhir dicapai.</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Air Pengencer</div><div class='item-desc'>Air suling jenuh oksigen diperkaya nutrisi (bila sampel pekat).</div></div>
+        </div>
+        """, unsafe_allow_html=True)
 
     # ------------------------------------------
     # SUB-BAGIAN: UJI COD
@@ -300,38 +296,36 @@ elif menu == "🧪 Alat & Bahan":
     elif pilihan_materi == "Daftar Alat & Bahan Uji COD":
         st.markdown("### 🔥 Parameter Analisis COD (Chemical Oxygen Demand)")
         
-        col_img, col_cards = st.columns([1, 1.5])
-        
-        with col_img:
-            url_cod = "https://github.com/user-attachments/assets/39987309-7194-4bd9-b1cc-8507f8fb8182"
-            st.image(url_cod, caption="Rangkaian Alat Analisis Parameter COD", use_container_width=True)
+        # Foto diletakkan di atas melebar penuh
+        url_cod = "https://github.com/user-attachments/assets/39987309-7194-4bd9-b1cc-8507f8fb8182"
+        st.image(url_cod, caption="Rangkaian Alat Analisis Parameter COD", use_container_width=True)
 
-        with col_cards:
-            st.markdown("#### 🛠️ Daftar Alat Kerja")
-            st.markdown("""
-            <div class='grid-container'>
-                <div class='tool-item'><div class='item-title'>🧪 Labu Refluks</div><div class='item-desc'>Labu alas bulat/datar tempat bertemunya reagen asam ekstrem & sampel.</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Kondensor Balik</div><div class='item-desc'>Pendingin uap asam agar kembali mengembun ke bawah selama pemanasan.</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Heating Mantle</div><div class='item-desc'>Alat pemanas elektrik bersuhu tinggi untuk proses digesti s/d ±150°C.</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Buret Makro</div><div class='item-desc'>Tempat pengisian titran larutan FAS (Ferro Ammonium Sulfate).</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Erlenmeyer 250mL</div><div class='item-desc'>Wadah titrasi sisa asam dikromat hasil destruksi yang telah dingin.</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Corong & Pipet</div><div class='item-desc'>Alat pembantu pemindahan reagen kimia korosif demi keselamatan kerja.</div></div>
-                <div class='tool-item'><div class='item-title'>🧪 Semprot Air</div><div class='item-desc'>Botol pembilas sisa reagen yang menempel di dinding dalam labu gelas.</div></div>
-            </div>
-            """, unsafe_allow_html=True)
+        # Konten list diletakkan di bawah foto
+        st.markdown("#### 🛠️ Daftar Alat Kerja")
+        st.markdown("""
+        <div class='grid-container'>
+            <div class='tool-item'><div class='item-title'>🔵 Labu Refluks</div><div class='item-desc'>Labu alas bulat/datar tempat bertemunya reagen asam ekstrem & sampel.</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Kondensor Balik</div><div class='item-desc'>Pendingin uap asam agar kembali mengembun ke bawah selama pemanasan.</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Heating Mantle</div><div class='item-desc'>Alat pemanas elektrik bersuhu tinggi untuk proses digesti s/d ±150°C.</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Buret Makro</div><div class='item-desc'>Tempat pengisian titran larutan FAS (Ferro Ammonium Sulfate).</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Erlenmeyer 250mL</div><div class='item-desc'>Wadah titrasi sisa asam dikromat hasil destruksi yang telah dingin.</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Corong & Pipet</div><div class='item-desc'>Alat pembantu pemindahan reagen kimia korosif demi keselamatan kerja.</div></div>
+            <div class='tool-item'><div class='item-title'>🔵 Semprot Air</div><div class='item-desc'>Botol pembilas sisa reagen yang menempel di dinding dalam labu gelas.</div></div>
+        </div>
+        """, unsafe_allow_html=True)
 
-            st.markdown("#### 🧪 Daftar Bahan Kimia")
-            st.markdown("""
-            <div class='grid-container'>
-                <div class='chem-item'><div class='item-title'>🔥 Kalium Dikromat</div><div class='item-desc'>Senyawa (K₂Cr₂O₇) selaku oksidator utama penghancur polutan organik.</div></div>
-                <div class='chem-item'><div class='item-title'>🔥 Asam Sulfat Reagen</div><div class='item-desc'>H₂SO₄ pekat pembangun suasana reaksi reduksi-oksidasi yang kuat.</div></div>
-                <div class='chem-item'><div class='item-title'>🔥 Perak Sulfat (Ag₂SO₄)</div><div class='item-desc'>Zat katalisator yang mempercepat proses rusaknya rantai karbon organik.</div></div>
-                <div class='chem-item'><div class='item-title'>🔥 Merkuri Sulfat</div><div class='item-desc'>HgSO₄ pengikat khusus ion klorida agar tidak merusak akurasi data (interferensi).</div></div>
-                <div class='chem-item'><div class='item-title'>🔥 Larutan Titran FAS</div><div class='item-desc'>Ferrous Ammonium Sulfate penitar sisa dikromat yang tidak terpakai.</div></div>
-                <div class='chem-item'><div class='item-title'>🔥 Indikator Ferroin</div><div class='item-desc'>Senyawa kompleks visual (perubahan warna: biru-hijau menjadi coklat-merah).</div></div>
-                <div class='chem-item'><div class='item-title'>🔥 Larutan Blanko</div><div class='item-desc'>Menggunakan air bebas ion/aquadest sebagai kontrol pembanding analisis.</div></div>
-            </div>
-            """, unsafe_allow_html=True)
+        st.markdown("#### 🧪 Daftar Bahan Kimia")
+        st.markdown("""
+        <div class='grid-container'>
+            <div class='chem-item'><div class='item-title'>🟢 Kalium Dikromat</div><div class='item-desc'>Senyawa (K₂Cr₂O₇) selaku oksidator utama penghancur polutan organik.</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Asam Sulfat Reagen</div><div class='item-desc'>H₂SO₄ pekat pembangun suasana reaksi reduksi-oksidasi yang kuat.</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Perak Sulfat (Ag₂SO₄)</div><div class='item-desc'>Zat katalisator yang mempercepat proses rusaknya rantai karbon organik.</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Merkuri Sulfat</div><div class='item-desc'>HgSO₄ pengikat khusus ion klorida agar tidak menimbulkan interferensi pembacaan.</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Larutan Titran FAS</div><div class='item-desc'>Ferrous Ammonium Sulfate penitar sisa dikromat yang tidak terpakai.</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Indikator Ferroin</div><div class='item-desc'>Senyawa kompleks visual (perubahan warna: biru-hijau menjadi coklat-merah).</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Larutan Blanko</div><div class='item-desc'>Menggunakan air bebas ion/aquadest sebagai kontrol pembanding analisis.</div></div>
+        </div>
+        """, unsafe_allow_html=True)
 
 # ==========================================
 # SIMULASI
