@@ -459,7 +459,7 @@ elif menu == "📋 Cara Kerja":
             <br>
             <li><b>Inkubasi:</b>
                 <ul>
-                    <li>Sampel diinkubasi selama 5 hari pada suhu 20°C tanpa gangguan.</li>
+                    <li>Sampel diinkubasi selama 5 days pada suhu 20°C tanpa gangguan.</li>
                     <li>Setelah inkubasi, tambahkan asam sulfat pekat untuk melarutkan endapan. Reaksi ini menghasilkan iodin bebas.</li>
                 </ul>
             </li>
@@ -622,16 +622,66 @@ elif menu == "🧮 Kalkulator":
                 st.balloons()
 
 # ==========================================
-# INTERPRETASI
+# INTERPRETASI (BARU & INTERAKTIF)
 # ==========================================
 elif menu == "📊 Interpretasi":
-    st.markdown("<h2 style='color:#009688;'>📊 Interpretasi Air</h2>", unsafe_allow_html=True)
-    data = pd.DataFrame({
-        "Kategori": ["Bersih", "Sedang", "Berat"],
-        "DO": [">6", "2-6", "<2"]
+    st.markdown("<h2 style='color:#009688;'>📊 Interpretasi Kualitas Air Terintegrasi</h2>", unsafe_allow_html=True)
+    st.write("Gunakan menu ini untuk mengecek status pencemaran air secara otomatis berdasarkan acuan baku mutu resmi nasional.")
+
+    # Bagian 1: Alat Cek Kualitas Air Otomatis
+    st.markdown("""
+    <div class='card'>
+        <h3>🔍 Alat Cek Status Air Otomatis</h3>
+        <p>Masukkan hasil kadar pengujian laboratorium Anda di bawah ini untuk mengetahui status kualitas sampel air.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        input_do = st.number_input("Masukkan Nilai DO Anda (mg/L):", min_value=0.0, value=5.0, step=0.1)
+    with col2:
+        input_bod = st.number_input("Masukkan Nilai BOD Anda (mg/L):", min_value=0.0, value=3.0, step=0.1)
+    with col3:
+        input_cod = st.number_input("Masukkan Nilai COD Anda (mg/L):", min_value=0.0, value=20.0, step=0.1)
+
+    if st.button("Analisis Kualitas Air", key="btn_interpretasi"):
+        st.markdown("#### 📢 Hasil Analisis Sistem:")
+        
+        # Logika Evaluasi Sederhana Terintegrasi
+        if input_do >= 6.0 and input_bod <= 2.0 and input_cod <= 10.0:
+            st.success("🟢 KATEGORI: AIR BERSIH (Memenuhi Baku Mutu Kelas 1)\n\nAir dalam kondisi sangat baik, kaya oksigen, rendah cemaran organik, aman untuk ekosistem dan bahan baku air minum.")
+        elif input_do >= 3.0 and input_bod <= 6.0 and input_cod <= 40.0:
+            st.warning("🟡 KATEGORI: TERCEMAR SEDANG (Memenuhi Baku Mutu Kelas 2/3)\n\nAir mengalami penurunan kualitas karena cemaran organik sedang. Masih dapat digunakan untuk sarana rekreasi air, pembudidayaan ikan air tawar, atau peternakan.")
+        else:
+            st.error("🔴 KATEGORI: TERCEMAR BERAT (Melebihi Batas Aman / Kelas 4)\n\nAir dalam kondisi kritis! Oksigen terlarut (DO) terlalu rendah atau beban limbah kimia (BOD/COD) terlalu tinggi. Hanya dapat digunakan untuk mengairi pertamanan atau membutuhkan pengolahan intensif.")
+
+    # Bagian 2: Tabel Acauaan Resmi Baku Mutu Air Nasional
+    st.markdown("""
+    <div class='card' style='margin-top:25px;'>
+        <h3>📋 Tabel Acuan Baku Mutu Air Nasional (PP No. 22 Tahun 2021)</h3>
+        <p>Klasifikasi peruntukan kelas air berdasarkan standar baku mutu lingkungan hidup:</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    data_mutu = pd.DataFrame({
+        "Parameter": ["DO (Oksigen Terlarut)", "BOD (Kebutuhan Oksigen Biologis)", "COD (Kebutuhan Oksigen Kimia)"],
+        "Kelas 1 (Air Minum)": ["≥ 6 mg/L", "≤ 2 mg/L", "≤ 10 mg/L"],
+        "Kelas 2 (Rekreasi Air)": ["≥ 4 mg/L", "≤ 3 mg/L", "≤ 25 mg/L"],
+        "Kelas 3 (Perikanan & Ternak)": ["≥ 3 mg/L", "≤ 6 mg/L", "≤ 40 mg/L"],
+        "Kelas 4 (Irigasi/Taman)": ["≥ 0 mg/L", "≤ 12 mg/L", "≤ 80 mg/L"]
     })
-    st.table(data)
-    st.success("🟢 Semakin tinggi DO maka kualitas air semakin baik")
+    
+    st.table(data_mutu)
+    
+    st.markdown("""
+    <div class='tool-item' style='margin-top:10px;'>
+        <div class='item-title'>💡 Tips Membaca Parameter Hubungan DO, BOD, & COD:</div>
+        <div class='item-desc'>
+            • Hubungan parameter ini berbanding terbalik. Semakin tinggi jumlah polutan organik di dalam air, maka angka <b>BOD dan COD akan melesat naik</b>.<br>
+            • Kenaikan beban organik tersebut memicu mikroorganisme bekerja keras dan mengonsumsi oksigen secara besar-besaran, yang berakibat pada <b>turunnya drastis nilai DO (oksigen terlarut)</b> hingga menyebabkan biota air mati.
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ==========================================
 # KUIS
