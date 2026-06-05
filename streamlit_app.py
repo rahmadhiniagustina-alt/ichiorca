@@ -137,7 +137,7 @@ menu = st.radio(
         "🧪 Alat & Bahan",
         "📋 Cara Kerja",
         "🧮 Kalkulator",
-        "📊 Interpretasi",
+        "📊 Analisis",
         "🎮 Kuis"
     ],
     horizontal=True
@@ -159,9 +159,6 @@ if menu == "🏠 Home":
         <li>🌱 Biochemical Oxygen Demand (BOD)</li>
         <li>🔥 Chemical Oxygen Demand (COD)</li>
     </ul>
-    <p>
-    Aplikasi ini dibuat lebih modern dan interaktif agar pembelajaran laboratorium menjadi lebih menyenangkan 🎉
-    </p>
     </div>
     """, unsafe_allow_html=True)
     st.success("✨ Yuk mulai belajar dari menu di atas!")
@@ -622,10 +619,10 @@ elif menu == "🧮 Kalkulator":
                 st.balloons()
 
 # ==========================================
-# INTERPRETASI
+# ANALISIS (MENGGANTIKAN INTERPRETASI)
 # ==========================================
-elif menu == "📊 Interpretasi":
-    st.markdown("<h2 style='color:#009688;'>📊 Interpretasi Kualitas Air</h2>", unsafe_allow_html=True)
+elif menu == "📊 Analisis":
+    st.markdown("<h2 style='color:#009688;'>📊 Analisis Kualitas Air</h2>", unsafe_allow_html=True)
     st.write("Gunakan menu ini untuk mengecek status pencemaran air secara otomatis berdasarkan acuan baku mutu resmi nasional.")
 
     # Bagian 1: Alat Cek Kualitas Air Otomatis
