@@ -520,7 +520,7 @@ elif menu == "📋 Cara Kerja":
         """, unsafe_allow_html=True)
 
 # ==========================================
-# 🧮 KALKULATOR (RE-DESIGN SESUAI RUMUS)
+# 🧮 KALKULATOR
 # ==========================================
 elif menu == "🧮 Kalkulator":
     st.markdown("<h2 style='color:#009688;'>🧮 Kalkulator Laboratorium</h2>", unsafe_allow_html=True)
@@ -532,7 +532,7 @@ elif menu == "🧮 Kalkulator":
     )
 
     # ------------------------------------------
-    # KALKULATOR DO
+    # KALKULATOR DO (Volume diset 3 angka belakang koma)
     # ------------------------------------------
     if pilihan_kalkulator == "Kalkulator Parameter DO":
         st.markdown("""
@@ -544,11 +544,11 @@ elif menu == "🧮 Kalkulator":
         
         col1, col2 = st.columns(2)
         with col1:
-            v_do = st.number_input("Volume Penitar / Titran Na₂S₂O₃ (V) [mL]", min_value=0.0, value=7.0, step=0.1, format="%.2f")
-            n_do = st.number_input("Normalitas Penitar / Na₂S₂O₃ (N)", min_value=0.0000, value=0.0250, step=0.001, format="%.4f")
+            v_do = st.number_input("Volume Penitar / Titran Na₂S₂O₃ (V) [mL]", min_value=0.000, value=7.000, step=0.001, format="%.3f")
+            n_do = st.number_input("Normalitas Penitar / Na₂S₂O₃ (N)", min_value=0.0000, value=0.0250, step=0.0001, format="%.4f")
         with col2:
             f_do = st.number_input("Faktor Koreksi Volume Penitar (F)", min_value=0.0, value=1.0, step=0.01, format="%.2f")
-            v_sampel_do = st.number_input("Volume Sampel Terpilih (V_s) [mL]", min_value=0.1, value=50.0, step=1.0, format="%.1f")
+            v_sampel_do = st.number_input("Volume Sampel Terpilih (V_s) [mL]", min_value=0.001, value=50.000, step=0.001, format="%.3f")
             
         if st.button("Hitung Nilai DO", key="btn_do"):
             if v_sampel_do > 0:
@@ -592,7 +592,7 @@ elif menu == "🧮 Kalkulator":
                 st.error("Nilai DO awal harus lebih besar atau sama dengan nilai DO akhir!")
 
     # ------------------------------------------
-    # KALKULATOR COD
+    # KALKULATOR COD (Volume diset 3 angka belakang koma & Perbaikan Rumus Matematika)
     # ------------------------------------------
     elif pilihan_kalkulator == "Kalkulator Parameter COD":
         st.markdown("""
@@ -604,14 +604,15 @@ elif menu == "🧮 Kalkulator":
         
         col1, col2 = st.columns(2)
         with col1:
-            v_blanko = st.number_input("Volume Penitaran Blanko (V_b) [mL]", min_value=0.0, value=20.0, step=0.1, format="%.2f")
-            v_contoh = st.number_input("Volume Penitaran Contoh/Sampel (V_c) [mL]", min_value=0.0, value=12.0, step=0.1, format="%.2f")
+            v_blanko = st.number_input("Volume Penitaran Blanko (V_b) [mL]", min_value=0.000, value=20.000, step=0.001, format="%.3f")
+            v_contoh = st.number_input("Volume Penitaran Contoh/Sampel (V_c) [mL]", min_value=0.000, value=12.000, step=0.001, format="%.3f")
         with col2:
-            n_fas = st.number_input("Normalitas Larutan Titran FAS (N_FAS)", min_value=0.0000, value=0.1000, step=0.001, format="%.4f")
-            v_s_cod = st.number_input("Volume Sampel Air yang Diuji (V_s) [mL]", min_value=0.1, value=50.0, step=1.0, format="%.1f")
+            n_fas = st.number_input("Normalitas Larutan Titran FAS (N_FAS)", min_value=0.0000, value=0.1000, step=0.0001, format="%.4f")
+            v_s_cod = st.number_input("Volume Sampel Air yang Diuji (V_s) [mL]", min_value=0.001, value=50.000, step=0.001, format="%.3f")
             
         if st.button("Hitung Nilai COD", key="btn_cod"):
             if v_s_cod > 0:
+                # Perbaikan rumus agar perhitungan sesuai prioritas matematika: (V_b - V_c) dikerjakan terlebih dahulu
                 hasil_cod = ((v_blanko - v_contoh) * n_fas * 8000) / v_s_cod
                 st.markdown(f"""
                 <div style='background-color: #e8fff1; padding: 15px; border-radius: 10px; border-left: 5px solid #00c9a7; margin-top: 15px;'>
