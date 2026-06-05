@@ -640,7 +640,7 @@ elif menu == "🎮 Kuis":
     st.markdown("<h2 style='color:#009688;'>🎮 Kuis Interaktif Parameter Air</h2>", unsafe_allow_html=True)
     st.write("Silakan jawab pertanyaan di bawah ini secara teliti untuk menguji pemahaman materi laboratorium Anda.")
 
-    # Data Soal Kuis Berdasarkan Dokumen Pengguna
+    # Data Soal Kuis 
     soal_list = [
         {
             "id": "q1",
@@ -714,46 +714,53 @@ elif menu == "🎮 Kuis":
         }
     ]
 
-    # Render Pertanyaan Kuis
+    # Render Pertanyaan Kuis dengan kondisi bulatan kosong (index=None) di awal
     jawaban_user = {}
     for item in soal_list:
         st.markdown(f"<div class='card'><b>{item['tanya']}</b></div>", unsafe_allow_html=True)
         jawaban_user[item["id"]] = st.radio(
             "Pilih Jawaban Anda:",
             item["opsi"],
+            index=None,  # Membuat pilihan default kosong/tidak ada yang terisi di awal
             key=f"radio_{item['id']}"
         )
         st.write("")
 
     # Tombol Evaluasi Nilai Kuis
     if st.button("Kirim Seluruh Jawaban Kuis", key="btn_submit_kuis"):
-        total_skor = 0
-        st.markdown("### 📋 Hasil Evaluasi Kuis:")
+        # Validasi jika ada soal yang belum dikerjakan/diisi sama sekali
+        belum_diisi = [item["tanya"][:4] for item in soal_list if jawaban_user[item["id"]] is None]
         
-        for item in soal_list:
-            pilihan = jawaban_user[item["id"]]
-            if pilihan == item["kunci"]:
-                total_skor += 100
-                st.success(f"🔹 {item['tanya']} -> JAWABAN ANDA BENAR ({pilihan})")
-            else:
-                st.error(f"🔸 {item['tanya']} -> JAWABAN ANDA SALAH. Anda memilih ({pilihan})")
+        if belum_diisi:
+            st.warning(f"⚠️ Tolong isi semua pertanyaan terlebih dahulu! Nomor yang belum diisi: {', '.join(belum_diisi)}")
+        else:
+            total_skor = 0
+            st.markdown("### 📋 Hasil Evaluasi Kuis:")
             
-            # Tampilkan Alasan Pembahasan Berdasarkan Dokumen
-            st.info(f"💡 *Alasan/Pembahasan:* {item['alasan']}")
-            st.write("---")
+            for item in soal_list:
+                pilihan = jawaban_user[item["id"]]
+                if pilihan == item["kunci"]:
+                    total_skor += 10  # 1 soal benar bernilai 10 poin
+                    st.success(f"🔹 {item['tanya']} -> JAWABAN ANDA BENAR ({pilihan})")
+                else:
+                    st.error(f"🔸 {item['tanya']} -> JAWABAN ANDA SALAH. Anda memilih ({pilihan})")
+                
+                # Tampilkan Alasan Pembahasan Berdasarkan Dokumen
+                st.info(f"💡 *Alasan/Pembahasan:* {item['alasan']}")
+                st.write("---")
+                
+            # Tampilkan Total Skor Akhir berbasis /100
+            st.markdown(f"""
+            <div style='background-color: #f0f7ff; padding: 20px; border-radius: 15px; border-left: 5px solid #00b4db; text-align: center;'>
+                <h3 style='margin:0; color:#0077b6;'>📊 Total Skor Anda</h3>
+                <b style='font-size: 40px; color:#00b4db;'>{total_skor} / 100</b>
+            </div>
+            """, unsafe_allow_html=True)
             
-        # Tampilkan Total Skor Akhir
-        st.markdown(f"""
-        <div style='background-color: #f0f7ff; padding: 20px; border-radius: 15px; border-left: 5px solid #00b4db; text-align: center;'>
-            <h3 style='margin:0; color:#0077b6;'>📊 Total Skor Anda</h3>
-            <b style='font-size: 40px; color:#00b4db;'>{total_skor} / 1000</b>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        if total_skor == 1000:
-            st.balloons()
-        elif total_skor >= 700:
-            st.snow()
+            if total_skor == 100:
+                st.balloons()
+            elif total_skor >= 70:
+                st.snow()
 
 # ==========================================
 # FOOTER
