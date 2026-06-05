@@ -132,7 +132,7 @@ if menu == "🏠 Home":
     st.success("✨ Yuk mulai belajar dari menu di atas!")
 
 # ==========================================
-# TEORI (KATA ANOMALI/EROR SUDAH DIHAPUS TOTAL)
+# TEORI (REVISI RUMUS COD LEBIH RAPI DI KOTAK PUTIH)
 # ==========================================
 elif menu == "📚 Teori":
 
@@ -220,7 +220,9 @@ elif menu == "📚 Teori":
         </ul>
         
         <p><b>Persamaan Reaksi Tahap Destruksi:</b></p>
-        <p style='text-align: center;'><code style='font-size: 15px;'>C_n H_a O_b N_c + c Cr₂O₇²⁻ + 8cH⁺ → n CO₂ + [(a + 8c) / 2] H₂O + 2c Cr³⁺</code></p>
+        <div style='text-align: center; background-color: #f8f9fa; padding: 15px; border-radius: 10px; font-family: monospace; font-size: 16px; font-weight: bold;'>
+            C<sub>n</sub>H<sub>a</sub>O<sub>b</sub>N<sub>c</sub> + c Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup> + 8cH<sup>+</sup> → n CO<sub>2</sub> + [ (a + 8c) / 2 ] H<sub>2</sub>O + 2c Cr<sup>3+</sup>
+        </div>
         </div>
         """, unsafe_allow_html=True)
 
