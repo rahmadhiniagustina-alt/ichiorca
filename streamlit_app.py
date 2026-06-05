@@ -132,7 +132,7 @@ if menu == "🏠 Home":
     st.success("✨ Yuk mulai belajar dari menu di atas!")
 
 # ==========================================
-# TEORI (MATERI SUPER LENGKAP DIKEMBALIKAN UTUH)
+# TEORI (KATA ANOMALI/EROR SUDAH DIHAPUS TOTAL)
 # ==========================================
 elif menu == "📚 Teori":
 
@@ -153,21 +153,23 @@ elif menu == "📚 Teori":
         <p>Dalam metode ini, oksigen yang terlarut dalam sampel akan bereaksi dengan ion mangan (II) dalam suasana basa sehingga menghasilkan mangan hidroksida [Mn(OH)₂] di mana zat ini akan direduksi kembali menjadi mangan (II) dengan adanya penambahan larutan iodida (I⁻) dalam suasana asam. Pertukaran elektron terjadi sehingga reaksi ini membebaskan iodin (I₂) yang akan diukur kadarnya melalui titrasi dengan natrium tiosulfat (Na₂S₂O₃) menggunakan indikator amilum.</p>
         
         <p><b>Persamaan Reaksi:</b></p>
+        <p><b>Reaksi Preparasi:</b><br>
+        <code style='font-size: 16px;'>Mn²⁺(aq) + 2OH⁻(aq) → Mn(OH)₂(s)</code></p>
+        <br>
+        <p><b>Reaksi Titrasi:</b><br>
+        <code style='font-size: 16px;'>I₂ + 2S₂O₃²⁻ —(H⁺)—> S₄O₆²⁻ + 2I⁻</code></p>
         </div>
         """, unsafe_allow_html=True)
-
-        st.markdown("**Reaksi Preparasi:**")
-        st.latex(r'''Mn^{2+}_{(aq)} + 2OH^{-}_{(aq)} \rightarrow Mn(OH)_{2(s)}''')
-        
-        st.markdown("**Reaksi Titrasi:**")
-        st.latex(r'''I_2 + 2S_2O_3^{2-} \xrightarrow{H^+} S_4O_6^{2-} + 2I^-''')
 
         st.markdown("""
         <div class='card'>
         <p><b>Rumus Perhitungan Nilai DO:</b></p>
+        <div style='text-align: center; font-size: 18px; font-weight: bold; padding: 10px;'>
+            DO (mg/L) = <span style='border-bottom: 2px solid black; padding-bottom: 2px;'>V × N × 8000 × F</span><br>
+            <span style='display: block; margin-top: 5px;'>50 mL</span>
+        </div>
         </div>
         """, unsafe_allow_html=True)
-        st.latex(r'''DO\ (mg/L) = \frac{V \times N \times 8000 \times F}{50\ mL}''')
 
     with tab2:
         st.markdown("""
@@ -182,24 +184,25 @@ elif menu == "📚 Teori":
         <p>Secara prinsip, titrasi iodometri merupakan titrasi reduksi-oksidasi (redoks) yang menggunakan Mangan klorida (MnCl₂), Larutan kalium iodida dalam natrium hidroksida (NaOH-KI), asam sulfat (H₂SO₄), dan natrium tiosulfat (Na₂S₂O₃). Prinsipnya adalah dengan menambahkan sampel dengan mangan klorida dan larutan kalium iodida dalam natrium hidroksida yang kemudian dikondisikan pada keadaan asam dengan penambahan asam sulfat sehingga ion iodida pada vessel titrat berubah menjadi iodin yang ekivalen dengan kadar oksigen terlarut. Vessel titrat kemudian dititrasi dengan larutan natrium tiosulfat dengan menggunakan indikator kanji.</p>
         
         <p><b>Persamaan Reaksi:</b></p>
+        <p><b>Reaksi Pengendapan (Pengikatan Oksigen):</b><br>
+        <code style='font-size: 16px;'>Mn²⁺ + 2OH⁻ + ½ O₂ → MnO₂·H₂O (endapan coklat)</code></p>
+        <br>
+        <p><b>Reaksi Pengasaman (Pelepasan Iodin):</b><br>
+        <code style='font-size: 16px;'>MnO₂·H₂O + 2I⁻ + 4H⁺ → Mn²⁺ + I₂ + 3H₂O</code></p>
+        <br>
+        <p><b>Reaksi Titrasi:</b><br>
+        <code style='font-size: 16px;'>I₂ + 2S₂O₃²⁻ → 2I⁻ + S₄O₆²⁻</code></p>
         </div>
         """, unsafe_allow_html=True)
-
-        st.markdown("**Reaksi Pengendapan (Pengikatan Oksigen):**")
-        st.latex(r'''Mn^{2+} + 2OH^- + \frac{1}{2}O_2 \rightarrow MnO_2\cdot H_2O\ \text{(endapan coklat)}''')
-        
-        st.markdown("**Reaksi Pengasaman (Pelepasan Iodin):**")
-        st.latex(r'''MnO_2\cdot H_2O + 2I^- + 4H^+ \rightarrow Mn^{2+} + I_2 + 3H_2O''')
-        
-        st.markdown("**Reaksi Titrasi:**")
-        st.latex(r'''I_2 + 2S_2O_3^{2-} \rightarrow 2I^- + S_4O_6^{2-}''')
 
         st.markdown("""
         <div class='card'>
         <p><b>Rumus Perhitungan Nilai BOD:</b></p>
+        <div style='text-align: center; font-size: 18px; font-weight: bold; padding: 10px;'>
+            BOD (mg/L) = 5 × (DO<sub>awal</sub> - DO<sub>akhir</sub>)
+        </div>
         </div>
         """, unsafe_allow_html=True)
-        st.latex(r'''BOD\ (mg/L) = 5 \times (DO_{awal} - DO_{akhir})''')
 
     with tab3:
         st.markdown("""
@@ -213,25 +216,27 @@ elif menu == "📚 Teori":
         
         <ul>
             <li><b>Tahap Destruksi:</b> Dilakukan dengan cara refluks (terbuka ataupun tertutup) yang berfungsi untuk mereaksikan kalium dikromat (K₂Cr₂O₇) dalam suasana asam dan mengubahnya menjadi ion kromat (Cr³⁺). Yang membedakan kedua cara ini adalah alat destruksi serta kuantitas reagen yang digunakan.</li>
-            <li><b>Tahap Pengujian:</b> Analis perlu menitar sampel hasil destruksi dengan larutan titran Ferro Ammonium Sulfat (FAS). Ion besi (II) (Fe²⁺) yang ada dalam larutan FAS akan mereduksi ion kromium heksavalen (Cr⁶⁺) menjadi ion krom (Cr³⁺) yang menghasilkan perubahan dari larutan <b>biru-kehijauan</b> menjadi warna <b>coklat-kemerahan</b> yang merupakan indikasi dari warna ion besi (III) (Fe³⁺).</li>
+            <li><b>Tahap Pengujian:</b> Analis perlu menitar sampel hasil destruksi dengan larutan titran Ferro Ammonium Sulfate (FAS). Ion besi (II) (Fe²⁺) yang ada dalam larutan FAS akan mereduksi ion kromium heksavalen (Cr⁶⁺) menjadi ion krom (Cr³⁺) yang menghasilkan perubahan dari larutan <b>biru-kehijauan</b> menjadi warna <b>coklat-kemerahan</b> yang merupakan indikasi dari warna ion besi (III) (Fe³⁺).</li>
         </ul>
         
         <p><b>Persamaan Reaksi Tahap Destruksi:</b></p>
+        <p style='text-align: center;'><code style='font-size: 15px;'>C_n H_a O_b N_c + c Cr₂O₇²⁻ + 8cH⁺ → n CO₂ + [(a + 8c) / 2] H₂O + 2c Cr³⁺</code></p>
         </div>
         """, unsafe_allow_html=True)
-
-        st.latex(r'''C_nH_aO_bN_c + cCr_2O_7^{2-} + 8cH^+ \rightarrow nCO_2 + \left(\frac{a+8c}{2}\right)H_2O + 2cCr^{3+}''')
 
         st.markdown("""
         <div class='card'>
         <p><b>Rumus Perhitungan Nilai COD:</b><br>
         Jumlah volume larutan FAS yang dibutuhkan sampai terjadinya perubahan warna dicatat dan dihitung dengan rumus:</p>
+        <div style='text-align: center; font-size: 18px; font-weight: bold; padding: 10px;'>
+            COD (mg/L) = <span style='border-bottom: 2px solid black; padding-bottom: 2px;'>(V<sub>b</sub> - V<sub>c</sub>) × N<sub>FAS</sub> × 8000</span><br>
+            <span style='display: block; margin-top: 5px;'>V<sub>s</sub></span>
+        </div>
         </div>
         """, unsafe_allow_html=True)
-        st.latex(r'''COD\ (mg/L) = \frac{(V_b - V_c) \times N_{FAS} \times 8000}{V_S}''')
 
 # ==========================================
-# ALAT & BAHAN (1 GAMBAR INDIVIDU LENGKAP PER UJI)
+# ALAT & BAHAN
 # ==========================================
 elif menu == "🧪 Alat & Bahan":
 
