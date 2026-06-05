@@ -532,7 +532,7 @@ elif menu == "🧮 Kalkulator":
     )
 
     # ------------------------------------------
-    # KALKULATOR DO (Volume diset 3 angka belakang koma)
+    # KALKULATOR DO 
     # ------------------------------------------
     if pilihan_kalkulator == "Kalkulator Parameter DO":
         st.markdown("""
@@ -592,7 +592,7 @@ elif menu == "🧮 Kalkulator":
                 st.error("Nilai DO awal harus lebih besar atau sama dengan nilai DO akhir!")
 
     # ------------------------------------------
-    # KALKULATOR COD (Volume diset 3 angka belakang koma & Perbaikan Rumus Matematika)
+    # KALKULATOR COD
     # ------------------------------------------
     elif pilihan_kalkulator == "Kalkulator Parameter COD":
         st.markdown("""
@@ -612,7 +612,6 @@ elif menu == "🧮 Kalkulator":
             
         if st.button("Hitung Nilai COD", key="btn_cod"):
             if v_s_cod > 0:
-                # Perbaikan rumus agar perhitungan sesuai prioritas matematika: (V_b - V_c) dikerjakan terlebih dahulu
                 hasil_cod = ((v_blanko - v_contoh) * n_fas * 8000) / v_s_cod
                 st.markdown(f"""
                 <div style='background-color: #e8fff1; padding: 15px; border-radius: 10px; border-left: 5px solid #00c9a7; margin-top: 15px;'>
@@ -638,15 +637,123 @@ elif menu == "📊 Interpretasi":
 # KUIS
 # ==========================================
 elif menu == "🎮 Kuis":
-    st.markdown("<h2 style='color:#009688;'>🎮 Kuis Interaktif</h2>", unsafe_allow_html=True)
-    score = 0
-    q1 = st.radio("Apa kepanjangan DO?", ["Dissolved Oxygen", "Digital Oxygen", "Double Oxygen"])
-    if st.button("Submit Jawaban"):
-        if q1 == "Dissolved Oxygen":
-            score += 100
-        st.success(f"🎉 Skor Kamu = {score}")
-        if score == 100:
+    st.markdown("<h2 style='color:#009688;'>🎮 Kuis Interaktif Parameter Air</h2>", unsafe_allow_html=True)
+    st.write("Silakan jawab pertanyaan di bawah ini secara teliti untuk menguji pemahaman materi laboratorium Anda.")
+
+    # Data Soal Kuis Berdasarkan Dokumen Pengguna
+    soal_list = [
+        {
+            "id": "q1",
+            "tanya": "1. BOD merupakan singkatan dari ...",
+            "opsi": ["A. Biological Oxygen Data", "B. Biochemical Oxygen Demand", "C. Biochemical Oxidation Data", "D. Biological Oxidation Demand"],
+            "kunci": "B. Biochemical Oxygen Demand",
+            "alasan": "BOD adalah Biochemical Oxygen Demand, yaitu jumlah oksigen yang dibutuhkan mikroorganisme untuk menguraikan bahan organik dalam air."
+        },
+        {
+            "id": "q2",
+            "tanya": "2. Parameter DO digunakan untuk mengetahui ...",
+            "opsi": ["A. Jumlah logam berat dalam air", "B. Kadar oksigen terlarut dalam air", "C. Tingkat keasaman air", "D. Kekeruhan air"],
+            "kunci": "B. Kadar oksigen terlarut dalam air",
+            "alasan": "DO (Dissolved Oxygen) digunakan untuk mengukur jumlah oksigen yang terlarut dalam air."
+        },
+        {
+            "id": "q3",
+            "tanya": "3. Pada metode Winkler, larutan Na₂S₂O₃ digunakan sebagai ...",
+            "opsi": ["A. Indikator", "B. Oksidator", "C. Titran", "D. Katalis"],
+            "kunci": "C. Titran",
+            "alasan": "Natrium tiosulfat digunakan sebagai larutan penitar untuk menentukan jumlah iodin yang terbentuk pada titrasi DO."
+        },
+        {
+            "id": "q4",
+            "tanya": "4. COD digunakan untuk mengukur ...",
+            "opsi": ["A. Jumlah mikroorganisme dalam air", "B. Kebutuhan oksigen secara kimia", "C. Kandungan garam dalam air", "D. Tingkat warna air"],
+            "kunci": "B. Kebutuhan oksigen secara kimia",
+            "alasan": "COD (Chemical Oxygen Demand) menunjukkan jumlah oksigen yang dibutuhkan untuk mengoksidasi bahan organik secara kimia."
+        },
+        {
+            "id": "q5",
+            "tanya": "5. Alat yang digunakan untuk menyimpan sampel DO agar tidak terkena udara adalah ...",
+            "opsi": ["A. Gelas ukur", "B. Labu ukur", "C. Botol Winkler", "D. Erlenmeyer"],
+            "kunci": "C. Botol Winkler",
+            "alasan": "Botol Winkler dirancang khusus agar sampel tidak kontak dengan udara sehingga kadar oksigen tidak berubah."
+        },
+        {
+            "id": "q6",
+            "tanya": "6. Inkubator pada pengujian BOD biasanya diatur pada suhu ...",
+            "opsi": ["A. 0°C", "B. 10°C", "C. 20°C", "D. 50°C"],
+            "kunci": "C. 20°C",
+            "alasan": "Pengujian BOD standar dilakukan pada suhu 20°C selama 5 hari agar aktivitas mikroorganisme optimal."
+        },
+        {
+            "id": "q7",
+            "tanya": "7. Indikator yang digunakan pada titrasi DO metode Winkler adalah ...",
+            "opsi": ["A. Fenolftalein", "B. Metil jingga", "C. Ferroin", "D. Amilum (pati)"],
+            "kunci": "D. Amilum (pati)",
+            "alasan": "Indikator amilum membentuk warna biru dengan iodin dan digunakan untuk menunjukkan titik akhir titrasi."
+        },
+        {
+            "id": "q8",
+            "tanya": "8. Semakin tinggi nilai BOD suatu air, maka ...",
+            "opsi": ["A. Air semakin bersih", "B. Kandungan bahan organik semakin tinggi", "C. Oksigen terlarut semakin tinggi", "D. Air semakin jernih"],
+            "kunci": "B. Kandungan bahan organik semakin tinggi",
+            "alasan": "Nilai BOD tinggi menunjukkan banyak bahan organik yang harus diuraikan mikroorganisme sehingga kebutuhan oksigen meningkat."
+        },
+        {
+            "id": "q9",
+            "tanya": "9. Pada pengujian COD, senyawa yang digunakan sebagai oksidator adalah ...",
+            "opsi": ["A. NaOH", "B. KMnO₄", "C. K₂Cr₂O₇", "D. NaCl"],
+            "kunci": "C. K₂Cr₂O₇",
+            "alasan": "Kalium dikromat (K₂Cr₂O₇) merupakan oksidator kuat yang digunakan untuk mengoksidasi bahan organik pada uji COD."
+        },
+        {
+            "id": "q10",
+            "tanya": "10. Tujuan utama pengukuran DO adalah ...",
+            "opsi": ["A. Mengetahui kadar bahan organik", "B. Menentukan tingkat salinitas", "C. Mengetahui jumlah oksigen terlarut dalam air", "D. Mengukur kadar logam berat"],
+            "kunci": "C. Mengetahui jumlah oksigen terlarut dalam air",
+            "alasan": "DO digunakan untuk mengetahui kadar oksigen terlarut yang penting bagi kehidupan organisme air dan kualitas perairan."
+        }
+    ]
+
+    # Render Pertanyaan Kuis
+    jawaban_user = {}
+    for item in soal_list:
+        st.markdown(f"<div class='card'><b>{item['tanya']}</b></div>", unsafe_allow_html=True)
+        jawaban_user[item["id"]] = st.radio(
+            "Pilih Jawaban Anda:",
+            item["opsi"],
+            key=f"radio_{item['id']}"
+        )
+        st.write("")
+
+    # Tombol Evaluasi Nilai Kuis
+    if st.button("Kirim Seluruh Jawaban Kuis", key="btn_submit_kuis"):
+        total_skor = 0
+        st.markdown("### 📋 Hasil Evaluasi Kuis:")
+        
+        for item in soal_list:
+            pilihan = jawaban_user[item["id"]]
+            if pilihan == item["kunci"]:
+                total_skor += 100
+                st.success(f"🔹 {item['tanya']} -> JAWABAN ANDA BENAR ({pilihan})")
+            else:
+                st.error(f"🔸 {item['tanya']} -> JAWABAN ANDA SALAH. Anda memilih ({pilihan})")
+            
+            # Tampilkan Alasan Pembahasan Berdasarkan Dokumen
+            st.info(f"💡 *Alasan/Pembahasan:* {item['alasan']}")
+            st.write("---")
+            
+        # Tampilkan Total Skor Akhir
+        st.markdown(f"""
+        <div style='background-color: #f0f7ff; padding: 20px; border-radius: 15px; border-left: 5px solid #00b4db; text-align: center;'>
+            <h3 style='margin:0; color:#0077b6;'>📊 Total Skor Anda</h3>
+            <b style='font-size: 40px; color:#00b4db;'>{total_skor} / 1000</b>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        if total_skor == 1000:
             st.balloons()
+        elif total_skor >= 700:
+            st.snow()
 
 # ==========================================
 # FOOTER
