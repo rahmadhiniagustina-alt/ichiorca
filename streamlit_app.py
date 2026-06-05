@@ -31,6 +31,17 @@ st.markdown("""
     box-shadow: 0px 4px 10px rgba(0,0,0,0.1);
 }
 
+/* Judul utama */
+.main-title {
+    font-size: 45px;
+    font-weight: bold;
+    text-align: center;
+    color: #0077b6;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
 /* Subjudul */
 .subtitle {
     text-align: center;
@@ -46,6 +57,11 @@ st.markdown("""
     border-radius: 20px;
     box-shadow: 0px 5px 15px rgba(0,0,0,0.08);
     margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: scale(1.01);
 }
 
 /* Grid Grid Kecil untuk Alat & Bahan */
@@ -135,19 +151,23 @@ if menu == "🏠 Home":
     st.markdown("""
     <div class='card'>
     <h2>👋 Selamat Datang!</h2>
-    <p>ModulDigital-Oxy adalah media pembelajaran interaktif untuk memahami:</p>
+    <p>
+    ModulDigital-Oxy adalah media pembelajaran interaktif untuk memahami:
+    </p>
     <ul>
         <li>💧 Dissolved Oxygen (DO)</li>
         <li>🌱 Biochemical Oxygen Demand (BOD)</li>
         <li>🔥 Chemical Oxygen Demand (COD)</li>
     </ul>
-    <p>Aplikasi ini dibuat lebih modern dan interaktif agar pembelajaran laboratorium menjadi lebih menyenangkan 🎉</p>
+    <p>
+    Aplikasi ini dibuat lebih modern dan interaktif agar pembelajaran laboratorium menjadi lebih menyenangkan 🎉
+    </p>
     </div>
     """, unsafe_allow_html=True)
     st.success("✨ Yuk mulai belajar dari menu di atas!")
 
 # ==========================================
-# TEORI
+# TEORI (100% KEMBALI LENGKAP SESUAI AWAL)
 # ==========================================
 elif menu == "📚 Teori":
     st.markdown("<h2 style='color:#009688;'>📚 Materi Teori</h2>", unsafe_allow_html=True)
@@ -157,16 +177,29 @@ elif menu == "📚 Teori":
         st.markdown("""
         <div class='card'>
         <h3>💧 Dissolved Oxygen (DO)</h3>
-        <p><b>Definisi:</b><br>Oksigen terlarut atau <i>dissolved oxygen</i> (DO) adalah elemen esensial yang dibutuhkan untuk mengoksidasi seluruh polutan yang terdapat dalam badan air baik secara kimiawi maupun secara biokimia.</p>
-        <p><b>Metode Uji & Prinsip:</b><br>Nilai DO dapat diukur menggunakan metode titrimetri <b>iodometri</b> (SNI 6989:2004). Prinsipnya melibatkan proses reaksi reduksi dan oksidasi (redoks) menggunakan larutan natrium tiosulfat (Na₂S₂O₃) dengan indikator amilum.</p>
-        <p><b>Persamaan Reaksi:</b><br>
-        <code>Mn²⁺(aq) + 2OH⁻(aq) → Mn(OH)₂(s)</code><br>
-        <code>I₂ + 2S₂O₃²⁻ —(H⁺)—> S₄O₆²⁻ + 2I⁻</code></p>
+        <p><b>Definisi:</b><br>
+        Oksigen terlarut atau <i>dissolved oxygen</i> (DO) adalah elemen esensial yang dibutuhkan untuk mengoksidasi seluruh polutan yang terdapat dalam badan air baik secara kimiawi maupun secara biokimia. Secara tidak langsung, DO juga berpengaruh pada kadar padatan tersuspensi total (<i>total suspended solids</i> / TSS) yang terkandung pada badan air.</p>
+        
+        <p><b>Metode Uji & Prinsip:</b><br>
+        Nilai DO dapat diukur menggunakan cara konvensional melalui metode titrimetri, yakni <b>iodometri</b> seperti yang disarankan pada <b>Standar Nasional Indonesia Nomor 6989 Tahun 2004</b>. Secara prinsip, metode iodometri dilakukan dengan teknik titrasi yang melibatkan proses reaksi reduksi dan oksidasi (redoks).</p>
+        
+        <p>Dalam metode ini, oksigen yang terlarut dalam sampel akan bereaksi dengan ion mangan (II) dalam suasana basa sehingga menghasilkan mangan hidroksida [Mn(OH)₂] di mana zat ini akan direduksi kembali menjadi mangan (II) dengan adanya penambahan larutan iodida (I⁻) dalam suasana asam. Pertukaran elektron terjadi sehingga reaksi ini membebaskan iodin (I₂) yang akan diukur kadarnya melalui titrasi dengan natrium tiosulfat (Na₂S₂O₃) menggunakan indikator amilum.</p>
+        
+        <p><b>Persamaan Reaksi:</b></p>
+        <p><b>Reaksi Preparasi:</b><br>
+        <code style='font-size: 16px;'>Mn²⁺(aq) + 2OH⁻(aq) → Mn(OH)₂(s)</code></p>
+        <br>
+        <p><b>Reaksi Titrasi:</b><br>
+        <code style='font-size: 16px;'>I₂ + 2S₂O₃²⁻ —(H⁺)—> S₄O₆²⁻ + 2I⁻</code></p>
         </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
         <div class='card'>
         <p><b>Rumus Perhitungan Nilai DO:</b></p>
-        <div style='text-align: center; font-size: 18px; font-weight: bold;'>
-            DO (mg/L) = (V × N × 8000 × F) / 50 mL
+        <div style='text-align: center; font-size: 18px; font-weight: bold; padding: 10px;'>
+            DO (mg/L) = <span style='border-bottom: 2px solid black; padding-bottom: 2px;'>V × N × 8000 × F</span><br>
+            <span style='display: block; margin-top: 5px;'>50 mL</span>
         </div>
         </div>
         """, unsafe_allow_html=True)
@@ -175,15 +208,30 @@ elif menu == "📚 Teori":
         st.markdown("""
         <div class='card'>
         <h3>🌱 Biochemical Oxygen Demand (BOD)</h3>
-        <p><b>Definisi:</b><br>Biochemical oxygen demand (BOD) adalah salah satu parameter wajib ukur pada air limbah (SNI 6989.72:2009).</p>
-        <p><b>Metode Uji & Prinsip:</b><br>Pengujian menggunakan metode Winkler melalui titrasi iodometri. Sampel diinkubasi di dalam botol winkler selama 5 hari pada suhu 20°C untuk menghitung selisih konsumsi oksigen oleh mikroorganisme.</p>
-        <p><b>Persamaan Reaksi:</b><br>
-        <code>Mn²⁺ + 2OH⁻ + ½ O₂ → MnO₂·H₂O (endapan coklat)</code><br>
-        <code>I₂ + 2S₂O₃²⁻ → 2I⁻ + S₄O₆²⁻</code></p>
+        <p><b>Definisi:</b><br>
+        Biochemical oxygen demand (BOD) atau kebutuhan oksigen biologis (KOB) adalah salah satu parameter wajib ukur pada air limbah.</p>
+        
+        <p><b>Metode Uji & Prinsip:</b><br>
+        Cara ujinya tertera pada <b>Standar Nasional Indonesia Nomor 6989 Bagian 72 Tahun 2009</b> yang diadaptasi dari <i>American Public Health Association</i> (APHA) 5210. Pengujian BOD dapat dilakukan dengan menggunakan metode Winkler yakni melalui titrasi iodometri yang merupakan metode referensi <i>United States Environmental Protection Agency</i> (USEPA).</p>
+        
+        <p>Secara prinsip, titrasi iodometri merupakan titrasi reduksi-oksidasi (redoks) yang menggunakan Mangan klorida (MnCl₂), Larutan kalium iodida dalam natrium hidroksida (NaOH-KI), asam sulfat (H₂SO₄), dan natrium tiosulfat (Na₂S₂O₃). Prinsipnya adalah dengan menambahkan sampel dengan mangan klorida dan larutan kalium iodida dalam natrium hidroksida yang kemudian dikondisikan pada keadaan asam dengan penambahan asam sulfat sehingga ion iodida pada vessel titrat berubah menjadi iodin yang ekivalen dengan kadar oksigen terlarut. Vessel titrat kemudian dititrasi dengan larutan natrium tiosulfat dengan menggunakan indikator kanji.</p>
+        
+        <p><b>Persamaan Reaksi:</b></p>
+        <p><b>Reaksi Pengendapan (Pengikatan Oksigen):</b><br>
+        <code style='font-size: 16px;'>Mn²⁺ + 2OH⁻ + ½ O₂ → MnO₂·H₂O (endapan coklat)</code></p>
+        <br>
+        <p><b>Reaksi Pengasaman (Pelepasan Iodin):</b><br>
+        <code style='font-size: 16px;'>MnO₂·H₂O + 2I⁻ + 4H⁺ → Mn²⁺ + I₂ + 3H₂O</code></p>
+        <br>
+        <p><b>Reaksi Titrasi:</b><br>
+        <code style='font-size: 16px;'>I₂ + 2S₂O₃²⁻ → 2I⁻ + S₄O₆²⁻</code></p>
         </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
         <div class='card'>
         <p><b>Rumus Perhitungan Nilai BOD:</b></p>
-        <div style='text-align: center; font-size: 18px; font-weight: bold;'>
+        <div style='text-align: center; font-size: 18px; font-weight: bold; padding: 10px;'>
             BOD (mg/L) = 5 × (DO<sub>awal</sub> - DO<sub>akhir</sub>)
         </div>
         </div>
@@ -193,19 +241,37 @@ elif menu == "📚 Teori":
         st.markdown("""
         <div class='card'>
         <h3>🔥 Chemical Oxygen Demand (COD)</h3>
-        <p><b>Definisi:</b><br>Chemical oxygen demand (COD) mengukur kebutuhan oksigen untuk mengoksidasi partikel organik secara kimiawi menggunakan oksidator kuat (SNI 6989:2019).</p>
-        <p><b>Metode Uji & Prinsip:</b><br>Melalui teknik destruksi/refluks menggunakan Kalium Dikromat (K₂Cr₂O₇) dalam suasana asam tinggi, kemudian dititrasi kembali sisa dikromat menggunakan Ferro Ammonium Sulfate (FAS) dengan indikator ferroin.</p>
+        <p><b>Definisi:</b><br>
+        Chemical oxygen demand (COD) adalah suatu parameter yang mengukur kebutuhan oksigen untuk mengoksidasi partikel-partikel yang terdapat dalam sampel air limbah melalui jalur kimia, yakni reaksi oksidasi dan reduksi.</p>
+        
+        <p><b>Metode Uji & Prinsip:</b><br>
+        Berdasarkan <b>Standar Nasional Indonesia Nomor 6989 Tahun 2019</b>, COD dapat diukur dengan cara teknik titrasi (titrimetri). Prinsip pengujian dilakukan dengan dua tahapan, yakni tahap destruksi dan tahap pengujian.</p>
+        
+        <ul>
+            <li><b>Tahap Destruksi:</b> Dilakukan dengan cara refluks (terbuka ataupun tertutup) yang berfungsi untuk mereaksikan kalium dikromat (K₂Cr₂O₇) dalam suasana asam dan mengubahnya menjadi ion kromat (Cr³⁺). Yang membedakan kedua cara ini adalah alat destruksi serta kuantitas reagen yang digunakan.</li>
+            <li><b>Tahap Pengujian:</b> Analis perlu menitar sampel hasil destruksi dengan larutan titran Ferro Ammonium Sulfate (FAS). Ion besi (II) (Fe²⁺) yang ada dalam larutan FAS akan mereduksi ion kromium heksavalen (Cr⁶⁺) menjadi ion krom (Cr³⁺) yang menghasilkan perubahan dari larutan <b>biru-kehijauan</b> menjadi warna <b>coklat-kemerahan</b> yang merupakan indikasi dari warna ion besi (III) (Fe³⁺).</li>
+        </ul>
+        
+        <p><b>Persamaan Reaksi Tahap Destruksi:</b></p>
+        <div style='text-align: center; background-color: #f8f9fa; padding: 15px; border-radius: 10px; font-family: monospace; font-size: 16px; font-weight: bold;'>
+            C<sub>n</sub>H<sub>a</sub>O<sub>b</sub>N<sub>c</sub> + c Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup> + 8cH<sup>+</sup> → n CO<sub>2</sub> + [ (a + 8c) / 2 ] H<sub>2</sub>O + 2c Cr<sup>3+</sup>
         </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("""
         <div class='card'>
-        <p><b>Rumus Perhitungan Nilai COD:</b></p>
-        <div style='text-align: center; font-size: 18px; font-weight: bold;'>
-            COD (mg/L) = [ (V<sub>blanko</sub> - V<sub>sampel</sub>) × N<sub>FAS</sub> × 8000 ] / V<sub>sampel</sub>
+        <p><b>Rumus Perhitungan Nilai COD:</b><br>
+        Jumlah volume larutan FAS yang dibutuhkan sampai terjadinya perubahan warna dicatat dan dihitung dengan rumus:</p>
+        <div style='text-align: center; font-size: 18px; font-weight: bold; padding: 10px;'>
+            COD (mg/L) = <span style='border-bottom: 2px solid black; padding-bottom: 2px;'>(V<sub>b</sub> - V<sub>c</sub>) × N<sub>FAS</sub> × 8000</span><br>
+            <span style='display: block; margin-top: 5px;'>V<sub>s</sub></span>
         </div>
         </div>
         """, unsafe_allow_html=True)
 
 # ==========================================
-# ALAT & BAHAN (FOTO DI ATAS DAFTARNYA)
+# ALAT & BAHAN (FOTO DI ATAS DAFTAR, EMOT BULAT WARNA)
 # ==========================================
 elif menu == "🧪 Alat & Bahan":
 
