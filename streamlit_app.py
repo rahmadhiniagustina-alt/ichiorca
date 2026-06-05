@@ -127,7 +127,7 @@ st.markdown("""
 st.markdown("<div class='subtitle'>Media Pembelajaran Interaktif DO, BOD, dan COD 💧</div>", unsafe_allow_html=True)
 
 # ==========================================
-# MENU ATAS (Simulasi diganti menjadi Cara Kerja)
+# MENU ATAS
 # ==========================================
 menu = st.radio(
     "",
@@ -312,7 +312,7 @@ elif menu == "🧪 Alat & Bahan":
             <div class='chem-item'><div class='item-title'>🟢 Natrium Tiosulfat</div><div class='item-desc'>Larutan standar (Na₂S₂O₃) yang bertindak selaku zat penitar (titran).</div></div>
             <div class='chem-item'><div class='item-title'>🟢 Indikator Amilum</div><div class='item-desc'>Larutan kanji penanda titik akhir titrasi (warna biru tepat hilang).</div></div>
             <div class='chem-item'><div class='item-title'>🟢 Kalium Dikromat</div><div class='item-desc'>Senyawa (K₂Cr₂O₇) standar primer untuk keperluan standardisasi titran.</div></div>
-            <div class='chem-item'><div class='item-title'>🟢 Aquadest</div><div class='item-desc'>Air murni suling untuk pelarutan pereaksi and pembersihan alat gelas.</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Aquadest</div><div class='item-desc'>Air murni suling untuk pelarutan pereaksi dan pembersihan alat gelas.</div></div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -376,7 +376,7 @@ elif menu == "🧪 Alat & Bahan":
         """, unsafe_allow_html=True)
 
 # ==========================================
-#📋 CARA KERJA (MENU BARU)
+# CARA KERJA
 # ==========================================
 elif menu == "📋 Cara Kerja":
     st.markdown("<h2 style='color:#009688;'>📋 Prosedur & Cara Kerja Laboratorium</h2>", unsafe_allow_html=True)
@@ -452,7 +452,7 @@ elif menu == "📋 Cara Kerja":
             <li><b>Persiapan Sampel:</b>
                 <ul>
                     <li>Isi botol Winkler dengan sampel air hingga penuh untuk menghindari masuknya udara.</li>
-                    <li>Tambahkan mangan(II) sulfat dan larutan alkali-iodida-azida.</li>
+                    <li>Tambahkan mangan(II) sulfat dan larutan alkali-iodida-</li>
                     <li>Endapan mangan oksida akan terbentuk.</li>
                 </ul>
             </li>
@@ -520,19 +520,106 @@ elif menu == "📋 Cara Kerja":
         """, unsafe_allow_html=True)
 
 # ==========================================
-# KALKULATOR
+# 🧮 KALKULATOR (RE-DESIGN SESUAI RUMUS)
 # ==========================================
 elif menu == "🧮 Kalkulator":
-    st.markdown("<h2 style='color:#009688;'>🧮 Kalkulator Otomatis</h2>", unsafe_allow_html=True)
-    parameter = st.selectbox("Pilih Parameter", ["DO", "BOD", "COD"])
+    st.markdown("<h2 style='color:#009688;'>🧮 Kalkulator Laboratorium</h2>", unsafe_allow_html=True)
+    st.write("Silakan pilih parameter uji untuk menghitung konsentrasi analit berdasarkan rumus standardisasi laboratorium.")
+    
+    pilihan_kalkulator = st.selectbox(
+        "Pilih Parameter Kalkulator:",
+        ["Kalkulator Parameter DO", "Kalkulator Parameter BOD", "Kalkulator Parameter COD"]
+    )
 
-    if parameter == "DO":
-        v = st.number_input("Volume Titran", value=7.0)
-        n = st.number_input("Normalitas", value=0.025)
-        vs = st.number_input("Volume Sampel", value=200.0)
-        if st.button("Hitung"):
-            hasil = (v * n * 8000) / vs
-            st.metric("Hasil DO", f"{hasil:.2f} mg/L")
+    # ------------------------------------------
+    # KALKULATOR DO
+    # ------------------------------------------
+    if pilihan_kalkulator == "Kalkulator Parameter DO":
+        st.markdown("""
+        <div class='card'>
+        <h3>💧 Perhitungan Kadar DO (Dissolved Oxygen)</h3>
+        <p>Formula: <b>DO (mg/L) = (V × N × 8000 × F) / 50 mL</b></p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            v_do = st.number_input("Volume Penitar / Titran Na₂S₂O₃ (V) [mL]", min_value=0.0, value=7.0, step=0.1, format="%.2f")
+            n_do = st.number_input("Normalitas Penitar / Na₂S₂O₃ (N)", min_value=0.0000, value=0.0250, step=0.001, format="%.4f")
+        with col2:
+            f_do = st.number_input("Faktor Koreksi Volume Penitar (F)", min_value=0.0, value=1.0, step=0.01, format="%.2f")
+            v_sampel_do = st.number_input("Volume Sampel Terpilih (V_s) [mL]", min_value=0.1, value=50.0, step=1.0, format="%.1f")
+            
+        if st.button("Hitung Nilai DO", key="btn_do"):
+            if v_sampel_do > 0:
+                hasil_do = (v_do * n_do * 8000 * f_do) / v_sampel_do
+                st.markdown(f"""
+                <div style='background-color: #e8fff1; padding: 15px; border-radius: 10px; border-left: 5px solid #00c9a7; margin-top: 15px;'>
+                    <span style='font-size: 16px; color: #333;'>Hasil Analisis Pembacaan:</span><br>
+                    <b style='font-size: 24px; color: #009688;'>Kadar DO = {hasil_do:.2f} mg/L</b>
+                </div>
+                """, unsafe_allow_html=True)
+                st.balloons()
+
+    # ------------------------------------------
+    # KALKULATOR BOD
+    # ------------------------------------------
+    elif pilihan_kalkulator == "Kalkulator Parameter BOD":
+        st.markdown("""
+        <div class='card'>
+        <h3>🌱 Perhitungan Kadar BOD (Biochemical Oxygen Demand)</h3>
+        <p>Formula: <b>BOD (mg/L) = 5 × (DO<sub>awal</sub> - DO<sub>akhir</sub>)</b></p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            do_awal = st.number_input("Konsentrasi Oksigen Terlarut Hari ke-0 (DO awal) [mg/L]", min_value=0.0, value=8.5, step=0.1, format="%.2f")
+        with col2:
+            do_akhir = st.number_input("Konsentrasi Oksigen Terlarut Hari ke-5 (DO akhir) [mg/L]", min_value=0.0, value=3.2, step=0.1, format="%.2f")
+            
+        if st.button("Hitung Nilai BOD", key="btn_bod"):
+            if do_awal >= do_akhir:
+                hasil_bod = 5 * (do_awal - do_akhir)
+                st.markdown(f"""
+                <div style='background-color: #e8fff1; padding: 15px; border-radius: 10px; border-left: 5px solid #00c9a7; margin-top: 15px;'>
+                    <span style='font-size: 16px; color: #333;'>Hasil Analisis Pembacaan:</span><br>
+                    <b style='font-size: 24px; color: #009688;'>Kadar BOD = {hasil_bod:.2f} mg/L</b>
+                </div>
+                """, unsafe_allow_html=True)
+                st.snow()
+            else:
+                st.error("Nilai DO awal harus lebih besar atau sama dengan nilai DO akhir!")
+
+    # ------------------------------------------
+    # KALKULATOR COD
+    # ------------------------------------------
+    elif pilihan_kalkulator == "Kalkulator Parameter COD":
+        st.markdown("""
+        <div class='card'>
+        <h3>🔥 Perhitungan Kadar COD (Chemical Oxygen Demand)</h3>
+        <p>Formula: <b>COD (mg/L) = [ (V<sub>b</sub> - V<sub>c</sub>) × N<sub>FAS</sub> × 8000 ] / V<sub>s</sub></b></p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        col1, col2 = st.columns(2)
+        with col1:
+            v_blanko = st.number_input("Volume Penitaran Blanko (V_b) [mL]", min_value=0.0, value=20.0, step=0.1, format="%.2f")
+            v_contoh = st.number_input("Volume Penitaran Contoh/Sampel (V_c) [mL]", min_value=0.0, value=12.0, step=0.1, format="%.2f")
+        with col2:
+            n_fas = st.number_input("Normalitas Larutan Titran FAS (N_FAS)", min_value=0.0000, value=0.1000, step=0.001, format="%.4f")
+            v_s_cod = st.number_input("Volume Sampel Air yang Diuji (V_s) [mL]", min_value=0.1, value=50.0, step=1.0, format="%.1f")
+            
+        if st.button("Hitung Nilai COD", key="btn_cod"):
+            if v_s_cod > 0:
+                hasil_cod = ((v_blanko - v_contoh) * n_fas * 8000) / v_s_cod
+                st.markdown(f"""
+                <div style='background-color: #e8fff1; padding: 15px; border-radius: 10px; border-left: 5px solid #00c9a7; margin-top: 15px;'>
+                    <span style='font-size: 16px; color: #333;'>Hasil Analisis Pembacaan:</span><br>
+                    <b style='font-size: 24px; color: #009688;'>Kadar COD = {hasil_cod:.2f} mg/L</b>
+                </div>
+                """, unsafe_allow_html=True)
+                st.balloons()
 
 # ==========================================
 # INTERPRETASI
