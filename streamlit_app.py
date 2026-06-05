@@ -127,7 +127,7 @@ st.markdown("""
 st.markdown("<div class='subtitle'>Media Pembelajaran Interaktif DO, BOD, dan COD 💧</div>", unsafe_allow_html=True)
 
 # ==========================================
-# MENU ATAS
+# MENU ATAS (Simulasi diganti menjadi Cara Kerja)
 # ==========================================
 menu = st.radio(
     "",
@@ -135,7 +135,7 @@ menu = st.radio(
         "🏠 Home",
         "📚 Teori",
         "🧪 Alat & Bahan",
-        "🕹️ Simulasi",
+        "📋 Cara Kerja",
         "🧮 Kalkulator",
         "📊 Interpretasi",
         "🎮 Kuis"
@@ -167,7 +167,7 @@ if menu == "🏠 Home":
     st.success("✨ Yuk mulai belajar dari menu di atas!")
 
 # ==========================================
-# TEORI (100% KEMBALI LENGKAP SESUAI AWAL)
+# TEORI
 # ==========================================
 elif menu == "📚 Teori":
     st.markdown("<h2 style='color:#009688;'>📚 Materi Teori</h2>", unsafe_allow_html=True)
@@ -271,7 +271,7 @@ elif menu == "📚 Teori":
         """, unsafe_allow_html=True)
 
 # ==========================================
-# ALAT & BAHAN (FOTO DI ATAS DAFTAR, EMOT BULAT WARNA)
+# ALAT & BAHAN
 # ==========================================
 elif menu == "🧪 Alat & Bahan":
 
@@ -283,17 +283,11 @@ elif menu == "🧪 Alat & Bahan":
         ["Daftar Alat & Bahan Uji DO", "Daftar Alat & Bahan Uji BOD", "Daftar Alat & Bahan Uji COD"]
     )
 
-    # ------------------------------------------
-    # SUB-BAGIAN: UJI DO
-    # ------------------------------------------
     if pilihan_materi == "Daftar Alat & Bahan Uji DO":
         st.markdown("### 💧 Parameter Analisis DO (Dissolved Oxygen)")
-        
-        # Foto diletakkan di atas melebar penuh
         url_do = "https://github.com/user-attachments/assets/411a7412-1a3b-40e5-ab74-f1a394717e13"
         st.image(url_do, caption="Rangkaian Alat Analisis Parameter DO", use_container_width=True)
 
-        # Konten list diletakkan di bawah foto
         st.markdown("#### 🛠️ Daftar Alat Kerja")
         st.markdown("""
         <div class='grid-container'>
@@ -318,21 +312,15 @@ elif menu == "🧪 Alat & Bahan":
             <div class='chem-item'><div class='item-title'>🟢 Natrium Tiosulfat</div><div class='item-desc'>Larutan standar (Na₂S₂O₃) yang bertindak selaku zat penitar (titran).</div></div>
             <div class='chem-item'><div class='item-title'>🟢 Indikator Amilum</div><div class='item-desc'>Larutan kanji penanda titik akhir titrasi (warna biru tepat hilang).</div></div>
             <div class='chem-item'><div class='item-title'>🟢 Kalium Dikromat</div><div class='item-desc'>Senyawa (K₂Cr₂O₇) standar primer untuk keperluan standardisasi titran.</div></div>
-            <div class='chem-item'><div class='item-title'>🟢 Aquadest</div><div class='item-desc'>Air murni suling untuk pelarutan pereaksi dan pembersihan alat gelas.</div></div>
+            <div class='chem-item'><div class='item-title'>🟢 Aquadest</div><div class='item-desc'>Air murni suling untuk pelarutan pereaksi and pembersihan alat gelas.</div></div>
         </div>
         """, unsafe_allow_html=True)
 
-    # ------------------------------------------
-    # SUB-BAGIAN: UJI BOD
-    # ------------------------------------------
     elif pilihan_materi == "Daftar Alat & Bahan Uji BOD":
         st.markdown("### 🌱 Parameter Analisis BOD (Biochemical Oxygen Demand)")
-        
-        # Foto diletakkan di atas melebar penuh
         url_bod = "https://github.com/user-attachments/assets/869acefd-cb84-49bc-81d7-9cd02cec5241"
         st.image(url_bod, caption="Rangkaian Alat Analisis Parameter BOD", use_container_width=True)
 
-        # Konten list diletakkan di bawah foto
         st.markdown("#### 🛠️ Daftar Alat Kerja")
         st.markdown("""
         <div class='grid-container'>
@@ -356,17 +344,11 @@ elif menu == "🧪 Alat & Bahan":
         </div>
         """, unsafe_allow_html=True)
 
-    # ------------------------------------------
-    # SUB-BAGIAN: UJI COD
-    # ------------------------------------------
     elif pilihan_materi == "Daftar Alat & Bahan Uji COD":
         st.markdown("### 🔥 Parameter Analisis COD (Chemical Oxygen Demand)")
-        
-        # Foto diletakkan di atas melebar penuh
         url_cod = "https://github.com/user-attachments/assets/39987309-7194-4bd9-b1cc-8507f8fb8182"
         st.image(url_cod, caption="Rangkaian Alat Analisis Parameter COD", use_container_width=True)
 
-        # Konten list diletakkan di bawah foto
         st.markdown("#### 🛠️ Daftar Alat Kerja")
         st.markdown("""
         <div class='grid-container'>
@@ -394,37 +376,148 @@ elif menu == "🧪 Alat & Bahan":
         """, unsafe_allow_html=True)
 
 # ==========================================
-# SIMULASI
+#📋 CARA KERJA (MENU BARU)
 # ==========================================
-elif menu == "🕹️ Simulasi":
-    st.markdown("<h2 style='color:#009688;'>🕹️ Simulasi Interaktif</h2>", unsafe_allow_html=True)
-    simulasi = st.selectbox("Pilih Simulasi", ["💧 Simulasi DO", "🌱 Simulasi BOD", "🔥 Simulasi COD"])
-
-    if simulasi == "💧 Simulasi DO":
-        st.info("💡 Tambahkan reagen MnSO₄")
-        if st.button("Tambahkan Reagen"):
-            st.toast("✅ Reagen berhasil ditambahkan!")
-            st.balloons()
-        v = st.number_input("Masukkan Volume Titrasi", value=6.4)
-        if st.button("Hitung DO"):
-            hasil = (v * 0.025 * 8000) / 200
-            st.success(f"🎉 Nilai DO = {hasil:.2f} mg/L")
-
-    elif simulasi == "🌱 Simulasi BOD":
-        do0 = st.number_input("DO Awal", value=8.5)
-        do5 = st.number_input("DO Akhir", value=3.2)
-        if st.button("Hitung BOD"):
-            hasil = do0 - do5
-            st.success(f"🌱 Nilai BOD = {hasil:.2f} mg/L")
-            st.snow()
-
-    elif simulasi == "🔥 Simulasi COD":
-        blanko = st.number_input("Volume Blanko", value=20.0)
-        sampel = st.number_input("Volume Sampel", value=12.0)
-        if st.button("Hitung COD"):
-            hasil = ((blanko - sampel) * 0.1 * 8000) / 50
-            st.success(f"🔥 Nilai COD = {hasil:.2f} mg/L")
-            st.balloons()
+elif menu == "📋 Cara Kerja":
+    st.markdown("<h2 style='color:#009688;'>📋 Prosedur & Cara Kerja Laboratorium</h2>", unsafe_allow_html=True)
+    
+    pilihan_kerja = st.selectbox(
+        "Pilih Cara Kerja Parameter:",
+        ["Cara Kerja Uji DO", "Cara Kerja Uji BOD", "Cara Kerja Uji COD"]
+    )
+    
+    if pilihan_kerja == "Cara Kerja Uji DO":
+        st.markdown("""
+        <div class='card'>
+        <h3>💧 Prosedur Analisis Uji DO</h3>
+        <ol>
+            <li><b>Pengambilan Sampel:</b>
+                <ul>
+                    <li>Siapkan botol Winkler.</li>
+                    <li>Isi sampel air sampai meluap penuh.</li>
+                    <li>Pastikan tidak ada gelembung udara.</li>
+                    <li>Tutup rapat segera agar tidak ada oksigen tambahan dari udara.</li>
+                    <li>Lakukan pengujian secepat mungkin setelah sampling.</li>
+                </ul>
+            </li>
+            <br>
+            <li><b>Penambahan reagen pertama (fiksasi oksigen):</b>
+                <ul>
+                    <li>Tambahkan: Larutan 1 mL MnSO₄ & 1 mL alkali iodida azida (KI + NaOH + NaN₃).</li>
+                    <li>Masukkan ujung pipet tepat di permukaan larutan (hindari udara masuk).</li>
+                    <li>Tutup botol lalu homogenkan.</li>
+                    <li>Akan terbentuk endapan coklat (MnO₂ / senyawa mangan teroksidasi).</li>
+                </ul>
+            </li>
+            <br>
+            <li><b>Pengendapan:</b>
+                <ul>
+                    <li>Diamkan selama 5–10 menit.</li>
+                    <li>Endapan dibiarkan terbentuk sempurna.</li>
+                </ul>
+            </li>
+            <br>
+            <li><b>Penambahan asam:</b>
+                <ul>
+                    <li>Tambahkan 1 mL H₂SO₄ pekat.</li>
+                    <li>Tutup kembali botol.</li>
+                    <li>Kocok hingga endapan larut sempurna.</li>
+                    <li>Reaksi ini akan membebaskan iodin (I₂) sesuai kadar oksigen terlarut.</li>
+                </ul>
+            </li>
+            <br>
+            <li><b>Persiapan Titrasi:</b>
+                <ul>
+                    <li>Ambil 50 mL larutan hasil reaksi.</li>
+                    <li>Masukkan ke dalam Erlenmeyer 150 mL.</li>
+                </ul>
+            </li>
+            <br>
+            <li><b>Titrasi:</b>
+                <ul>
+                    <li>Titrasi menggunakan Na₂S₂O₃ (natrium tiosulfat).</li>
+                    <li>Tambahkan indikator amilum (kanji) saat warna mulai kuning pucat.</li>
+                    <li>Lanjutkan titrasi sampai: warna biru tepat hilang → ini adalah titik akhir titrasi.</li>
+                </ul>
+            </li>
+        </ol>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    elif pilihan_kerja == "Cara Kerja Uji BOD":
+        st.markdown("""
+        <div class='card'>
+        <h3>🌱 Prosedur Analisis Uji BOD</h3>
+        <ol>
+            <li><b>Persiapan Sampel:</b>
+                <ul>
+                    <li>Isi botol Winkler dengan sampel air hingga penuh untuk menghindari masuknya udara.</li>
+                    <li>Tambahkan mangan(II) sulfat dan larutan alkali-iodida-azida.</li>
+                    <li>Endapan mangan oksida akan terbentuk.</li>
+                </ul>
+            </li>
+            <br>
+            <li><b>Inkubasi:</b>
+                <ul>
+                    <li>Sampel diinkubasi selama 5 hari pada suhu 20°C tanpa gangguan.</li>
+                    <li>Setelah inkubasi, tambahkan asam sulfat pekat untuk melarutkan endapan. Reaksi ini menghasilkan iodin bebas.</li>
+                </ul>
+            </li>
+            <br>
+            <li><b>Titrasi:</b>
+                <ul>
+                    <li>Titrasi larutan dengan natrium tiosulfat hingga warna kuning pucat.</li>
+                    <li>Tambahkan indikator pati; larutan akan berubah biru.</li>
+                    <li>Lanjutkan titrasi hingga larutan tidak berwarna.</li>
+                </ul>
+            </li>
+        </ol>
+        </div>
+        """, unsafe_allow_html=True)
+        
+    elif pilihan_kerja == "Cara Kerja Uji COD":
+        st.markdown("""
+        <div class='card'>
+        <h3>🔥 Prosedur Analisis Uji COD</h3>
+        <ol>
+            <li><b>Persiapan sampel:</b>
+                <ul>
+                    <li>Ambil volume sampel sesuai metode (umumnya 10–50 mL).</li>
+                    <li>Jika perlu, lakukan pengenceran.</li>
+                    <li>Tambahkan HgSO₄ (jika ada gangguan klorida).</li>
+                </ul>
+            </li>
+            <br>
+            <li><b>Penambahan reagen oksidator:</b>
+                <ul>
+                    <li>Tambahkan: Larutan K₂Cr₂O₇ (kalium dikromat) berlebih & Larutan H₂SO₄ pekat + Ag₂SO₄ (katalis).</li>
+                    <li>Campuran akan menjadi sangat asam (media oksidasi kuat).</li>
+                </ul>
+            </li>
+            <br>
+            <li><b>Proses refluks (digestion):</b>
+                <ul>
+                    <li>Sampel dipanaskan pada ±150°C selama 2 jam (120 menit).</li>
+                    <li>Tujuan: mengoksidasi senyawa organik menjadi CO₂ dan H₂O.</li>
+                </ul>
+            </li>
+            <br>
+            <li><b>Pendinginan:</b>
+                <ul>
+                    <li>Setelah refluks selesai, dinginkan sampel hingga suhu ruang.</li>
+                </ul>
+            </li>
+            <br>
+            <li><b>Titrasi:</b>
+                <ul>
+                    <li>Tambahkan indikator ferroin.</li>
+                    <li>Titrasi sisa K₂Cr₂O₇ dengan larutan FAS (Fe(NH₄)₂(SO₄)₂).</li>
+                    <li>Titik akhir: perubahan warna dari hijau kebiruan → merah bata/coklat kemerahan.</li>
+                </ul>
+            </li>
+        </ol>
+        </div>
+        """, unsafe_allow_html=True)
 
 # ==========================================
 # KALKULATOR
