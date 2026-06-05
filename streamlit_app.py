@@ -459,7 +459,7 @@ elif menu == "📋 Cara Kerja":
             <br>
             <li><b>Inkubasi:</b>
                 <ul>
-                    <li>Sampel diinkubasi selama 5 days pada suhu 20°C tanpa gangguan.</li>
+                    <li>Sampel diinkubasi selama 5 hari pada suhu 20°C tanpa gangguan.</li>
                     <li>Setelah inkubasi, tambahkan asam sulfat pekat untuk melarutkan endapan. Reaksi ini menghasilkan iodin bebas.</li>
                 </ul>
             </li>
@@ -622,10 +622,10 @@ elif menu == "🧮 Kalkulator":
                 st.balloons()
 
 # ==========================================
-# INTERPRETASI (BARU & INTERAKTIF)
+# INTERPRETASI
 # ==========================================
 elif menu == "📊 Interpretasi":
-    st.markdown("<h2 style='color:#009688;'>📊 Interpretasi Kualitas Air Terintegrasi</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='color:#009688;'>📊 Interpretasi Kualitas Air</h2>", unsafe_allow_html=True)
     st.write("Gunakan menu ini untuk mengecek status pencemaran air secara otomatis berdasarkan acuan baku mutu resmi nasional.")
 
     # Bagian 1: Alat Cek Kualitas Air Otomatis
@@ -655,7 +655,7 @@ elif menu == "📊 Interpretasi":
         else:
             st.error("🔴 KATEGORI: TERCEMAR BERAT (Melebihi Batas Aman / Kelas 4)\n\nAir dalam kondisi kritis! Oksigen terlarut (DO) terlalu rendah atau beban limbah kimia (BOD/COD) terlalu tinggi. Hanya dapat digunakan untuk mengairi pertamanan atau membutuhkan pengolahan intensif.")
 
-    # Bagian 2: Tabel Acauaan Resmi Baku Mutu Air Nasional
+    # Bagian 2: Tabel Acuan Resmi Baku Mutu Air Nasional
     st.markdown("""
     <div class='card' style='margin-top:25px;'>
         <h3>📋 Tabel Acuan Baku Mutu Air Nasional (PP No. 22 Tahun 2021)</h3>
