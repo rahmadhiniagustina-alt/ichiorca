@@ -196,7 +196,7 @@ with st.sidebar:
             "📊 Analisis Mutu Air",
             "🎮 Uji Pemahaman (Kuis)"
         ],
-        label_visibility="collapsed" # Menyembunyikan label bawaan agar rapi
+        label_visibility="collapsed"
     )
     st.markdown("---")
     
@@ -209,24 +209,93 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
 # ==========================================
-# ISI HALAMAN - 🏠 BERANDA UTAMA
+# ISI HALAMAN - 🏠 BERANDA UTAMA (VERSION: TRAILER HIGHLIGHTS)
 # ==========================================
 if menu == "🏠 Beranda Utama":
     st.balloons()
+    
+    # 🎬 WELCOME BANNER TRAILER
     st.markdown("""
-    <div class='card'>
-    <h2>👋 Selamat Datang!</h2>
-    <p>
-    ModulDigital-Oxy adalah media pembelajaran interaktif untuk memahami:
-    </p>
-    <ul>
-        <li>💧 Dissolved Oxygen (DO)</li>
-        <li>🌱 Biochemical Oxygen Demand (BOD)</li>
-        <li>🔥 Chemical Oxygen Demand (COD)</li>
-    </ul>
+    <div class='card' style='background: linear-gradient(135deg, #0077b6, #00c9a7); color: white; padding: 30px; text-align: center; border: none;'>
+        <h1 style='color: white; margin-bottom: 10px; font-size: 36px;'>🎬 Selamat Datang di ModulDigital-Oxy!</h1>
+        <p style='font-size: 18px; opacity: 0.9; max-width: 800px; margin: 0 auto; line-height: 1.6;'>
+            Selamat datang di Teaser Pembelajaran Digital Interaktif. Jelajahi parameter esensial analisis kualitas air 
+            melalui visualisasi modern, sistem komputasi otomatis, dan evaluasi langsung yang dirancang untuk standar laboratorium industri.
+        </p>
     </div>
     """, unsafe_allow_html=True)
-    st.success("✨ Yuk mulai belajar dari menu di samping!")
+    
+    st.write("")
+    st.markdown("<h3 style='text-align: center; color: #0077b6; margin-bottom: 25px;'>👀 CUPLIKAN UTAMA: Apa yang Akan Kamu Pelajari?</h3>", unsafe_allow_html=True)
+
+    # 👁️ VISUAL SHOWCASE: 3 PARAMETER UTAMA (Trailer Teori)
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown("""
+        <div class='card' style='border-top: 5px solid #00b4db; height: 100%;'>
+            <h3 style='color: #00b4db; margin-top: 0;'>💧 DO Showcase</h3>
+            <p style='font-size: 14px; color: #555;'><b>Dissolved Oxygen (Oksigen Terlarut)</b></p>
+            <p style='font-size: 13px; color: #666; line-height: 1.5;'>
+                Intip bagaimana molekul oksigen diikat oleh <span style='color:#00b4db; font-weight:bold;'>MnSO₄</span> dan dilepaskan kembali sebagai iodin bebas pada metode titrasi iodometri (Winkler) sesuai <b>SNI 6989:2004</b>.
+            </p>
+            <span style='background-color: #e6f7ff; color: #00b4db; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold;'>🔬 Metode Iodometri</span>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div class='card' style='border-top: 5px solid #00c9a7; height: 100%;'>
+            <h3 style='color: #00c9a7; margin-top: 0;'>🌱 BOD Teaser</h3>
+            <p style='font-size: 14px; color: #555;'><b>Biochemical Oxygen Demand</b></p>
+            <p style='font-size: 13px; color: #666; line-height: 1.5;'>
+                Simulasi pengeraman mikroorganisme selama <b>5 hari penuh pada suhu stabil 20°C</b>. Amati bagaimana bakteri mengonsumsi oksigen alami untuk menguraikan polutan organik air limbah.
+            </p>
+            <span style='background-color: #f4fdfa; color: #00c9a7; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold;'>⏳ Inkubasi 5 Hari</span>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown("""
+        <div class='card' style='border-top: 5px solid #ff9f43; height: 100%;'>
+            <h3 style='color: #ff9f43; margin-top: 0;'>🔥 COD Sneak Peek</h3>
+            <p style='font-size: 14px; color: #555;'><b>Chemical Oxygen Demand</b></p>
+            <p style='font-size: 13px; color: #666; line-height: 1.5;'>
+                Saksikan reaksi destruksi ekstrem pada suhu <b>150°C</b> menggunakan oksidator kuat <span style='color:#ff9f43; font-weight:bold;'>K₂Cr₂O₇</span>, diikuti transisi warna dramatis indikator ferroin saat titrasi FAS.
+            </p>
+            <span style='background-color: #fff5ec; color: #ff9f43; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold;'>🌡️ Refluks Asam 150°C</span>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.write("")
+    
+    # 🌟 HIGHLIGHT FITUR INTERAKTIF (Trailer Sistem Aplikasi)
+    st.markdown("""
+    <div class='card' style='background-color: #ffffff;'>
+        <h3 style='color: #009688; margin-bottom: 20px; text-align: center;'>⚡ Sorotan Fitur Unggulan Modul</h3>
+        <div style='display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;'>
+            <div style='padding: 15px; border-radius: 12px; background-color: #f8f9fa; border-left: 4px solid #0077b6;'>
+                <b style='color: #0077b6; display: block; margin-bottom: 5px;'>📸 Galeri Alat Realistis</b>
+                <span style='font-size: 13px; color: #555;'>Visualisasi asli penataan alat laboratorium seperti kondensor balik dan Botol Winkler.</span>
+            </div>
+            <div style='padding: 15px; border-radius: 12px; background-color: #f8f9fa; border-left: 4px solid #0077b6;'>
+                <b style='color: #0077b6; display: block; margin-bottom: 5px;'>🧮 Otomatisasi Perhitungan</b>
+                <span style='font-size: 13px; color: #555;'>Kalkulator pintar terintegrasi rumus SNI untuk mencari kadar konsentrasi analit instan.</span>
+            </div>
+            <div style='padding: 15px; border-radius: 12px; background-color: #f8f9fa; border-left: 4px solid #0077b6;'>
+                <b style='color: #0077b6; display: block; margin-bottom: 5px;'>📊 Diagnosis Mutu Otomatis</b>
+                <span style='font-size: 13px; color: #555;'>Sistem kecerdasan buatan untuk mengecek tingkat pencemaran air berdasarkan PP No. 22 Tahun 2021.</span>
+            </div>
+            <div style='padding: 15px; border-radius: 12px; background-color: #f8f9fa; border-left: 4px solid #0077b6;'>
+                <b style='color: #0077b6; display: block; margin-bottom: 5px;'>🎮 Gamifikasi Kuis</b>
+                <span style='font-size: 13px; color: #555;'>Evaluasi pemahaman kompetensi dengan 10 tantangan soal interaktif beserta pembahasannya.</span>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # 🧭 CALL TO ACTION (Panduan Memulai)
+    st.info("💡 **Cara Memulai Eksplorasi:** Silakan klik menu **🚀 RUANG JELAJAH MODUL** di sebelah kiri layar untuk mulai membuka seluruh materi dan fitur lengkap laboratorium digital ini!")
 
 # ==========================================
 # ISI HALAMAN - 📚 RUANG TEORI KIMIA
@@ -513,14 +582,14 @@ elif menu == "📋 SOP Langkah Kerja":
             <li><b>Persiapan Sampel:</b>
                 <ul>
                     <li>Isi botol Winkler dengan sampel air hingga penuh untuk menghindari masuknya udara.</li>
-                    <li>Tambahkan mangan(II) sulfat dan larutan alkali-iodida-</li>
+                    <li>Tambahkan mangan(II) sulfat dan larutan alkali-iodida-azida.</li>
                     <li>Endapan mangan oksida akan terbentuk.</li>
                 </ul>
             </li>
             <br>
             <li><b>Inkubasi:</b>
                 <ul>
-                    <li>Sampel diinkubasi selama 5 days pada suhu 20°C tanpa gangguan.</li>
+                    <li>Sampel diinkubasi selama 5 hari pada suhu 20°C tanpa gangguan.</li>
                     <li>Setelah inkubasi, tambahkan asam sulfat pekat untuk melarutkan endapan. Reaksi ini menghasilkan iodin bebas.</li>
                 </ul>
             </li>
