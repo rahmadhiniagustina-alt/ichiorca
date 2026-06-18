@@ -11,7 +11,7 @@ st.set_page_config(
 )
 
 # ==========================================
-# CUSTOM CSS MODERN
+# CUSTOM CSS MODERN & SIDEBAR MENARIK
 # ==========================================
 st.markdown("""
 <style>
@@ -109,14 +109,67 @@ st.markdown("""
     text-align: center;
     padding: 20px;
     color: gray;
-    font-size: 14px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+
+/* KUSTOMISASI SIDEBAR */
+[data-testid="stSidebar"] {
+    background-color: #ffffff !important;
+    box-shadow: 4px 0px 15px rgba(0,0,0,0.05);
+}
+
+/* Judul Ruang Jelajah Modul */
+.sidebar-header {
+    background: linear-gradient(135deg, #0077b6, #00b4db);
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    color: white !important;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: 'Trebuchet MS', sans-serif;
+    box-shadow: 0px 4px 8px rgba(0,119,182,0.2);
+    margin-bottom: 10px;
+}
+
+/* Mengubah tampilan Radio Button di Sidebar menjadi Card Menu */
+div[data-testid="stSidebarUserContent"] div[role="radiogroup"] label {
+    background-color: #f8f9fa !important;
+    padding: 12px 16px !important;
+    border-radius: 10px !important;
+    margin-bottom: 8px !important;
+    border: 1px solid #e9ecef !important;
+    transition: all 0.2s ease-in-out !important;
+    width: 100% !important;
+}
+
+/* Efek hover saat mouse mendekati menu */
+div[data-testid="stSidebarUserContent"] div[role="radiogroup"] label:hover {
+    background-color: #e6f7ff !important;
+    border-color: #1890ff !important;
+    transform: translateX(4px);
+}
+
+/* Tampilan ketika menu sedang terpilih/aktif */
+div[data-testid="stSidebarUserContent"] div[role="radiogroup"] label[data-checked="true"] {
+    background: linear-gradient(90deg, #e6f7ff, #bae7ff) !important;
+    border-left: 5px solid #1890ff !important;
+    border-color: #1890ff !important;
+    font-weight: bold !important;
+}
+
+/* Penyesuaian teks dalam menu */
+div[data-testid="stSidebarUserContent"] div[role="radiogroup"] label div[data-testid="stMarkdownContainer"] p {
+    font-size: 15px !important;
+    color: #333333 !important;
 }
 
 </style>
 """, unsafe_allow_html=True)
 
 # ==========================================
-# HEADER
+# HEADER UTAMA
 # ==========================================
 st.markdown("""
 <div class='navbar'>
@@ -127,41 +180,102 @@ st.markdown("""
 st.markdown("<div class='subtitle'>Media Pembelajaran Interaktif DO, BOD, dan COD 💧</div>", unsafe_allow_html=True)
 
 # ==========================================
-# MENU ATAS
+# MENU SIDEBAR & IDENTITAS KAMPUS
 # ==========================================
-menu = st.radio(
-    "",
-    [
-        "🏠 Home",
-        "📚 Teori",
-        "🧪 Alat & Bahan",
-        "📋 Cara Kerja",
-        "🧮 Kalkulator",
-        "📊 Analisis",
-        "🎮 Kuis"
-    ],
-    horizontal=True
-)
-
-# ==========================================
-# HOME
-# ==========================================
-if menu == "🏠 Home":
-    st.balloons()
+with st.sidebar:
+    st.markdown("<div class='sidebar-header'>🚀 RUANG JELAJAH MODUL</div>", unsafe_allow_html=True)
+    
+    menu = st.radio(
+        "Pilih Halaman Modul:",
+        [
+            "🏠 Beranda Utama",
+            "📚 Ruang Teori Kimia",
+            "🧪 Eksplorasi Alat & Bahan",
+            "📋 SOP Langkah Kerja",
+            "🧮 Kalkulator Laboratorium",
+            "📊 Analisis Mutu Air",
+            "🎮 Uji Pemahaman (Kuis)"
+        ],
+        label_visibility="collapsed"
+    )
+    st.markdown("---")
+    
     st.markdown("""
-    <div class='card'>
-    <h2>🎬 Selamat Datang di ModulDigital-Oxy!</h2>
-    <p>
-    Aplikasi ini adalah media belajar sederhana untuk membantu kamu memahami materi dasar analisis kualitas air (DO, BOD, dan COD). Di sini kamu bisa mempelajari teori dasar, melihat daftar alat bahan, mencoba simulasi hitungan, dan menguji pemahaman dengan kuis santai.
-    </p>
+    <div style='text-align: center; color: #7f8c8d; font-size: 11px; line-height: 1.6; font-weight: bold;'>
+        🧪 Designed by Research Team 8 • Class 1A<br>
+        <span style='color: #009688; font-size: 10px; letter-spacing: 1px;'>POLITEKNIK AKA BOGOR</span>
     </div>
     """, unsafe_allow_html=True)
-    st.success("✨ Yuk mulai belajar dari menu di atas!")
 
 # ==========================================
-# TEORI
+# ISI HALAMAN - 🏠 BERANDA UTAMA
 # ==========================================
-elif menu == "📚 Teori":
+if menu == "🏠 Beranda Utama":
+    st.balloons()
+    
+    # 🎬 WELCOME BANNER (Sudah diubah menjadi putih bersih agar senada dengan card bawah)
+    st.markdown("""
+    <div class='card' style='background-color: white; border: 1px solid #e9ecef; padding: 30px; text-align: center;'>
+        <h1 style='color: #0077b6; margin-bottom: 15px; font-size: 34px;'>🎬 Selamat Datang di ModulDigital-Oxy!</h1>
+        <p style='font-size: 16px; color: #444444; max-width: 850px; margin: 0 auto; line-height: 1.6;'>
+            Aplikasi ini adalah media belajar sederhana untuk membantu kamu memahami materi dasar analisis kualitas air (DO, BOD, dan COD). 
+            Di sini kamu bisa mempelajari teori dasar, melihat daftar alat bahan, mencoba simulasi hitungan, dan menguji pemahaman dengan kuis santai.
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    st.write("")
+    # Judul tengah ringkas
+    st.markdown("<h3 style='text-align: center; color: #0077b6; margin-bottom: 25px;'>Apa yang Akan Kamu Pelajari?</h3>", unsafe_allow_html=True)
+
+    # 👁️ VISUAL SHOWCASE: 3 PARAMETER UTAMA
+    col1, col2, col3 = st.columns(3)
+    
+    with col1:
+        st.markdown("""
+        <div class='card' style='border-top: 5px solid #00b4db; height: 100%;'>
+            <h3 style='color: #00b4db; margin-top: 0;'>💧 DO Showcase</h3>
+            <p style='font-size: 14px; color: #555;'><b>Dissolved Oxygen (Oksigen Terlarut)</b></p>
+            <p style='font-size: 13px; color: #666; line-height: 1.5;'>
+                Intip bagaimana molekul oksigen diikat oleh <span style='color:#00b4db; font-weight:bold;'>MnSO₄</span> dan dilepaskan kembali sebagai iodin bebas pada metode titrasi iodometri (Winkler) sesuai <b>SNI 6989:2004</b>.
+            </p>
+            <span style='background-color: #e6f7ff; color: #00b4db; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold;'>🔬 Metode Iodometri</span>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div class='card' style='border-top: 5px solid #00c9a7; height: 100%;'>
+            <h3 style='color: #00c9a7; margin-top: 0;'>🌱 BOD Showcase</h3>
+            <p style='font-size: 14px; color: #555;'><b>Biochemical Oxygen Demand</b></p>
+            <p style='font-size: 13px; color: #666; line-height: 1.5;'>
+                Simulasi pengeraman mikroorganisme selama <b>5 hari penuh pada suhu stabil 20°C</b>. Amati bagaimana bakteri mengonsumsi oksigen alami untuk menguraikan polutan organik air limbah.
+            </p>
+            <span style='background-color: #f4fdfa; color: #00c9a7; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold;'>⏳ Inkubasi 5 Hari</span>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown("""
+        <div class='card' style='border-top: 5px solid #ff9f43; height: 100%;'>
+            <h3 style='color: #ff9f43; margin-top: 0;'>🔥 COD Sneak Peek</h3>
+            <p style='font-size: 14px; color: #555;'><b>Chemical Oxygen Demand</b></p>
+            <p style='font-size: 13px; color: #666; line-height: 1.5;'>
+                Saksikan reaksi destruksi ekstrem pada suhu <b>150°C</b> menggunakan oksidator kuat <span style='color:#ff9f43; font-weight:bold;'>K₂Cr₂O₇</span>, diikuti transisi warna dramatis indikator ferroin saat titrasi FAS.
+            </p>
+            <span style='background-color: #fff5ec; color: #ff9f43; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold;'>🌡️ Refluks Asam 150°C</span>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.write("")
+    
+    # 🧭 CALL TO ACTION (Panduan Memulai)
+    st.info("💡 **Cara Memulai Eksplorasi:** Silakan klik menu **🚀 RUANG JELAJAH MODUL** di sebelah kiri layar untuk mulai membuka seluruh materi dan fitur lengkap laboratorium digital ini!")
+
+# ==========================================
+# ISI HALAMAN - 📚 RUANG TEORI KIMIA
+# ==========================================
+elif menu == "📚 Ruang Teori Kimia":
     st.markdown("<h2 style='color:#009688;'>📚 Materi Teori</h2>", unsafe_allow_html=True)
     tab1, tab2, tab3 = st.tabs(["💧 DO", "🌱 BOD", "🔥 COD"])
 
@@ -201,12 +315,12 @@ elif menu == "📚 Teori":
         <div class='card'>
         <h3>🌱 Biochemical Oxygen Demand (BOD)</h3>
         <p><b>Definisi:</b><br>
-        Biochemical oxygen demand (BOD) atau kebutuhan oksigen biologis (KOB) adalah salah satu parameter wajib ukur pada air limbah.</p>
+        Biochemical oxygen demand (BOD) atau kebutuhan oksigen biologis (KOB) salah satu parameter wajib ukur pada air limbah.</p>
         
         <p><b>Metode Uji & Prinsip:</b><br>
         Cara ujinya tertera pada <b>Standar Nasional Indonesia Nomor 6989 Bagian 72 Tahun 2009</b> yang diadaptasi dari <i>American Public Health Association</i> (APHA) 5210. Pengujian BOD dapat dilakukan dengan menggunakan metode Winkler yakni melalui titrasi iodometri yang merupakan metode referensi <i>United States Environmental Protection Agency</i> (USEPA).</p>
         
-        <p>Secara prinsip, titrasi iodometri merupakan titrasi reduksi-oksidasi (redoks) yang menggunakan Mangan klorida (MnCl₂), Larutan kalium iodida dalam natrium hidroksida (NaOH-KI), asam sulfat (H₂SO₄), dan natrium tiosulfat (Na₂S₂O₃). Prinsipnya adalah dengan menambahkan sampel dengan mangan klorida dan larutan kalium iodida dalam natrium hidroksida yang kemudian dikondisikan pada keadaan asam dengan penambahan asam sulfat sehingga ion iodida pada vessel titrat berubah menjadi iodin yang ekivalen dengan kadar oksigen terlarut. Vessel titrat kemudian dititrasi dengan larutan natrium tiosulfat dengan menggunakan indikator kanji.</p>
+        <p>Secara prinsip, titrasi iodometri merupakan titrasi reduksi-oksidasi (redoks) yang menggunakan Mangan klorida (MnCl₂), Larutan kalium iodida dalam natrium hidroksida (NaOH-KI), asam sulfat (H₂SO₄), dan natrium tiosulfat (Na₂S₂O₃). Prinsipnya adalah dengan menambahkan sampel dengan mangan klorida and larutan kalium iodida dalam natrium hidroksida yang kemudian dikondisikan pada keadaan asam dengan penambahan asam sulfat sehingga ion iodida pada vessel titrat berubah menjadi iodin yang ekivalen dengan kadar oksigen terlarut. Vessel titrat kemudian dititrasi dengan larutan natrium tiosulfat dengan menggunakan indikator kanji.</p>
         
         <p><b>Persamaan Reaksi:</b></p>
         <p><b>Reaksi Pengendapan (Pengikatan Oksigen):</b><br>
@@ -240,7 +354,7 @@ elif menu == "📚 Teori":
         Berdasarkan <b>Standar Nasional Indonesia Nomor 6989 Tahun 2019</b>, COD dapat diukur dengan cara teknik titrasi (titrimetri). Prinsip pengujian dilakukan dengan dua tahapan, yakni tahap destruksi dan tahap pengujian.</p>
         
         <ul>
-            <li><b>Tahap Destruksi:</b> Dilakukan dengan cara refluks (terbuka ataupun tertutup) yang berfungsi untuk mereaksikan kalium dikromat (K₂Cr₂O₇) dalam suasana asam and mengubahnya menjadi ion kromat (Cr³⁺). Yang membedakan kedua cara ini adalah alat destruksi serta kuantitas reagen yang digunakan.</li>
+            <li><b>Tahap Destruksi:</b> Dilakukan dengan cara refluks (terbuka ataupun tertutup) yang berfungsi untuk mereaksikan kalium dikromat (K₂Cr₂O₇) dalam suasana asam dan mengubahnya menjadi ion kromat (Cr³⁺). Yang membedakan kedua cara ini adalah alat destruksi serta kuantitas reagen yang digunakan.</li>
             <li><b>Tahap Pengujian:</b> Analis perlu menitar sampel hasil destruksi dengan larutan titran Ferro Ammonium Sulfate (FAS). Ion besi (II) (Fe²⁺) yang ada dalam larutan FAS akan mereduksi ion kromium heksavalen (Cr⁶⁺) menjadi ion krom (Cr³⁺) yang menghasilkan perubahan dari larutan <b>biru-kehijauan</b> menjadi warna <b>coklat-kemerahan</b> yang merupakan indikasi dari warna ion besi (III) (Fe³⁺).</li>
         </ul>
         
@@ -263,10 +377,9 @@ elif menu == "📚 Teori":
         """, unsafe_allow_html=True)
 
 # ==========================================
-# ALAT & BAHAN
+# ISI HALAMAN - 🧪 EKSPLORASI ALAT & BAHAN
 # ==========================================
-elif menu == "🧪 Alat & Bahan":
-
+elif menu == "🧪 Eksplorasi Alat & Bahan":
     st.markdown("<h2 style='color:#009688; margin-bottom:5px;'>🧪 Komponen Alat & Bahan Laboratorium</h2>", unsafe_allow_html=True)
     st.write("Silakan pilih parameter di bawah ini untuk melihat daftar alat dan bahan dengan tampilan kartu informatif.")
 
@@ -368,9 +481,9 @@ elif menu == "🧪 Alat & Bahan":
         """, unsafe_allow_html=True)
 
 # ==========================================
-# CARA KERJA
+# ISI HALAMAN - 📋 SOP LANGKAH KERJA
 # ==========================================
-elif menu == "📋 Cara Kerja":
+elif menu == "📋 SOP Langkah Kerja":
     st.markdown("<h2 style='color:#009688;'>📋 Prosedur & Cara Kerja Laboratorium</h2>", unsafe_allow_html=True)
     
     pilihan_kerja = st.selectbox(
@@ -444,14 +557,14 @@ elif menu == "📋 Cara Kerja":
             <li><b>Persiapan Sampel:</b>
                 <ul>
                     <li>Isi botol Winkler dengan sampel air hingga penuh untuk menghindari masuknya udara.</li>
-                    <li>Tambahkan mangan(II) sulfat dan larutan alkali-iodida-</li>
+                    <li>Tambahkan mangan(II) sulfat dan larutan alkali-iodida-azida.</li>
                     <li>Endapan mangan oksida akan terbentuk.</li>
                 </ul>
             </li>
             <br>
             <li><b>Inkubasi:</b>
                 <ul>
-                    <li>Sampel diinkubasi selama 5 days pada suhu 20°C tanpa gangguan.</li>
+                    <li>Sampel diinkubasi selama 5 hari pada suhu 20°C tanpa gangguan.</li>
                     <li>Setelah inkubasi, tambahkan asam sulfat pekat untuk melarutkan endapan. Reaksi ini menghasilkan iodin bebas.</li>
                 </ul>
             </li>
@@ -494,7 +607,7 @@ elif menu == "📋 Cara Kerja":
                 </ul>
             </li>
             <br>
-            <li><b>Pendinginan:</b>
+            <li><b>Permanent Pendinginan:</b>
                 <ul>
                     <li>Setelah refluks selesai, dinginkan sampel hingga suhu ruang.</li>
                 </ul>
@@ -512,11 +625,11 @@ elif menu == "📋 Cara Kerja":
         """, unsafe_allow_html=True)
 
 # ==========================================
-# 🧮 KALKULATOR
+# ISI HALAMAN - 🧮 KALKULATOR LABORATORIUM
 # ==========================================
-elif menu == "🧮 Kalkulator":
+elif menu == "🧮 Kalkulator Laboratorium":
     st.markdown("<h2 style='color:#009688;'>🧮 Kalkulator Laboratorium</h2>", unsafe_allow_html=True)
-    st.write("Silakan pilih parameter uji untuk menghitung konsentrasi analit berdasarkan rumus standardisasi laboratorium.")
+    st.write("Silakan pilih parameter uji untuk menghitung konsentrasi analit berdasarkan rumus laboratorium.")
     
     pilihan_kalkulator = st.selectbox(
         "Pilih Parameter Kalkulator:",
@@ -536,11 +649,11 @@ elif menu == "🧮 Kalkulator":
         
         col1, col2 = st.columns(2)
         with col1:
-            v_do = st.number_input("Volume Penitar / Titran Na₂S₂O₃ (V) [mL]", min_value=0.000, value=7.000, step=0.001, format="%.3f")
-            n_do = st.number_input("Normalitas Penitar / Na₂S₂O₃ (N)", min_value=0.0000, value=0.0250, step=0.0001, format="%.4f")
+            v_do = st.number_input("Volume Penitar / Titran Na₂S₂O₃ (V) [mL]", min_value=0.000, value=0.000, step=0.001, format="%.3f")
+            n_do = st.number_input("Normalitas Penitar / Na₂S₂O₃ (N)", min_value=0.0000, value=0.0000, step=0.0001, format="%.4f")
         with col2:
-            f_do = st.number_input("Faktor Koreksi Volume Penitar (F)", min_value=0.0, value=1.0, step=0.01, format="%.2f")
-            v_sampel_do = st.number_input("Volume Sampel Terpilih (V_s) [mL]", min_value=0.001, value=50.000, step=0.001, format="%.3f")
+            f_do = st.number_input("Faktor Koreksi Volume Penitar (F)", min_value=0.0, value=0.0, step=0.01, format="%.2f")
+            v_sampel_do = st.number_input("Volume Sampel Terpilih (V_s) [mL]", min_value=0.000, value=0.000, step=0.001, format="%.3f")
             
         if st.button("Hitung Nilai DO", key="btn_do"):
             if v_sampel_do > 0:
@@ -552,6 +665,8 @@ elif menu == "🧮 Kalkulator":
                 </div>
                 """, unsafe_allow_html=True)
                 st.balloons()
+            else:
+                st.error("Volume Sampel harus lebih besar dari 0 agar tidak terjadi pembagian dengan nol!")
 
     # ------------------------------------------
     # KALKULATOR BOD
@@ -566,9 +681,9 @@ elif menu == "🧮 Kalkulator":
         
         col1, col2 = st.columns(2)
         with col1:
-            do_awal = st.number_input("Konsentrasi Oksigen Terlarut Hari ke-0 (DO awal) [mg/L]", min_value=0.0, value=8.5, step=0.1, format="%.2f")
+            do_awal = st.number_input("Konsentrasi Oksigen Terlarut Hari ke-0 (DO awal) [mg/L]", min_value=0.0, value=0.0, step=0.1, format="%.2f")
         with col2:
-            do_akhir = st.number_input("Konsentrasi Oksigen Terlarut Hari ke-5 (DO akhir) [mg/L]", min_value=0.0, value=3.2, step=0.1, format="%.2f")
+            do_akhir = st.number_input("Konsentrasi Oksigen Terlarut Hari ke-5 (DO akhir) [mg/L]", min_value=0.0, value=0.0, step=0.1, format="%.2f")
             
         if st.button("Hitung Nilai BOD", key="btn_bod"):
             if do_awal >= do_akhir:
@@ -596,11 +711,11 @@ elif menu == "🧮 Kalkulator":
         
         col1, col2 = st.columns(2)
         with col1:
-            v_blanko = st.number_input("Volume Penitaran Blanko (V_b) [mL]", min_value=0.000, value=20.000, step=0.001, format="%.3f")
-            v_contoh = st.number_input("Volume Penitaran Contoh/Sampel (V_c) [mL]", min_value=0.000, value=12.000, step=0.001, format="%.3f")
+            v_blanko = st.number_input("Volume Penitaran Blanko (V_b) [mL]", min_value=0.000, value=0.000, step=0.001, format="%.3f")
+            v_contoh = st.number_input("Volume Penitaran Contoh/Sampel (V_c) [mL]", min_value=0.000, value=0.000, step=0.001, format="%.3f")
         with col2:
-            n_fas = st.number_input("Normalitas Larutan Titran FAS (N_FAS)", min_value=0.0000, value=0.1000, step=0.0001, format="%.4f")
-            v_s_cod = st.number_input("Volume Sampel Air yang Diuji (V_s) [mL]", min_value=0.001, value=50.000, step=0.001, format="%.3f")
+            n_fas = st.number_input("Normalitas Larutan Titran FAS (N_FAS)", min_value=0.0000, value=0.0000, step=0.0001, format="%.4f")
+            v_s_cod = st.number_input("Volume Sampel Air yang Diuji (V_s) [mL]", min_value=0.000, value=0.000, step=0.001, format="%.3f")
             
         if st.button("Hitung Nilai COD", key="btn_cod"):
             if v_s_cod > 0:
@@ -612,15 +727,16 @@ elif menu == "🧮 Kalkulator":
                 </div>
                 """, unsafe_allow_html=True)
                 st.balloons()
+            else:
+                st.error("Volume Sampel Air harus lebih besar dari 0 agar tidak terjadi pembagian dengan nol!")
 
 # ==========================================
-# ANALISIS
+# ISI HALAMAN - 📊 ANALISIS MUTU AIR
 # ==========================================
-elif menu == "📊 Analisis":
+elif menu == "📊 Analisis Mutu Air":
     st.markdown("<h2 style='color:#009688;'>📊 Analisis Kualitas Air</h2>", unsafe_allow_html=True)
-    st.write("Gunakan menu ini untuk mengecek status pencemaran air secara otomatis berdasarkan acuan baku mutu resmi nasional.")
+    st.write("Gunakan menu ini untuk mengecek status pencemaran air secara otomatis berdasarkan acuan baku mutu lingkungan hidup.")
 
-    # Bagian 1: Alat Cek Kualitas Air Otomatis
     st.markdown("""
     <div class='card'>
         <h3>🔍 Alat Cek Status Air Otomatis</h3>
@@ -639,7 +755,6 @@ elif menu == "📊 Analisis":
     if st.button("Analisis Kualitas Air", key="btn_interpretasi"):
         st.markdown("#### 📢 Hasil Analisis Sistem:")
         
-        # Logika Evaluasi Sederhana
         if input_do >= 6.0 and input_bod <= 2.0 and input_cod <= 10.0:
             st.success("🟢 KATEGORI: AIR BERSIH (Memenuhi Baku Mutu Kelas 1)\n\nAir dalam kondisi sangat baik, kaya oksigen, rendah cemaran organik, aman untuk ekosistem dan bahan baku air minum.")
         elif input_do >= 3.0 and input_bod <= 6.0 and input_cod <= 40.0:
@@ -647,7 +762,6 @@ elif menu == "📊 Analisis":
         else:
             st.error("🔴 KATEGORI: TERCEMAR BERAT (Melebihi Batas Aman / Kelas 4)\n\nAir dalam kondisi kritis! Oksigen terlarut (DO) terlalu rendah atau beban limbah kimia (BOD/COD) terlalu tinggi. Hanya dapat digunakan untuk mengairi pertamanan atau membutuhkan pengolahan intensif.")
 
-    # Bagian 2: Tabel Acuan Resmi Baku Mutu Air Nasional
     st.markdown("""
     <div class='card' style='margin-top:25px;'>
         <h3>📋 Tabel Acuan Baku Mutu Air Nasional (PP No. 22 Tahun 2021)</h3>
@@ -676,19 +790,17 @@ elif menu == "📊 Analisis":
     """, unsafe_allow_html=True)
 
 # ==========================================
-# KUIS
+# ISI HALAMAN - 🎮 UJI PEMAHAMAN (KUIS)
 # ==========================================
-elif menu == "🎮 Kuis":
+elif menu == "🎮 Uji Pemahaman (Kuis)":
     st.markdown("<h2 style='color:#009688;'>🎮 Kuis Interaktif Parameter Air</h2>", unsafe_allow_html=True)
     st.write("Silakan jawab pertanyaan di bawah ini secara teliti untuk menguji pemahaman materi laboratorium Anda.")
 
-    # Inisialisasi Session State untuk melacak status pengiriman kuis
     if "kuis_disubmit" not in st.session_state:
         st.session_state.kuis_disubmit = False
     if "skor_akhir" not in st.session_state:
         st.session_state.skor_akhir = 0
 
-    # Data Soal Kuis 
     soal_list = [
         {
             "id": "q1",
@@ -762,7 +874,6 @@ elif menu == "🎮 Kuis":
         }
     ]
 
-    # Render Pertanyaan Kuis dan Evaluasi Langsung Di Bawah Soal
     jawaban_user = {}
     for item in soal_list:
         st.markdown(f"<div class='card'><b>{item['tanya']}</b></div>", unsafe_allow_html=True)
@@ -774,7 +885,6 @@ elif menu == "🎮 Kuis":
             key=f"radio_{item['id']}"
         )
         
-        # JIKA kuis sudah disubmit, langsung munculkan hasilnya di bawah soal bersangkutan
         if st.session_state.kuis_disubmit:
             pilihan = jawaban_user[item["id"]]
             if pilihan == item["kunci"]:
@@ -786,27 +896,22 @@ elif menu == "🎮 Kuis":
             
         st.write("")
 
-    # Tombol Evaluasi Nilai Kuis
     if st.button("Kirim Seluruh Jawaban Kuis", key="btn_submit_kuis"):
-        # Validasi jika ada soal yang belum dikerjakan/diisi sama sekali
         belum_diisi = [item["tanya"][:4] for item in soal_list if jawaban_user[item["id"]] is None]
         
         if belum_diisi:
             st.warning("⚠️ Tolong isi semua pertanyaan terlebih dahulu!")
             st.session_state.kuis_disubmit = False
         else:
-            # Hitung skor akhir
             total_skor = 0
             for item in soal_list:
                 if jawaban_user[item["id"]] == item["kunci"]:
                     total_skor += 10
             
-            # Simpan status ke session state dan picu jalannya penampilan interpretasi bawah soal
             st.session_state.kuis_disubmit = True
             st.session_state.skor_akhir = total_skor
             st.rerun()
 
-    # Tampilkan Total Skor Akhir di bagian paling bawah setelah disubmit
     if st.session_state.kuis_disubmit:
         st.markdown("---")
         st.markdown(f"""
@@ -826,6 +931,6 @@ elif menu == "🎮 Kuis":
 # ==========================================
 st.markdown("""
 <div class='footer'>
-✨ Kelompok 8 kelas 1A ✨
+    Media Pembelajaran Digital • 🧪 Designed by <b>Research Team 8 (Class 1A)</b> • Politeknik AKA Bogor © 2026
 </div>
 """, unsafe_allow_html=True)
