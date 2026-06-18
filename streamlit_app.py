@@ -218,8 +218,8 @@ if menu == "🏠 Beranda Utama":
     <div class='card' style='background: linear-gradient(135deg, #0077b6, #00c9a7); color: white; padding: 30px; text-align: center; border: none;'>
         <h1 style='color: white; margin-bottom: 10px; font-size: 36px;'>🎬 Selamat Datang di ModulDigital-Oxy!</h1>
         <p style='font-size: 18px; opacity: 0.9; max-width: 850px; margin: 0 auto; line-height: 1.6;'>
-            Platform Pembelajaran Digital Interaktif yang dirancang khusus untuk mendalami parameter esensial analisis kualitas air. 
-            Kuasai konsep dasar, visualisasi instrumen laboratorium, sistem komputasi otomatis, hingga evaluasi mandiri yang disesuaikan dengan standar industri dan regulasi nasional.
+            Aplikasi ini adalah media belajar sederhana untuk membantu kamu memahami materi dasar analisis kualitas air (DO, BOD, dan COD). 
+            Di sini kamu bisa mempelajari teori dasar, melihat daftar alat bahan, mencoba simulasi hitungan, dan menguji pemahaman dengan kuis santai.
         </p>
     </div>
     """, unsafe_allow_html=True)
