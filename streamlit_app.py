@@ -127,21 +127,25 @@ st.markdown("""
 st.markdown("<div class='subtitle'>Media Pembelajaran Interaktif DO, BOD, dan COD 💧</div>", unsafe_allow_html=True)
 
 # ==========================================
-# MENU ATAS
+# MENU SIDEBAR (REVISI)
 # ==========================================
-menu = st.radio(
-    "",
-    [
-        "🏠 Home",
-        "📚 Teori",
-        "🧪 Alat & Bahan",
-        "📋 Cara Kerja",
-        "🧮 Kalkulator",
-        "📊 Analisis",
-        "🎮 Kuis"
-    ],
-    horizontal=True
-)
+with st.sidebar:
+    st.markdown("<h2 style='text-align: center; color: #0077b6; font-family: sans-serif;'>🧭 Navigasi Menu</h2>", unsafe_allow_html=True)
+    st.markdown("---")
+    menu = st.radio(
+        "Pilih Halaman Modul:",
+        [
+            "🏠 Home",
+            "📚 Teori",
+            "🧪 Alat & Bahan",
+            "📋 Cara Kerja",
+            "🧮 Kalkulator",
+            "📊 Analisis",
+            "🎮 Kuis"
+        ]
+    )
+    st.markdown("---")
+    st.markdown("<div style='text-align: center; color: gray; font-size: 12px;'>ModulDigital-Oxy v1.0</div>", unsafe_allow_html=True)
 
 # ==========================================
 # HOME
@@ -161,7 +165,7 @@ if menu == "🏠 Home":
     </ul>
     </div>
     """, unsafe_allow_html=True)
-    st.success("✨ Yuk mulai belajar dari menu di atas!")
+    st.success("✨ Yuk mulai belajar dari menu di samping!")
 
 # ==========================================
 # TEORI
@@ -517,7 +521,7 @@ elif menu == "📋 Cara Kerja":
         """, unsafe_allow_html=True)
 
 # ==========================================
-# 🧮 KALKULATOR
+# 🧮 KALKULATOR (REVISI AWALAN NOL)
 # ==========================================
 elif menu == "🧮 Kalkulator":
     st.markdown("<h2 style='color:#009688;'>🧮 Kalkulator Laboratorium</h2>", unsafe_allow_html=True)
@@ -541,11 +545,11 @@ elif menu == "🧮 Kalkulator":
         
         col1, col2 = st.columns(2)
         with col1:
-            v_do = st.number_input("Volume Penitar / Titran Na₂S₂O₃ (V) [mL]", min_value=0.000, value=7.000, step=0.001, format="%.3f")
-            n_do = st.number_input("Normalitas Penitar / Na₂S₂O₃ (N)", min_value=0.0000, value=0.0250, step=0.0001, format="%.4f")
+            v_do = st.number_input("Volume Penitar / Titran Na₂S₂O₃ (V) [mL]", min_value=0.000, value=0.000, step=0.001, format="%.3f")
+            n_do = st.number_input("Normalitas Penitar / Na₂S₂O₃ (N)", min_value=0.0000, value=0.0000, step=0.0001, format="%.4f")
         with col2:
-            f_do = st.number_input("Faktor Koreksi Volume Penitar (F)", min_value=0.0, value=1.0, step=0.01, format="%.2f")
-            v_sampel_do = st.number_input("Volume Sampel Terpilih (V_s) [mL]", min_value=0.001, value=50.000, step=0.001, format="%.3f")
+            f_do = st.number_input("Faktor Koreksi Volume Penitar (F)", min_value=0.0, value=0.0, step=0.01, format="%.2f")
+            v_sampel_do = st.number_input("Volume Sampel Terpilih (V_s) [mL]", min_value=0.000, value=0.000, step=0.001, format="%.3f")
             
         if st.button("Hitung Nilai DO", key="btn_do"):
             if v_sampel_do > 0:
@@ -557,6 +561,8 @@ elif menu == "🧮 Kalkulator":
                 </div>
                 """, unsafe_allow_html=True)
                 st.balloons()
+            else:
+                st.error("Volume Sampel harus lebih besar dari 0 agar tidak terjadi pembagian dengan nol!")
 
     # ------------------------------------------
     # KALKULATOR BOD
@@ -571,9 +577,9 @@ elif menu == "🧮 Kalkulator":
         
         col1, col2 = st.columns(2)
         with col1:
-            do_awal = st.number_input("Konsentrasi Oksigen Terlarut Hari ke-0 (DO awal) [mg/L]", min_value=0.0, value=8.5, step=0.1, format="%.2f")
+            do_awal = st.number_input("Konsentrasi Oksigen Terlarut Hari ke-0 (DO awal) [mg/L]", min_value=0.0, value=0.0, step=0.1, format="%.2f")
         with col2:
-            do_akhir = st.number_input("Konsentrasi Oksigen Terlarut Hari ke-5 (DO akhir) [mg/L]", min_value=0.0, value=3.2, step=0.1, format="%.2f")
+            do_akhir = st.number_input("Konsentrasi Oksigen Terlarut Hari ke-5 (DO akhir) [mg/L]", min_value=0.0, value=0.0, step=0.1, format="%.2f")
             
         if st.button("Hitung Nilai BOD", key="btn_bod"):
             if do_awal >= do_akhir:
@@ -601,11 +607,11 @@ elif menu == "🧮 Kalkulator":
         
         col1, col2 = st.columns(2)
         with col1:
-            v_blanko = st.number_input("Volume Penitaran Blanko (V_b) [mL]", min_value=0.000, value=20.000, step=0.001, format="%.3f")
-            v_contoh = st.number_input("Volume Penitaran Contoh/Sampel (V_c) [mL]", min_value=0.000, value=12.000, step=0.001, format="%.3f")
+            v_blanko = st.number_input("Volume Penitaran Blanko (V_b) [mL]", min_value=0.000, value=0.000, step=0.001, format="%.3f")
+            v_contoh = st.number_input("Volume Penitaran Contoh/Sampel (V_c) [mL]", min_value=0.000, value=0.000, step=0.001, format="%.3f")
         with col2:
-            n_fas = st.number_input("Normalitas Larutan Titran FAS (N_FAS)", min_value=0.0000, value=0.1000, step=0.0001, format="%.4f")
-            v_s_cod = st.number_input("Volume Sampel Air yang Diuji (V_s) [mL]", min_value=0.001, value=50.000, step=0.001, format="%.3f")
+            n_fas = st.number_input("Normalitas Larutan Titran FAS (N_FAS)", min_value=0.0000, value=0.0000, step=0.0001, format="%.4f")
+            v_s_cod = st.number_input("Volume Sampel Air yang Diuji (V_s) [mL]", min_value=0.000, value=0.000, step=0.001, format="%.3f")
             
         if st.button("Hitung Nilai COD", key="btn_cod"):
             if v_s_cod > 0:
@@ -617,6 +623,8 @@ elif menu == "🧮 Kalkulator":
                 </div>
                 """, unsafe_allow_html=True)
                 st.balloons()
+            else:
+                st.error("Volume Sampel Air harus lebih besar dari 0 agar tidak terjadi pembagian dengan nol!")
 
 # ==========================================
 # ANALISIS
@@ -728,7 +736,7 @@ elif menu == "🎮 Kuis":
             "tanya": "5. Alat yang digunakan untuk menyimpan sampel DO agar tidak terkena udara adalah ...",
             "opsi": ["A. Gelas ukur", "B. Labu ukur", "C. Botol Winkler", "D. Erlenmeyer"],
             "kunci": "C. Botol Winkler",
-            "alasan": "Botol Winkler dirancang khusus agar sampel tidak kontak dengan udara sehingga kadar oksigen tidak berubah."
+            "alasan": "Botol Winkler dirancang khusus agar sampel tidak kontakt dengan udara sehingga kadar oksigen tidak berubah."
         },
         {
             "id": "q6",
@@ -797,7 +805,7 @@ elif menu == "🎮 Kuis":
         belum_diisi = [item["tanya"][:4] for item in soal_list if jawaban_user[item["id"]] is None]
         
         if belum_diisi:
-            st.warning(f"⚠️ Tolong isi semua pertanyaan terlebih dahulu! Nomor yang belum diisi: {', '.join(belum_diisi)}")
+            st.warning("⚠️ Tolong isi semua pertanyaan terlebih dahulu!")
             st.session_state.kuis_disubmit = False
         else:
             # Hitung skor akhir
