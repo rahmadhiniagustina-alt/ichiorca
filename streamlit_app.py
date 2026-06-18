@@ -208,16 +208,16 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
 # ==========================================
-# ISI HALAMAN - 🏠 BERANDA UTAMA (REVISED)
+# ISI HALAMAN - 🏠 BERANDA UTAMA (FULL REVISED)
 # ==========================================
 if menu == "🏠 Beranda Utama":
     st.balloons()
     
-    # 🎬 WELCOME BANNER (Bahasa Diperbagus & Kata Teaser Dihapus)
+    # 🎬 WELCOME BANNER (Background Baru Biru Kalem & Deskripsi Sederhana)
     st.markdown("""
-    <div class='card' style='background: linear-gradient(135deg, #0077b6, #00c9a7); color: white; padding: 30px; text-align: center; border: none;'>
+    <div class='card' style='background: linear-gradient(135deg, #005f73, #008ea0); color: white; padding: 30px; text-align: center; border: none;'>
         <h1 style='color: white; margin-bottom: 10px; font-size: 36px;'>🎬 Selamat Datang di ModulDigital-Oxy!</h1>
-        <p style='font-size: 18px; opacity: 0.9; max-width: 850px; margin: 0 auto; line-height: 1.6;'>
+        <p style='font-size: 17px; opacity: 0.9; max-width: 800px; margin: 0 auto; line-height: 1.5;'>
             Aplikasi ini adalah media belajar sederhana untuk membantu kamu memahami materi dasar analisis kualitas air (DO, BOD, dan COD). 
             Di sini kamu bisa mempelajari teori dasar, melihat daftar alat bahan, mencoba simulasi hitungan, dan menguji pemahaman dengan kuis santai.
         </p>
@@ -225,7 +225,7 @@ if menu == "🏠 Beranda Utama":
     """, unsafe_allow_html=True)
     
     st.write("")
-    # Judul tengah disederhanakan
+    # Judul tengah ringkas sesuai request
     st.markdown("<h3 style='text-align: center; color: #0077b6; margin-bottom: 25px;'>Apa yang Akan Kamu Pelajari?</h3>", unsafe_allow_html=True)
 
     # 👁️ VISUAL SHOWCASE: 3 PARAMETER UTAMA
@@ -607,7 +607,7 @@ elif menu == "📋 SOP Langkah Kerja":
                 </ul>
             </li>
             <br>
-            <li><b>Pendinginan:</b>
+            <li><b>Permanent Pendinginan:</b>
                 <ul>
                     <li>Setelah refluks selesai, dinginkan sampel hingga suhu ruang.</li>
                 </ul>
@@ -629,7 +629,7 @@ elif menu == "📋 SOP Langkah Kerja":
 # ==========================================
 elif menu == "🧮 Kalkulator Laboratorium":
     st.markdown("<h2 style='color:#009688;'>🧮 Kalkulator Laboratorium</h2>", unsafe_allow_html=True)
-    st.write("Silakan pilih parameter uji untuk menghitung konsentrasi analit berdasarkan rumus standardisasi laboratorium.")
+    st.write("Silakan pilih parameter uji untuk menghitung konsentrasi analit berdasarkan rumus laboratorium.")
     
     pilihan_kalkulator = st.selectbox(
         "Pilih Parameter Kalkulator:",
@@ -735,7 +735,7 @@ elif menu == "🧮 Kalkulator Laboratorium":
 # ==========================================
 elif menu == "📊 Analisis Mutu Air":
     st.markdown("<h2 style='color:#009688;'>📊 Analisis Kualitas Air</h2>", unsafe_allow_html=True)
-    st.write("Gunakan menu ini untuk mengecek status pencemaran air secara otomatis berdasarkan acuan baku mutu resmi nasional.")
+    st.write("Gunakan menu ini untuk mengecek status pencemaran air secara otomatis berdasarkan acuan baku mutu lingkungan hidup.")
 
     st.markdown("""
     <div class='card'>
@@ -846,7 +846,7 @@ elif menu == "🎮 Uji Pemahaman (Kuis)":
         },
         {
             "id": "q7",
-            "tanya": "7. Indikator yang digunakan pada titrasi DO metode Winkler adalah ...",
+            "tanya": "7. Indikator yang digunakan pada titrasi DO metode Winkler is ...",
             "opsi": ["A. Fenolftalein", "B. Metil jingga", "C. Ferroin", "D. Amilum (pati)"],
             "kunci": "D. Amilum (pati)",
             "alasan": "Indikator amilum membentuk warna biru dengan iodin dan digunakan untuk menunjukkan titik akhir titrasi."
@@ -868,7 +868,7 @@ elif menu == "🎮 Uji Pemahaman (Kuis)":
         {
             "id": "q10",
             "tanya": "10. Tujuan utama pengukuran DO adalah ...",
-            "opsi": ["A. Mengetahui kadar bahan organik", "B. Menentukan tingkat salinitas", "C. Mengetahui jumlah oksigen terlarut dalam air", "D. Mengukur kadar logam berat"],
+            "opsi": ["A. Mengetadar bahan organik", "B. Menentukan tingkat salinitas", "C. Mengetahui jumlah oksigen terlarut dalam air", "D. Mengukur kadar logam berat"],
             "kunci": "C. Mengetahui jumlah oksigen terlarut dalam air",
             "alasan": "DO digunakan untuk mengetahui kadar oksigen terlarut yang penting bagi kehidupan organisme air dan kualitas perairan."
         }
