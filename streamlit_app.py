@@ -11,7 +11,7 @@ st.set_page_config(
 )
 
 # ==========================================
-# CUSTOM CSS MODERN
+# CUSTOM CSS MODERN & SIDEBAR MENARIK (REVISI)
 # ==========================================
 st.markdown("""
 <style>
@@ -112,6 +112,58 @@ st.markdown("""
     font-size: 14px;
 }
 
+/* KUSTOMISASI SIDEBAR AGAR MENARIK */
+[data-testid="stSidebar"] {
+    background-color: #ffffff !important;
+    box-shadow: 4px 0px 15px rgba(0,0,0,0.05);
+}
+
+/* Membuat judul modifikasi di sidebar */
+.sidebar-header {
+    background: linear-gradient(135deg, #0077b6, #00b4db);
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    color: white !important;
+    font-weight: bold;
+    font-size: 18px;
+    font-family: 'Trebuchet MS', sans-serif;
+    box-shadow: 0px 4px 8px rgba(0,119,182,0.2);
+    margin-bottom: 10px;
+}
+
+/* Mengubah tampilan Radio Button di Sidebar menjadi Card Menu */
+div[data-testid="stSidebarUserContent"] div[role="radiogroup"] label {
+    background-color: #f8f9fa !important;
+    padding: 12px 16px !important;
+    border-radius: 10px !important;
+    margin-bottom: 8px !important;
+    border: 1px solid #e9ecef !important;
+    transition: all 0.2s ease-in-out !important;
+    width: 100% !important;
+}
+
+/* Efek hover saat mouse mendekati menu */
+div[data-testid="stSidebarUserContent"] div[role="radiogroup"] label:hover {
+    background-color: #e6f7ff !important;
+    border-color: #1890ff !important;
+    transform: translateX(4px);
+}
+
+/* Tampilan ketika menu sedang terpilih/aktif */
+div[data-testid="stSidebarUserContent"] div[role="radiogroup"] label[data-checked="true"] {
+    background: linear-gradient(90deg, #e6f7ff, #bae7ff) !important;
+    border-left: 5px solid #1890ff !important;
+    border-color: #1890ff !important;
+    font-weight: bold !important;
+}
+
+/* Sembunyikan lingkaran radio asli agar terlihat seperti tombol murni */
+div[data-testid="stSidebarUserContent"] div[role="radiogroup"] label div[data-testid="stMarkdownContainer"] p {
+    font-size: 15px !important;
+    color: #333333 !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
@@ -127,30 +179,32 @@ st.markdown("""
 st.markdown("<div class='subtitle'>Media Pembelajaran Interaktif DO, BOD, dan COD 💧</div>", unsafe_allow_html=True)
 
 # ==========================================
-# MENU SIDEBAR (REVISI)
+# MENU SIDEBAR (REVISI JUDUL & STYLE)
 # ==========================================
 with st.sidebar:
-    st.markdown("<h2 style='text-align: center; color: #0077b6; font-family: sans-serif;'>🧭 Navigasi Menu</h2>", unsafe_allow_html=True)
-    st.markdown("---")
+    # Mengganti "🧭 Navigasi Menu" dengan konsep yang lebih menarik dan interaktif
+    st.markdown("<div class='sidebar-header'>🚀 RUANG JELAJAH MODUL</div>", unsafe_allow_html=True)
+    
     menu = st.radio(
         "Pilih Halaman Modul:",
         [
-            "🏠 Home",
-            "📚 Teori",
-            "🧪 Alat & Bahan",
-            "📋 Cara Kerja",
-            "🧮 Kalkulator",
-            "📊 Analisis",
-            "🎮 Kuis"
-        ]
+            "🏠 Beranda Utama",
+            "📚 Ruang Teori Kimia",
+            "🧪 Eksplorasi Alat & Bahan",
+            "📋 SOP Langkah Kerja",
+            "🧮 Kalkulator Laboratorium",
+            "📊 Analisis Mutu Air",
+            "🎮 Uji Pemahaman (Kuis)"
+        ],
+        label_visibility="collapsed" # Menyembunyikan label bawaan agar rapi
     )
     st.markdown("---")
-    st.markdown("<div style='text-align: center; color: gray; font-size: 12px;'>ModulDigital-Oxy v1.0</div>", unsafe_allow_html=True)
+    st.markdown("<div style='text-align: center; color: gray; font-size: 11px; font-weight: bold;'>KELOMPOK 8 • KELAS 1A</div>", unsafe_allow_html=True)
 
 # ==========================================
 # HOME
 # ==========================================
-if menu == "🏠 Home":
+if menu == "🏠 Beranda Utama":
     st.balloons()
     st.markdown("""
     <div class='card'>
@@ -170,7 +224,7 @@ if menu == "🏠 Home":
 # ==========================================
 # TEORI
 # ==========================================
-elif menu == "📚 Teori":
+elif menu == "📚 Ruang Teori Kimia":
     st.markdown("<h2 style='color:#009688;'>📚 Materi Teori</h2>", unsafe_allow_html=True)
     tab1, tab2, tab3 = st.tabs(["💧 DO", "🌱 BOD", "🔥 COD"])
 
@@ -210,7 +264,7 @@ elif menu == "📚 Teori":
         <div class='card'>
         <h3>🌱 Biochemical Oxygen Demand (BOD)</h3>
         <p><b>Definisi:</b><br>
-        Biochemical oxygen demand (BOD) atau kebutuhan oksigen biologis (KOB) adalah salah satu parameter wajib ukur pada air limbah.</p>
+        Biochemical oxygen demand (BOD) atau kebutuhan oksigen biologis (KOB) salah satu parameter wajib ukur pada air limbah.</p>
         
         <p><b>Metode Uji & Prinsip:</b><br>
         Cara ujinya tertera pada <b>Standar Nasional Indonesia Nomor 6989 Bagian 72 Tahun 2009</b> yang diadaptasi dari <i>American Public Health Association</i> (APHA) 5210. Pengujian BOD dapat dilakukan dengan menggunakan metode Winkler yakni melalui titrasi iodometri yang merupakan metode referensi <i>United States Environmental Protection Agency</i> (USEPA).</p>
@@ -274,7 +328,7 @@ elif menu == "📚 Teori":
 # ==========================================
 # ALAT & BAHAN
 # ==========================================
-elif menu == "🧪 Alat & Bahan":
+elif menu == "🧪 Eksplorasi Alat & Bahan":
 
     st.markdown("<h2 style='color:#009688; margin-bottom:5px;'>🧪 Komponen Alat & Bahan Laboratorium</h2>", unsafe_allow_html=True)
     st.write("Silakan pilih parameter di bawah ini untuk melihat daftar alat dan bahan dengan tampilan kartu informatif.")
@@ -379,7 +433,7 @@ elif menu == "🧪 Alat & Bahan":
 # ==========================================
 # CARA KERJA
 # ==========================================
-elif menu == "📋 Cara Kerja":
+elif menu == "📋 SOP Langkah Kerja":
     st.markdown("<h2 style='color:#009688;'>📋 Prosedur & Cara Kerja Laboratorium</h2>", unsafe_allow_html=True)
     
     pilihan_kerja = st.selectbox(
@@ -521,9 +575,9 @@ elif menu == "📋 Cara Kerja":
         """, unsafe_allow_html=True)
 
 # ==========================================
-# 🧮 KALKULATOR (REVISI AWALAN NOL)
+# 🧮 KALKULATOR
 # ==========================================
-elif menu == "🧮 Kalkulator":
+elif menu == "🧮 Kalkulator Laboratorium":
     st.markdown("<h2 style='color:#009688;'>🧮 Kalkulator Laboratorium</h2>", unsafe_allow_html=True)
     st.write("Silakan pilih parameter uji untuk menghitung konsentrasi analit berdasarkan rumus standardisasi laboratorium.")
     
@@ -629,7 +683,7 @@ elif menu == "🧮 Kalkulator":
 # ==========================================
 # ANALISIS
 # ==========================================
-elif menu == "📊 Analisis":
+elif menu == "📊 Analisis Mutu Air":
     st.markdown("<h2 style='color:#009688;'>📊 Analisis Kualitas Air</h2>", unsafe_allow_html=True)
     st.write("Gunakan menu ini untuk mengecek status pencemaran air secara otomatis berdasarkan acuan baku mutu resmi nasional.")
 
@@ -691,7 +745,7 @@ elif menu == "📊 Analisis":
 # ==========================================
 # KUIS
 # ==========================================
-elif menu == "🎮 Kuis":
+elif menu == "🎮 Uji Pemahaman (Kuis)":
     st.markdown("<h2 style='color:#009688;'>🎮 Kuis Interaktif Parameter Air</h2>", unsafe_allow_html=True)
     st.write("Silakan jawab pertanyaan di bawah ini secara teliti untuk menguji pemahaman materi laboratorium Anda.")
 
@@ -736,7 +790,7 @@ elif menu == "🎮 Kuis":
             "tanya": "5. Alat yang digunakan untuk menyimpan sampel DO agar tidak terkena udara adalah ...",
             "opsi": ["A. Gelas ukur", "B. Labu ukur", "C. Botol Winkler", "D. Erlenmeyer"],
             "kunci": "C. Botol Winkler",
-            "alasan": "Botol Winkler dirancang khusus agar sampel tidak kontakt dengan udara sehingga kadar oksigen tidak berubah."
+            "alasan": "Botol Winkler dirancang khusus agar sampel tidak kontak dengan udara sehingga kadar oksigen tidak berubah."
         },
         {
             "id": "q6",
