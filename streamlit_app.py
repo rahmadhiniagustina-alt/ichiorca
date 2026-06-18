@@ -200,7 +200,6 @@ with st.sidebar:
     )
     st.markdown("---")
     
-    # Identitas baru gabungan kelompok, kelas, dan kampus
     st.markdown("""
     <div style='text-align: center; color: #7f8c8d; font-size: 11px; line-height: 1.6; font-weight: bold;'>
         🧪 Designed by Research Team 8 • Class 1A<br>
@@ -209,26 +208,27 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
 # ==========================================
-# ISI HALAMAN - 🏠 BERANDA UTAMA (VERSION: TRAILER HIGHLIGHTS)
+# ISI HALAMAN - 🏠 BERANDA UTAMA (REVISED)
 # ==========================================
 if menu == "🏠 Beranda Utama":
     st.balloons()
     
-    # 🎬 WELCOME BANNER TRAILER
+    # 🎬 WELCOME BANNER (Bahasa Diperbagus & Kata Teaser Dihapus)
     st.markdown("""
     <div class='card' style='background: linear-gradient(135deg, #0077b6, #00c9a7); color: white; padding: 30px; text-align: center; border: none;'>
         <h1 style='color: white; margin-bottom: 10px; font-size: 36px;'>🎬 Selamat Datang di ModulDigital-Oxy!</h1>
-        <p style='font-size: 18px; opacity: 0.9; max-width: 800px; margin: 0 auto; line-height: 1.6;'>
-            Selamat datang di Teaser Pembelajaran Digital Interaktif. Jelajahi parameter esensial analisis kualitas air 
-            melalui visualisasi modern, sistem komputasi otomatis, dan evaluasi langsung yang dirancang untuk standar laboratorium industri.
+        <p style='font-size: 18px; opacity: 0.9; max-width: 850px; margin: 0 auto; line-height: 1.6;'>
+            Platform Pembelajaran Digital Interaktif yang dirancang khusus untuk mendalami parameter esensial analisis kualitas air. 
+            Kuasai konsep dasar, visualisasi instrumen laboratorium, sistem komputasi otomatis, hingga evaluasi mandiri yang disesuaikan dengan standar industri dan regulasi nasional.
         </p>
     </div>
     """, unsafe_allow_html=True)
     
     st.write("")
-    st.markdown("<h3 style='text-align: center; color: #0077b6; margin-bottom: 25px;'>👀 CUPLIKAN UTAMA: Apa yang Akan Kamu Pelajari?</h3>", unsafe_allow_html=True)
+    # Judul tengah disederhanakan
+    st.markdown("<h3 style='text-align: center; color: #0077b6; margin-bottom: 25px;'>Apa yang Akan Kamu Pelajari?</h3>", unsafe_allow_html=True)
 
-    # 👁️ VISUAL SHOWCASE: 3 PARAMETER UTAMA (Trailer Teori)
+    # 👁️ VISUAL SHOWCASE: 3 PARAMETER UTAMA
     col1, col2, col3 = st.columns(3)
     
     with col1:
@@ -246,7 +246,7 @@ if menu == "🏠 Beranda Utama":
     with col2:
         st.markdown("""
         <div class='card' style='border-top: 5px solid #00c9a7; height: 100%;'>
-            <h3 style='color: #00c9a7; margin-top: 0;'>🌱 BOD Teaser</h3>
+            <h3 style='color: #00c9a7; margin-top: 0;'>🌱 BOD Showcase</h3>
             <p style='font-size: 14px; color: #555;'><b>Biochemical Oxygen Demand</b></p>
             <p style='font-size: 13px; color: #666; line-height: 1.5;'>
                 Simulasi pengeraman mikroorganisme selama <b>5 hari penuh pada suhu stabil 20°C</b>. Amati bagaimana bakteri mengonsumsi oksigen alami untuk menguraikan polutan organik air limbah.
@@ -269,31 +269,6 @@ if menu == "🏠 Beranda Utama":
 
     st.write("")
     
-    # 🌟 HIGHLIGHT FITUR INTERAKTIF (Trailer Sistem Aplikasi)
-    st.markdown("""
-    <div class='card' style='background-color: #ffffff;'>
-        <h3 style='color: #009688; margin-bottom: 20px; text-align: center;'>⚡ Sorotan Fitur Unggulan Modul</h3>
-        <div style='display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px;'>
-            <div style='padding: 15px; border-radius: 12px; background-color: #f8f9fa; border-left: 4px solid #0077b6;'>
-                <b style='color: #0077b6; display: block; margin-bottom: 5px;'>📸 Galeri Alat Realistis</b>
-                <span style='font-size: 13px; color: #555;'>Visualisasi asli penataan alat laboratorium seperti kondensor balik dan Botol Winkler.</span>
-            </div>
-            <div style='padding: 15px; border-radius: 12px; background-color: #f8f9fa; border-left: 4px solid #0077b6;'>
-                <b style='color: #0077b6; display: block; margin-bottom: 5px;'>🧮 Otomatisasi Perhitungan</b>
-                <span style='font-size: 13px; color: #555;'>Kalkulator pintar terintegrasi rumus SNI untuk mencari kadar konsentrasi analit instan.</span>
-            </div>
-            <div style='padding: 15px; border-radius: 12px; background-color: #f8f9fa; border-left: 4px solid #0077b6;'>
-                <b style='color: #0077b6; display: block; margin-bottom: 5px;'>📊 Diagnosis Mutu Otomatis</b>
-                <span style='font-size: 13px; color: #555;'>Sistem kecerdasan buatan untuk mengecek tingkat pencemaran air berdasarkan PP No. 22 Tahun 2021.</span>
-            </div>
-            <div style='padding: 15px; border-radius: 12px; background-color: #f8f9fa; border-left: 4px solid #0077b6;'>
-                <b style='color: #0077b6; display: block; margin-bottom: 5px;'>🎮 Gamifikasi Kuis</b>
-                <span style='font-size: 13px; color: #555;'>Evaluasi pemahaman kompetensi dengan 10 tantangan soal interaktif beserta pembahasannya.</span>
-            </div>
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
-
     # 🧭 CALL TO ACTION (Panduan Memulai)
     st.info("💡 **Cara Memulai Eksplorasi:** Silakan klik menu **🚀 RUANG JELAJAH MODUL** di sebelah kiri layar untuk mulai membuka seluruh materi dan fitur lengkap laboratorium digital ini!")
 
@@ -345,7 +320,7 @@ elif menu == "📚 Ruang Teori Kimia":
         <p><b>Metode Uji & Prinsip:</b><br>
         Cara ujinya tertera pada <b>Standar Nasional Indonesia Nomor 6989 Bagian 72 Tahun 2009</b> yang diadaptasi dari <i>American Public Health Association</i> (APHA) 5210. Pengujian BOD dapat dilakukan dengan menggunakan metode Winkler yakni melalui titrasi iodometri yang merupakan metode referensi <i>United States Environmental Protection Agency</i> (USEPA).</p>
         
-        <p>Secara prinsip, titrasi iodometri merupakan titrasi reduksi-oksidasi (redoks) yang menggunakan Mangan klorida (MnCl₂), Larutan kalium iodida dalam natrium hidroksida (NaOH-KI), asam sulfat (H₂SO₄), dan natrium tiosulfat (Na₂S₂O₃). Prinsipnya adalah dengan menambahkan sampel dengan mangan klorida dan larutan kalium iodida dalam natrium hidroksida yang kemudian dikondisikan pada keadaan asam dengan penambahan asam sulfat sehingga ion iodida pada vessel titrat berubah menjadi iodin yang ekivalen dengan kadar oksigen terlarut. Vessel titrat kemudian dititrasi dengan larutan natrium tiosulfat dengan menggunakan indikator kanji.</p>
+        <p>Secara prinsip, titrasi iodometri merupakan titrasi reduksi-oksidasi (redoks) yang menggunakan Mangan klorida (MnCl₂), Larutan kalium iodida dalam natrium hidroksida (NaOH-KI), asam sulfat (H₂SO₄), dan natrium tiosulfat (Na₂S₂O₃). Prinsipnya adalah dengan menambahkan sampel dengan mangan klorida and larutan kalium iodida dalam natrium hidroksida yang kemudian dikondisikan pada keadaan asam dengan penambahan asam sulfat sehingga ion iodida pada vessel titrat berubah menjadi iodin yang ekivalen dengan kadar oksigen terlarut. Vessel titrat kemudian dititrasi dengan larutan natrium tiosulfat dengan menggunakan indikator kanji.</p>
         
         <p><b>Persamaan Reaksi:</b></p>
         <p><b>Reaksi Pengendapan (Pengikatan Oksigen):</b><br>
@@ -762,7 +737,6 @@ elif menu == "📊 Analisis Mutu Air":
     st.markdown("<h2 style='color:#009688;'>📊 Analisis Kualitas Air</h2>", unsafe_allow_html=True)
     st.write("Gunakan menu ini untuk mengecek status pencemaran air secara otomatis berdasarkan acuan baku mutu resmi nasional.")
 
-    # Bagian 1: Alat Cek Kualitas Air Otomatis
     st.markdown("""
     <div class='card'>
         <h3>🔍 Alat Cek Status Air Otomatis</h3>
@@ -781,7 +755,6 @@ elif menu == "📊 Analisis Mutu Air":
     if st.button("Analisis Kualitas Air", key="btn_interpretasi"):
         st.markdown("#### 📢 Hasil Analisis Sistem:")
         
-        # Logika Evaluasi Sederhana
         if input_do >= 6.0 and input_bod <= 2.0 and input_cod <= 10.0:
             st.success("🟢 KATEGORI: AIR BERSIH (Memenuhi Baku Mutu Kelas 1)\n\nAir dalam kondisi sangat baik, kaya oksigen, rendah cemaran organik, aman untuk ekosistem dan bahan baku air minum.")
         elif input_do >= 3.0 and input_bod <= 6.0 and input_cod <= 40.0:
@@ -789,7 +762,6 @@ elif menu == "📊 Analisis Mutu Air":
         else:
             st.error("🔴 KATEGORI: TERCEMAR BERAT (Melebihi Batas Aman / Kelas 4)\n\nAir dalam kondisi kritis! Oksigen terlarut (DO) terlalu rendah atau beban limbah kimia (BOD/COD) terlalu tinggi. Hanya dapat digunakan untuk mengairi pertamanan atau membutuhkan pengolahan intensif.")
 
-    # Bagian 2: Tabel Acuan Resmi Baku Mutu Air Nasional
     st.markdown("""
     <div class='card' style='margin-top:25px;'>
         <h3>📋 Tabel Acuan Baku Mutu Air Nasional (PP No. 22 Tahun 2021)</h3>
@@ -824,13 +796,11 @@ elif menu == "🎮 Uji Pemahaman (Kuis)":
     st.markdown("<h2 style='color:#009688;'>🎮 Kuis Interaktif Parameter Air</h2>", unsafe_allow_html=True)
     st.write("Silakan jawab pertanyaan di bawah ini secara teliti untuk menguji pemahaman materi laboratorium Anda.")
 
-    # Inisialisasi Session State untuk melacak status pengiriman kuis
     if "kuis_disubmit" not in st.session_state:
         st.session_state.kuis_disubmit = False
     if "skor_akhir" not in st.session_state:
         st.session_state.skor_akhir = 0
 
-    # Data Soal Kuis 
     soal_list = [
         {
             "id": "q1",
@@ -904,7 +874,6 @@ elif menu == "🎮 Uji Pemahaman (Kuis)":
         }
     ]
 
-    # Render Pertanyaan Kuis dan Evaluasi Langsung Di Bawah Soal
     jawaban_user = {}
     for item in soal_list:
         st.markdown(f"<div class='card'><b>{item['tanya']}</b></div>", unsafe_allow_html=True)
@@ -916,7 +885,6 @@ elif menu == "🎮 Uji Pemahaman (Kuis)":
             key=f"radio_{item['id']}"
         )
         
-        # JIKA kuis sudah disubmit, langsung munculkan hasilnya di bawah soal bersangkutan
         if st.session_state.kuis_disubmit:
             pilihan = jawaban_user[item["id"]]
             if pilihan == item["kunci"]:
@@ -928,27 +896,22 @@ elif menu == "🎮 Uji Pemahaman (Kuis)":
             
         st.write("")
 
-    # Tombol Evaluasi Nilai Kuis
     if st.button("Kirim Seluruh Jawaban Kuis", key="btn_submit_kuis"):
-        # Validasi jika ada soal yang belum dikerjakan/diisi sama sekali
         belum_diisi = [item["tanya"][:4] for item in soal_list if jawaban_user[item["id"]] is None]
         
         if belum_diisi:
             st.warning("⚠️ Tolong isi semua pertanyaan terlebih dahulu!")
             st.session_state.kuis_disubmit = False
         else:
-            # Hitung skor akhir
             total_skor = 0
             for item in soal_list:
                 if jawaban_user[item["id"]] == item["kunci"]:
                     total_skor += 10
             
-            # Simpan status ke session state dan picu jalannya penampilan interpretasi bawah soal
             st.session_state.kuis_disubmit = True
             st.session_state.skor_akhir = total_skor
             st.rerun()
 
-    # Tampilkan Total Skor Akhir di bagian paling bawah setelah disubmit
     if st.session_state.kuis_disubmit:
         st.markdown("---")
         st.markdown(f"""
@@ -964,10 +927,10 @@ elif menu == "🎮 Uji Pemahaman (Kuis)":
             st.snow()
 
 # ==========================================
-# FOOTER (Paling Bawah Halaman)
+# FOOTER
 # ==========================================
 st.markdown("""
-<div class='footer' style='font-size: 13px; letter-spacing: 0.5px;'>
+<div class='footer'>
     Media Pembelajaran Digital • 🧪 Designed by <b>Research Team 8 (Class 1A)</b> • Politeknik AKA Bogor © 2026
 </div>
 """, unsafe_allow_html=True)
