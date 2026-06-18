@@ -734,11 +734,11 @@ elif menu == "📊 Analisis":
     
     col1, col2, col3 = st.columns(3)
     with col1:
-        input_do = st.number_input("Masukkan Nilai DO Anda (mg/L):", min_value=0.0, value=5.0, step=0.1)
+        input_do = st.number_input("Masukkan Nilai DO Anda (mg/L):", min_value=0.0, value=0.0, step=0.1)
     with col2:
-        input_bod = st.number_input("Masukkan Nilai BOD Anda (mg/L):", min_value=0.0, value=3.0, step=0.1)
+        input_bod = st.number_input("Masukkan Nilai BOD Anda (mg/L):", min_value=0.0, value=0.0, step=0.1)
     with col3:
-        input_cod = st.number_input("Masukkan Nilai COD Anda (mg/L):", min_value=0.0, value=20.0, step=0.1)
+        input_cod = st.number_input("Masukkan Nilai COD Anda (mg/L):", min_value=0.0, value=0.0, step=0.1)
 
     if st.button("Analisis Kualitas Air", key="btn_interpretasi"):
         st.markdown("#### 📢 Hasil Analisis Sistem:")
