@@ -233,7 +233,7 @@ if menu == "🏠 Beranda Utama":
     with col1:
         st.markdown("""
         <div class='card' style='border-top: 5px solid #00b4db; height: 100%;'>
-            <h3 style='color: #00b4db; margin-top: 0;'>💧 DO Showcase</h3>
+            <h3 style='color: #00b4db; margin-top: 0;'>💧 DO (Dissolved Oxygen)</h3>
             <p style='font-size: 14px; color: #555;'><b>Dissolved Oxygen (Oksigen Terlarut)</b></p>
             <p style='font-size: 13px; color: #666; line-height: 1.5;'>
                 Intip bagaimana molekul oksigen diikat oleh <span style='color:#00b4db; font-weight:bold;'>MnSO₄</span> dan dilepaskan kembali sebagai iodin bebas pada metode titrasi iodometri (Winkler) sesuai <b>SNI 6989:2004</b>.
@@ -245,7 +245,7 @@ if menu == "🏠 Beranda Utama":
     with col2:
         st.markdown("""
         <div class='card' style='border-top: 5px solid #00c9a7; height: 100%;'>
-            <h3 style='color: #00c9a7; margin-top: 0;'>🌱 BOD Showcase</h3>
+            <h3 style='color: #00c9a7; margin-top: 0;'>🌱 BOD (Biochemical Oxygen Demand)</h3>
             <p style='font-size: 14px; color: #555;'><b>Biochemical Oxygen Demand</b></p>
             <p style='font-size: 13px; color: #666; line-height: 1.5;'>
                 Simulasi pengeraman mikroorganisme selama <b>5 hari penuh pada suhu stabil 20°C</b>. Amati bagaimana bakteri mengonsumsi oksigen alami untuk menguraikan polutan organik air limbah.
@@ -257,7 +257,7 @@ if menu == "🏠 Beranda Utama":
     with col3:
         st.markdown("""
         <div class='card' style='border-top: 5px solid #ff9f43; height: 100%;'>
-            <h3 style='color: #ff9f43; margin-top: 0;'>🔥 COD Sneak Peek</h3>
+            <h3 style='color: #ff9f43; margin-top: 0;'>🔥 COD (Chemical Oxygen Demand)</h3>
             <p style='font-size: 14px; color: #555;'><b>Chemical Oxygen Demand</b></p>
             <p style='font-size: 13px; color: #666; line-height: 1.5;'>
                 Saksikan reaksi destruksi ekstrem pada suhu <b>150°C</b> menggunakan oksidator kuat <span style='color:#ff9f43; font-weight:bold;'>K₂Cr₂O₇</span>, diikuti transisi warna dramatis indikator ferroin saat titrasi FAS.
