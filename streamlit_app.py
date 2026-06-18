@@ -11,7 +11,7 @@ st.set_page_config(
 )
 
 # ==========================================
-# CUSTOM CSS MODERN & SIDEBAR MENARIK (REVISI)
+# CUSTOM CSS MODERN & SIDEBAR MENARIK
 # ==========================================
 st.markdown("""
 <style>
@@ -109,16 +109,17 @@ st.markdown("""
     text-align: center;
     padding: 20px;
     color: gray;
-    font-size: 14px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
 }
 
-/* KUSTOMISASI SIDEBAR AGAR MENARIK */
+/* KUSTOMISASI SIDEBAR */
 [data-testid="stSidebar"] {
     background-color: #ffffff !important;
     box-shadow: 4px 0px 15px rgba(0,0,0,0.05);
 }
 
-/* Membuat judul modifikasi di sidebar */
+/* Judul Ruang Jelajah Modul */
 .sidebar-header {
     background: linear-gradient(135deg, #0077b6, #00b4db);
     padding: 15px;
@@ -158,7 +159,7 @@ div[data-testid="stSidebarUserContent"] div[role="radiogroup"] label[data-checke
     font-weight: bold !important;
 }
 
-/* Sembunyikan lingkaran radio asli agar terlihat seperti tombol murni */
+/* Penyesuaian teks dalam menu */
 div[data-testid="stSidebarUserContent"] div[role="radiogroup"] label div[data-testid="stMarkdownContainer"] p {
     font-size: 15px !important;
     color: #333333 !important;
@@ -168,7 +169,7 @@ div[data-testid="stSidebarUserContent"] div[role="radiogroup"] label div[data-te
 """, unsafe_allow_html=True)
 
 # ==========================================
-# HEADER
+# HEADER UTAMA
 # ==========================================
 st.markdown("""
 <div class='navbar'>
@@ -179,10 +180,9 @@ st.markdown("""
 st.markdown("<div class='subtitle'>Media Pembelajaran Interaktif DO, BOD, dan COD 💧</div>", unsafe_allow_html=True)
 
 # ==========================================
-# MENU SIDEBAR (REVISI JUDUL & STYLE)
+# MENU SIDEBAR & IDENTITAS KAMPUS
 # ==========================================
 with st.sidebar:
-    # Mengganti "🧭 Navigasi Menu" dengan konsep yang lebih menarik dan interaktif
     st.markdown("<div class='sidebar-header'>🚀 RUANG JELAJAH MODUL</div>", unsafe_allow_html=True)
     
     menu = st.radio(
@@ -199,10 +199,17 @@ with st.sidebar:
         label_visibility="collapsed" # Menyembunyikan label bawaan agar rapi
     )
     st.markdown("---")
-    st.markdown("<div style='text-align: center; color: gray; font-size: 11px; font-weight: bold;'>KELOMPOK 8 • KELAS 1A</div>", unsafe_allow_html=True)
+    
+    # Identitas baru gabungan kelompok, kelas, dan kampus
+    st.markdown("""
+    <div style='text-align: center; color: #7f8c8d; font-size: 11px; line-height: 1.6; font-weight: bold;'>
+        🧪 Designed by Research Team 8 • Class 1A<br>
+        <span style='color: #009688; font-size: 10px; letter-spacing: 1px;'>POLITEKNIK AKA BOGOR</span>
+    </div>
+    """, unsafe_allow_html=True)
 
 # ==========================================
-# HOME
+# ISI HALAMAN - 🏠 BERANDA UTAMA
 # ==========================================
 if menu == "🏠 Beranda Utama":
     st.balloons()
@@ -222,7 +229,7 @@ if menu == "🏠 Beranda Utama":
     st.success("✨ Yuk mulai belajar dari menu di samping!")
 
 # ==========================================
-# TEORI
+# ISI HALAMAN - 📚 RUANG TEORI KIMIA
 # ==========================================
 elif menu == "📚 Ruang Teori Kimia":
     st.markdown("<h2 style='color:#009688;'>📚 Materi Teori</h2>", unsafe_allow_html=True)
@@ -326,10 +333,9 @@ elif menu == "📚 Ruang Teori Kimia":
         """, unsafe_allow_html=True)
 
 # ==========================================
-# ALAT & BAHAN
+# ISI HALAMAN - 🧪 EKSPLORASI ALAT & BAHAN
 # ==========================================
 elif menu == "🧪 Eksplorasi Alat & Bahan":
-
     st.markdown("<h2 style='color:#009688; margin-bottom:5px;'>🧪 Komponen Alat & Bahan Laboratorium</h2>", unsafe_allow_html=True)
     st.write("Silakan pilih parameter di bawah ini untuk melihat daftar alat dan bahan dengan tampilan kartu informatif.")
 
@@ -431,7 +437,7 @@ elif menu == "🧪 Eksplorasi Alat & Bahan":
         """, unsafe_allow_html=True)
 
 # ==========================================
-# CARA KERJA
+# ISI HALAMAN - 📋 SOP LANGKAH KERJA
 # ==========================================
 elif menu == "📋 SOP Langkah Kerja":
     st.markdown("<h2 style='color:#009688;'>📋 Prosedur & Cara Kerja Laboratorium</h2>", unsafe_allow_html=True)
@@ -575,7 +581,7 @@ elif menu == "📋 SOP Langkah Kerja":
         """, unsafe_allow_html=True)
 
 # ==========================================
-# 🧮 KALKULATOR
+# ISI HALAMAN - 🧮 KALKULATOR LABORATORIUM
 # ==========================================
 elif menu == "🧮 Kalkulator Laboratorium":
     st.markdown("<h2 style='color:#009688;'>🧮 Kalkulator Laboratorium</h2>", unsafe_allow_html=True)
@@ -681,7 +687,7 @@ elif menu == "🧮 Kalkulator Laboratorium":
                 st.error("Volume Sampel Air harus lebih besar dari 0 agar tidak terjadi pembagian dengan nol!")
 
 # ==========================================
-# ANALISIS
+# ISI HALAMAN - 📊 ANALISIS MUTU AIR
 # ==========================================
 elif menu == "📊 Analisis Mutu Air":
     st.markdown("<h2 style='color:#009688;'>📊 Analisis Kualitas Air</h2>", unsafe_allow_html=True)
@@ -743,7 +749,7 @@ elif menu == "📊 Analisis Mutu Air":
     """, unsafe_allow_html=True)
 
 # ==========================================
-# KUIS
+# ISI HALAMAN - 🎮 UJI PEMAHAMAN (KUIS)
 # ==========================================
 elif menu == "🎮 Uji Pemahaman (Kuis)":
     st.markdown("<h2 style='color:#009688;'>🎮 Kuis Interaktif Parameter Air</h2>", unsafe_allow_html=True)
@@ -889,10 +895,10 @@ elif menu == "🎮 Uji Pemahaman (Kuis)":
             st.snow()
 
 # ==========================================
-# FOOTER
+# FOOTER (Paling Bawah Halaman)
 # ==========================================
 st.markdown("""
-<div class='footer'>
-✨ Kelompok 8 kelas 1A ✨
+<div class='footer' style='font-size: 13px; letter-spacing: 0.5px;'>
+    Media Pembelajaran Digital • 🧪 Designed by <b>Research Team 8 (Class 1A)</b> • Politeknik AKA Bogor © 2026
 </div>
 """, unsafe_allow_html=True)
